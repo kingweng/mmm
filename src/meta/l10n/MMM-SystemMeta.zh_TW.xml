@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SystemMetaL10N code="MMM" label="MMM App" info="App Description">
+    <MenuTree code="AppWeb">
+        <MenuDir code="MMM" label="Room">
+            <MenuDir code="001W" label="Reserve"/>
+        </MenuDir>
+    </MenuTree>
+    <Role code="Admin" label="Admin"/>
+    <Role code="User" label="User"/>
+    <Text code="front.end.text1" label="Text Label1" info="front end text info1..."/>
+    <Text code="front.end.text2" label="Text Label2" info="front end text info2..."/>
+</SystemMetaL10N>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FunctionMetaL10N code="001W" label="Room Web" info="Room Data">
+    <UiScreen code="1" info="Meeting Rooms">
+        <UiField code="nameEq" label="Name"/>
+        <UiButton code="query" label="Search"/>
+        <UiButton code="create" label="Create"/>
+    </UiScreen>
+    <UiScreen code="2" info="Meeting Rooms">
+        <UiField code="name" label="Name"/>
+        <UiButton code="query" label="Search"/>
+        <UiButton code="view" label="View"/>
+        <UiButton code="save" label="Save"/>
+        <UiButton code="update" label="Update"/>
+    </UiScreen>
+    <UiPage code="Query001W1" label="Query Page"/>
+    <UiPage code="List001W2" label="List Page"/>
+    <UiPage code="Create001W2" label="Create Page"/>
+    <UiPage code="View001W2" label="View Page"/>
+    <UiPage code="Update001W2" label="Update Page"/>
+    <UiPage code="Menu000W1" label="Menu Page"/>
+</FunctionMetaL10N>

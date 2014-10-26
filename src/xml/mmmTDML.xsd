@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://tas.truetel.com/TDML/MmmTDML" xmlns:tdml="http://tas.truetel.com/TDML/MmmTDML"
+	elementFormDefault="qualified">
+
+	<xsd:element name="MmmTDML" type="tdml:MmmTDMLType"/>
+
+	<xsd:complexType name="MmmTDMLType">
+		<!--
+		Note, XML Schema 1.0 does not allow "all" to have unbounded maxOccurs.
+		Due to a bug in castor, castor was able to allow it in code generation.
+		-->
+		<xsd:all>
+			<xsd:element name="Stock" type="tdml:StockType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Warrant" type="tdml:WarrantType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Storage" type="tdml:StorageType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="DailyCsvReq" type="tdml:DailyCsvReqType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="WatchStock" type="tdml:WatchStockType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Bid" type="tdml:BidType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="StockType">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="price" type="xsd:double" use="required"/>
+		<xsd:attribute name="startPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="lowestPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="highestPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="changePrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="dateStr" type="xsd:string" use="required"/>
+		<xsd:attribute name="monthStr" type="xsd:string" use="required"/>
+		<xsd:attribute name="volume" type="xsd:long" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="WarrantType">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="price" type="xsd:double" use="required"/>
+		<xsd:attribute name="priChange" type="xsd:double" use="required"/>
+		<xsd:attribute name="changePer" type="xsd:double" use="required"/>
+		<xsd:attribute name="volume" type="xsd:long" use="required"/>
+		<xsd:attribute name="stockAppId" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="StorageType">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="price" type="xsd:double" use="required"/>
+		<xsd:attribute name="unit" type="xsd:string" use="required"/>
+		<xsd:attribute name="totalPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="warrantAppId" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="DailyCsvReqType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="monthStr" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="WatchStockType">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="BidType">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="price" type="xsd:double" use="required"/>
+		<xsd:attribute name="unit" type="xsd:string" use="required"/>
+		<xsd:attribute name="totalPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="warrantAppId" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+
+    <xsd:simpleType name="SomeEnumEnu">
+		<xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Monday"/>
+            <xsd:enumeration value="Tuesday"/>
+            <xsd:enumeration value="Wednesday"/>
+            <xsd:enumeration value="Thursday"/>
+            <xsd:enumeration value="Friday"/>
+            <xsd:enumeration value="Saturday"/>
+            <xsd:enumeration value="Sunday"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="BidStateEnu">
+		<xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Init"/>
+            <xsd:enumeration value="Success"/>
+            <xsd:enumeration value="Failure"/>
+            <xsd:enumeration value="Cancel"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="PullReqStateEnu">
+		<xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Init"/>
+            <xsd:enumeration value="RetryRetrieval"/>
+            <xsd:enumeration value="Retrieved"/>
+            <xsd:enumeration value="Complete"/>
+            <xsd:enumeration value="Failed"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+
+	<xsd:simpleType name="StringList">
+		<xsd:list itemType="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="IntegerList">
+		<xsd:list itemType="xsd:int"/>
+	</xsd:simpleType>
+
+
+</xsd:schema>

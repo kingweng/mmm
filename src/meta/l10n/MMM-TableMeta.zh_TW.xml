@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TSDLL10N xmlns="http://tas.truetel.com/XML/TSDLL10N" name="mmm">
+    <SvcProperty name="SvcCfg" label="System Configuration">
+        <SvcAttr name="svcName" label="svcName"/>
+        <SvcAttr name="simMode" label="SimMode"/>
+        <SvcAttr name="retryIntvl" label="retryInterval"/>
+        <SvcAttr name="retryLimit" label="retryLimit"/>
+        <SvcAttr name="dailyImportTime" label="dailyImportTime"/>
+    </SvcProperty>
+    <SvcTable name="Stock" label="Stock">
+        <SvcAttr name="stockOid" label="stockOid"/>
+        <SvcAttr name="name" label="Name"/>
+        <SvcAttr name="code" label="Code"/>
+        <SvcAttr name="price" label="change"/>
+        <SvcAttr name="startPrice" label="end price"/>
+        <SvcAttr name="lowestPrice" label="lowest price"/>
+        <SvcAttr name="highestPrice" label="highest price"/>
+        <SvcAttr name="changePrice" label="change price"/>
+        <SvcAttr name="dateStr" label="yyyymmdd"/>
+        <SvcAttr name="monthStr" label="yyyymm"/>
+        <SvcAttr name="volume" label="volume"/>
+        <SvcAttr name="createTime" label="Create Time"/>
+        <SvcIndex name="CodeDate" label="CodeDate"/>
+        <SvcIndex name="CodeMonth" label="CodeMonth"/>
+        <SvcIndex name="Month" label="Month"/>
+    </SvcTable>
+    <SvcTable name="Warrant" label="Warrant">
+        <SvcAttr name="warrantOid" label="warrantOid"/>
+        <SvcAttr name="name" label="Name"/>
+        <SvcAttr name="code" label="Code"/>
+        <SvcAttr name="stockOid" label="target"/>
+        <SvcAttr name="price" label="change"/>
+        <SvcAttr name="priChange" label="change"/>
+        <SvcAttr name="changePer" label="change percentage"/>
+        <SvcAttr name="volume" label="volume"/>
+        <SvcAttr name="createTime" label="Create Time"/>
+        <SvcAttr name="updateTime" label="Update Time"/>
+        <SvcForeignKey name="Stock" label="Stock"/>
+    </SvcTable>
+    <SvcTable name="Storage" label="Purchase">
+        <SvcAttr name="storageOid" label="storageOid"/>
+        <SvcAttr name="warrantOid" label="warrantOid"/>
+        <SvcAttr name="name" label="Warrant Name"/>
+        <SvcAttr name="price" label="price"/>
+        <SvcAttr name="unit" label="Code"/>
+        <SvcAttr name="totalPrice" label="totalPrice"/>
+        <SvcAttr name="createTime" label="Create Time"/>
+        <SvcAttr name="currentPrice" label="currentPrice"/>
+        <SvcAttr name="revenue" label="Revenue"/>
+        <SvcForeignKey name="Warrant" label="Warrant"/>
+    </SvcTable>
+    <SvcTable name="DailyCsvReq" label="DailyCsvReq">
+        <SvcAttr name="reqOid" label="reqOid"/>
+        <SvcAttr name="code" label="stock or warrant code"/>
+        <SvcAttr name="name" label="Name"/>
+        <SvcAttr name="pullReqState" label="pullReqState"/>
+        <SvcAttr name="csvUrl" label="csvUrl"/>
+        <SvcAttr name="csvFilePath" label="csvFilePath"/>
+        <SvcAttr name="monthStr" label="yyyymm"/>
+        <SvcAttr name="retryCount" label="retry count"/>
+        <SvcAttr name="errMsg" label="error message"/>
+        <SvcAttr name="createTime" label="Create Time"/>
+        <SvcAttr name="updateTime" label="Update Time"/>
+    </SvcTable>
+    <SvcTable name="WatchStock" label="Stock">
+        <SvcAttr name="watchOid" label="watchOid"/>
+        <SvcAttr name="name" label="Name"/>
+        <SvcAttr name="code" label="Code"/>
+        <SvcAttr name="createTime" label="Create Time"/>
+        <SvcIndex name="Code" label="Code"/>
+        <SvcApi name="importCsv" label="importCsv">
+            <Argument name="filepath" label="filepath"/>
+        </SvcApi>
+    </SvcTable>
+    <SvcTable name="Bid" label="Bid">
+        <SvcAttr name="bidOid" label="bidOid"/>
+        <SvcAttr name="warrantOid" label="warrantOid"/>
+        <SvcAttr name="name" label="Warrant Name"/>
+        <SvcAttr name="price" label="price"/>
+        <SvcAttr name="unit" label="Code"/>
+        <SvcAttr name="bidState" label="bidState"/>
+        <SvcAttr name="totalPrice" label="totalPrice"/>
+        <SvcAttr name="createTime" label="Create Time"/>
+        <SvcAttr name="updateTime" label="Update Time"/>
+        <SvcForeignKey name="Warrant" label="Warrant"/>
+    </SvcTable>
+    <SvcApi name="callSomething" label="Call Something"/>
+    <SvcEnum name="SomeEnum" label="Enum">
+        <SvcEnumItem name="Monday" label="Monday"/>
+        <SvcEnumItem name="Tuesday" label="Tuesday"/>
+        <SvcEnumItem name="Wednesday" label="Wednesday"/>
+        <SvcEnumItem name="Thursday" label="Thursday"/>
+        <SvcEnumItem name="Friday" label="Friday"/>
+        <SvcEnumItem name="Saturday" label="Saturday"/>
+        <SvcEnumItem name="Sunday" label="Sunday"/>
+    </SvcEnum>
+    <Fsm name="BidState" label="BidState">
+        <FsmState name="Init" label="Init"/>
+        <FsmState name="Success" label="Success"/>
+        <FsmState name="Failure" label="Failure"/>
+        <FsmState name="Cancel" label="Cancel"/>
+        <FsmAction name="Succeed" label="Succeed"/>
+        <FsmAction name="Fail" label="Fail"/>
+        <FsmAction name="Cancel" label="Cancel"/>
+    </Fsm>
+    <Fsm name="PullReqState" label="PullReqState">
+        <FsmState name="Init" label="Init"/>
+        <FsmState name="RetryRetrieval" label="RetryRetrieval"/>
+        <FsmState name="Retrieved" label="Retrieved"/>
+        <FsmState name="Complete" label="Complete"/>
+        <FsmState name="Failed" label="Failed"/>
+        <FsmAction name="Retrieve" label="Retrieve"/>
+        <FsmAction name="FailRetrieval" label="FailRetrieval"/>
+        <FsmAction name="Parse" label="Parse"/>
+        <FsmAction name="Fail" label="Fail"/>
+    </Fsm>
+    <Message name="back.end.msg.1" label="msg1"/>
+    <Message name="back.end.msg.2" label="msg2"/>
+</TSDLL10N>

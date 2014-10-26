@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaRpt systemCode="mmm" functionCnt="1" tableCnt="7" actionCnt="1"
+    screenCnt="2" topPageCnt="5" allPageCnt="5" reportCnt="0"
+    eflowCnt="0" xmlns="http://cga.b2sky.com/xsd/SkyMeta">
+    <FixMe fixMeTableCnt="0" fixMeAttrCnt="0" fixMePageCnt="0"
+        fixMeReportCnt="0" fixMeEflowCnt="0" fixMeFieldCnt="0" fixMeButtonCnt="0"/>
+    <SiteMap>
+        <Page pageId="MMM001W.Menu000W1(Menu Page)">
+            <Button buttonCode="execute001W(1.1 Reserve)" methodName="MMM001W.execute001WFromMenu">
+                <Page pageId="MMM001W.Query001W1(Query Page)">
+                    <Button buttonCode="query(Search)" methodName="MMM001W.queryFromQuery001W1">
+                        <Page pageId="MMM001W.List001W2(List Page)">
+                            <Button buttonCode="view(View)" methodName="MMM001W.viewFromList001W2">
+                                <Page pageId="MMM001W.View001W2(View Page)">
+                                    <Button buttonCode="update(Update)" methodName="MMM001W.updateFromView001W2">
+                                    <Page pageId="MMM001W.Update001W2(Update Page)">
+                                    <Button
+                                    buttonCode="save(Save)" methodName="MMM001W.saveFromUpdate001W2"/>
+                                    </Page>
+                                    </Button>
+                                </Page>
+                            </Button>
+                            <Button buttonCode="update(Update)" methodName="MMM001W.updateFromList001W2">
+                                <Page pageId="MMM001W.Update001W2(Update Page)">
+                                    <Button buttonCode="save(Save)" methodName="MMM001W.saveFromUpdate001W2"/>
+                                </Page>
+                            </Button>
+                        </Page>
+                    </Button>
+                    <Button buttonCode="create(Create)" methodName="MMM001W.createFromQuery001W1">
+                        <Page pageId="MMM001W.Create001W2(Create Page)">
+                            <Button buttonCode="save(Save)" methodName="MMM001W.saveFromCreate001W2"/>
+                        </Page>
+                    </Button>
+                </Page>
+            </Button>
+        </Page>
+    </SiteMap>
+    <PageInfo pageId="MMM001W.Query001W1" pagePos="Top"
+        fromPages="MMM001W.Menu000W1 MMM001W.Create001W2 MMM001W.Update001W2" fromMenus="1.1"/>
+    <PageInfo pageId="MMM001W.List001W2" pagePos="Top"
+        fromPages="MMM001W.Query001W1" fromMenus="1.1"/>
+    <PageInfo pageId="MMM001W.Create001W2" pagePos="Top"
+        fromPages="MMM001W.Query001W1" fromMenus="1.1"/>
+    <PageInfo pageId="MMM001W.View001W2" pagePos="Top"
+        fromPages="MMM001W.List001W2 MMM001W.View001W2" fromMenus="1.1"/>
+    <PageInfo pageId="MMM001W.Update001W2" pagePos="Top"
+        fromPages="MMM001W.List001W2 MMM001W.View001W2" fromMenus="1.1"/>
+</MetaRpt>

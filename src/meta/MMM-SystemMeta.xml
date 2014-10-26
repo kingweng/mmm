@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SystemMeta label="MMM App" mtMode="none" systemCode="MMM" systemType="Free" info="App Description" newRestGen="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../cga/src/xml/SkyMeta.xsd" spellCheck="false">
+    <MenuTree webType="AppWeb">
+        <MenuDir menuCode="MMM" label="Room">
+            <MenuDir label="Reserve" function="MMM001W"/>
+        </MenuDir>
+    </MenuTree>
+
+    <!--
+    <MenuTree webType="MgmtWeb">
+    	<MenuDir label="Management Page 1" function="MMM100W"/>
+    </MenuTree-->
+    <!--MenuTree webType="Mobile">
+        <MenuDir label="Mobile Page 1" function="MMM200W"/>
+    </MenuTree>
+    -->
+
+    <Role roleCode="Admin" label="Admin" webType="AppWeb"/>
+    <Role roleCode="User" label="User" webType="MgmtWeb"/>
+    
+    <TenantDefaultRole userType="Owner" roleCode="Admin" />
+    <TenantDefaultRole userType="Member" roleCode="Admin" />
+
+    <Text textCode="front.end.text1" label="Text Label1" info="front end text info1..." />
+    <Text textCode="front.end.text2" label="Text Label2" info="front end text info2..." />
+
+</SystemMeta>

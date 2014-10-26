@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FunctionMeta webType="AppWeb" tableCode="Stock" label="Room Web" info="Room Data" systemCode="MMM" functionCode="001W" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../cga/src/xml/OaMeta.xsd">
+	<FuncRole roleCode="Admin" canUpdate="true"/>
+    <UiScreen screenCode="1" info="Meeting Rooms">
+	<UiField fieldCode="nameEq" label="Name" fieldType="Text"/>
+	<UiButton fieldCode="query" label="Search"/>
+	<UiButton fieldCode="create" label="Create"/>
+    </UiScreen>
+    <UiScreen screenCode="2" info="Meeting Rooms">
+	<UiField fieldCode="name" label="Name" fieldType="Text"/>
+	<UiButton fieldCode="query" label="Search"/>
+	<UiButton fieldCode="view" label="View"/>
+	<UiButton fieldCode="save" label="Save"/>
+	<UiButton fieldCode="update" label="Update"/>
+    </UiScreen>
+    <UiPage pageId="Query001W1" label="Query Page"/>
+    <UiPage pageId="List001W2" label="List Page"/>
+    <UiPage pageId="Create001W2" label="Create Page"/>
+    <UiPage pageId="View001W2" label="View Page"/>
+    <UiPage pageId="Update001W2" label="Update Page"/>
+</FunctionMeta>

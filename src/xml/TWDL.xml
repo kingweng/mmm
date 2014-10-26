@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TWDL svcName="mmm" twdlVersion="$Revision"
+    twdlDate="$Date: 2009/07/02 09:27:43 $"
+    packageBase="com.oforsky.mmm">
+    <SvcWar warName="aweb"/>
+    <SvcWar warName="uweb"/>
+</TWDL>

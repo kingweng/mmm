@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mmm" basedir="." default="package">
+	<property name="sky.pkg.name" value="com.oforsky.sky"/>
+	<property name="svcName" value="mmm"/>
+	<property name="svcNameUp" value="MMM"/>
+	<property name="svcOrder" value=""/>
+	<property name="migsvcList" value="mmm"/>
+	<property name="app.type" value="svc"/>
+	<property name="template.type" value="FREE_MARKER_EJB3"/>
+	<!--property name="importTsdlFiles" value="${basedir}/../hrs/src/meta/HRS-TableMeta.xml,${basedir}/../lvs/src/meta/LVS-TableMeta.xml" />
+	<property name="hrs.sclient.jar" value="${basedir}/../hrs/prod/jar/hrssclient.jar"/>
+	<property name="lvs.sclient.jar" value="${basedir}/../lvs/prod/jar/lvssclient.jar"/-->
+
+	<property name="reflections.lib.dir" value="../3rdparty/reflections-0.9.8-uberjar" />
+	<property name="gson.lib.jar" value="${basedir}/../3rdparty/google-gson/google-gson-2.2.4/gson-2.2.4.jar" />
+	<property name="commonscsv.lib.jar" value="${basedir}/../3rdparty/commonscsv/commons-csv-1.0-20140121.172117-249.jar" />
+	<property name="junit.lib.jar" value="${basedir}/../3rdparty/junit/4.8.2/junit-4.8.2.jar" />
+	<property name="mockito.lib.jar" value="${basedir}/../3rdparty/mockito/1.9.5/mockito-all-1.9.5.jar" />
+
+	<import file="../bld/build.base.xml"/>
+
+	<property name="awebpath" value="build/awebwarsar"/>
+	<property name="awebsar" value="mmmaweb.sar"/>
+	<property name="awebwar" value="mmmaweb.war"/>
+
+	<path id="oa.specific.class.path">
+		<!-- Add the project specific classpath here-->
+		<!--pathelement location="${hrs.sclient.jar}"/>
+		<pathelement location="${lvs.sclient.jar}"/-->
+		<fileset dir="${reflections.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="${gson.lib.jar}" />
+		<pathelement location="${commonscsv.lib.jar}" />
+	</path>
+
+	<target name="compile.schema">
+		<javac classpathref="compile.classpath" debug="true" deprecation="true"
+			   destdir="${build.classes}" encoding="UTF-8" fork="yes"
+			   memoryInitialSize="128m" memoryMaximumSize="1024m" nowarn="false"
+			   target="1.5">
+			<src path="${src}"/>
+			<include name="**/SchemaGenerator.java"/>
+		</javac>
+	</target>
+
+	<taskdef name="jsonschema2pojo" classname="com.googlecode.jsonschema2pojo.ant.Jsonschema2PojoTask">
+		<classpath>
+			<fileset dir="${basedir}/../3rdparty/jsonschema2pojo-0.3.5/">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>
+	</taskdef>
+
+	<target name="codegen.pojo" depends="init,compile.schema">
+		<!--<jsonschema2pojo source="${gensrc}/json/activiti/resp" targetDirectory="${gensrc}" targetPackage="com.oforsky.bpm.activiti.resp" sourceType="JSONSCHEMA" annotationStyle="JACKSON1" />-->
+		<jsonschema2pojo source="${src}/com/oforsky/mmm/capture/schema/json"
+						 targetDirectory="${gensrc}"
+						 targetPackage="com.oforsky.mmm.capture.data.stock"
+						 sourceType="JSON" annotationStyle="JACKSON1"/>
+	</target>
+
+	<target name="compile.svc" depends="codegen.pojo,share.compile.svc">
+
+	</target>
+
+
+	<property file="build.properties" />
+
+	<path id="test.platform.classpath">
+		<pathelement location="${junit.lib.jar}" />
+		<pathelement location="${mockito.lib.jar}" />
+		<pathelement location="${prj.classes.dir}" />
+		<pathelement location="${mysql.jdbc.jar}" />
+		<fileset dir="${tas.jar.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${jboss.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${jboss.client.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${jboss.home.dir}/server/all/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${sky.dir}/cga/prod">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${sky.dir}/abs/prod">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${sky.dir}/acc/prod">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="test.classpath">
+		<pathelement location="${test.build.dir}" />
+		<pathelement location="${build.classes}" />
+		<path refid="test.platform.classpath" />
+		<path refid="oa.specific.class.path" />
+	</path>
+
+	<target name="compile.test" depends="test.clean">
+		<mkdir dir="${test.build.dir}" />
+		<javac srcdir="${unitestsrc.dir};${inttestsrc.dir}" debug="true" destdir="${test.build.dir}">
+			<!--<classpath refid="test.classpath" /> -->
+			<classpath refid="test.classpath" />
+		</javac>
+
+		<copy file="${persistence.xml}" toDir="${meta-inf.dir}" overwrite="true">
+			<filterset>
+				<filtersfile file="build.properties" />
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="test.clean">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${test.build.dir}" />
+		</delete>
+	</target>
+
+	<target name="test" depends="compile.test">
+		<junit printsummary="true" haltonfailure="true" maxmemory="512m" showoutput="true" fork="true" >
+			<classpath refid="test.classpath"/>
+			<sysproperty key="host" value="${host}" />
+			<sysproperty key="mib.port" value="${mib.port}" />
+			<sysproperty key="jndi.port" value="${jndi.port}" />
+			<sysproperty key="db.name" value="${db.name}" />
+			<sysproperty key="db.userid" value="${db.userid}" />
+			<sysproperty key="db.password" value="${db.password}" />
+			<sysproperty key="db.url" value="${db.url}" />
+			<formatter type="brief" usefile="false" />
+			<test name="${testcase}" todir="${test.build.dir}" if="testcase" />
+			<batchtest todir="${test.build.dir}" unless="testcase">
+				<fileset dir="${test.build.dir}" includes="**/*Test.class" excludes="**/test/*Test.class"/>
+			</batchtest>
+		</junit>
+	</target>
+</project>
