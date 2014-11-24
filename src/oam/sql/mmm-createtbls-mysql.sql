@@ -6,7 +6,17 @@ create table mmm_SvcCfg (
 	retryIntvl integer,
 	retryLimit integer,
 	dailyImportTime varchar(20),
+	tickInterval integer,
+	tickTimeRange varchar(20),
         constraint mmm_SvcCfg_PK
+		primary key (svcName) 
+)   ENGINE=InnoDB ;
+
+create table mmm_ReportParams (
+	svcName varchar(20) not null,
+	dayCount integer,
+	overTimes integer,
+        constraint mmm_ReportParams_PK
 		primary key (svcName) 
 )   ENGINE=InnoDB ;
 
@@ -32,6 +42,26 @@ create  index
 	mmm_Stock_CodeMonth on mmm_Stock (code, monthStr) ;
 create  index
 	mmm_Stock_Month on mmm_Stock (monthStr) ;
+
+create table mmm_Tick (
+	tickOid integer not null auto_increment,
+	code varchar(20),
+	price double precision,
+	tickVolume integer,
+	totalVolume integer,
+	timestamp bigint,
+	createTime timestamp  null,
+	buyPrices varchar(20),
+	buyVolumes varchar(20),
+	seldPrices varchar(20),
+	seldVolumes varchar(20),
+        constraint mmm_Tick_PK
+		primary key (tickOid) 
+)   ENGINE=InnoDB ;
+create  index
+	mmm_Tick_Code on mmm_Tick (code) ;
+create  index
+	mmm_Tick_Time on mmm_Tick (createTime) ;
 
 create table mmm_Warrant (
 	warrantOid integer not null auto_increment,
@@ -100,6 +130,31 @@ create table mmm_Bid (
         constraint mmm_Bid_PK
 		primary key (bidOid) 
 )   ENGINE=InnoDB ;
+
+create table mmm_Drive (
+	driveOid integer not null auto_increment,
+	license varchar(20),
+	driveTime timestamp  null,
+	poison varchar(50),
+	weight double precision,
+	unit varchar(20),
+        constraint mmm_Drive_PK
+		primary key (driveOid) 
+)   ENGINE=InnoDB ;
+create  index
+	mmm_Drive_License on mmm_Drive (license) ;
+
+create table mmm_License (
+	licenseOid integer not null auto_increment,
+	license varchar(20),
+	startTime timestamp  null,
+	endTime timestamp  null,
+	poison varchar(256),
+        constraint mmm_License_PK
+		primary key (licenseOid) 
+)   ENGINE=InnoDB ;
+create  index
+	mmm_License_License on mmm_License (license) ;
                 	
 --  virtual tables
 --  virtual tables 

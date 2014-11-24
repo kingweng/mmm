@@ -6,7 +6,17 @@ create table mmm_SvcCfg (
 	retryIntvl number(10),
 	retryLimit number(10),
 	dailyImportTime varchar2(20),
+	tickInterval number(10),
+	tickTimeRange varchar2(20),
         constraint mmm_SvcCfg_PK
+		primary key (svcName) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+
+create table mmm_ReportParams (
+	svcName varchar2(20) not null,
+	dayCount number(10),
+	overTimes number(10),
+        constraint mmm_ReportParams_PK
 		primary key (svcName) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
 
@@ -34,6 +44,28 @@ create  index
 	mmm_Stock_CodeMonth on mmm_Stock (code, monthStr) tablespace tasind_svc;
 create  index
 	mmm_Stock_Month on mmm_Stock (monthStr) tablespace tasind_svc;
+
+create table mmm_Tick (
+	tickOid number(10) not null,
+	code varchar2(20),
+	price float(126),
+	tickVolume number(10),
+	totalVolume number(10),
+	timestamp number(20),
+	createTime date,
+	buyPrices varchar2(20),
+	buyVolumes varchar2(20),
+	seldPrices varchar2(20),
+	seldVolumes varchar2(20),
+        constraint mmm_Tick_PK
+		primary key (tickOid) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+                	
+create sequence mmm_Tick_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_Tick_Code on mmm_Tick (code) tablespace tasind_svc;
+create  index
+	mmm_Tick_Time on mmm_Tick (createTime) tablespace tasind_svc;
 
 create table mmm_Warrant (
 	warrantOid number(10) not null,
@@ -112,6 +144,35 @@ create table mmm_Bid (
 ) tablespace  tas_svc  ;
                 	
 create sequence mmm_Bid_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+
+create table mmm_Drive (
+	driveOid number(10) not null,
+	license varchar2(20),
+	driveTime date,
+	poison varchar2(50),
+	weight float(126),
+	unit varchar2(20),
+        constraint mmm_Drive_PK
+		primary key (driveOid) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+                	
+create sequence mmm_Drive_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_Drive_License on mmm_Drive (license) tablespace tasind_svc;
+
+create table mmm_License (
+	licenseOid number(10) not null,
+	license varchar2(20),
+	startTime date,
+	endTime date,
+	poison varchar2(256),
+        constraint mmm_License_PK
+		primary key (licenseOid) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+                	
+create sequence mmm_License_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_License_License on mmm_License (license) tablespace tasind_svc;
                 	
 --  virtual tables
 --  virtual tables 

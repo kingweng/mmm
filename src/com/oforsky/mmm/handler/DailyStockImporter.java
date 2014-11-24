@@ -32,7 +32,7 @@ public class DailyStockImporter {
                     bReader.readLine());
             bReader.readLine();//ignore header
             while ((input = bReader.readLine()) != null) {
-                sets.add(StockEbo.parseStr(input, info.getCode(),
+                sets.add(StockEbo.fromDailyStr(input, info.getCode(),
                         info.getName()));
             }
         } finally {

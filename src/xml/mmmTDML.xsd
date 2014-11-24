@@ -12,11 +12,14 @@
 		-->
 		<xsd:all>
 			<xsd:element name="Stock" type="tdml:StockType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Tick" type="tdml:TickType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Warrant" type="tdml:WarrantType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Storage" type="tdml:StorageType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="DailyCsvReq" type="tdml:DailyCsvReqType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="WatchStock" type="tdml:WatchStockType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Bid" type="tdml:BidType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Drive" type="tdml:DriveType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="License" type="tdml:LicenseType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:all>
 	</xsd:complexType>
 
@@ -31,6 +34,18 @@
 		<xsd:attribute name="dateStr" type="xsd:string" use="required"/>
 		<xsd:attribute name="monthStr" type="xsd:string" use="required"/>
 		<xsd:attribute name="volume" type="xsd:long" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="TickType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="price" type="xsd:double" use="required"/>
+		<xsd:attribute name="tickVolume" type="xsd:int" use="required"/>
+		<xsd:attribute name="totalVolume" type="xsd:int" use="required"/>
+		<xsd:attribute name="timestamp" type="xsd:long" use="required"/>
+		<xsd:attribute name="buyPrices" type="tdml:StringList" use="optional"/>
+		<xsd:attribute name="buyVolumes" type="tdml:IntegerList" use="optional"/>
+		<xsd:attribute name="seldPrices" type="tdml:StringList" use="optional"/>
+		<xsd:attribute name="seldVolumes" type="tdml:IntegerList" use="optional"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="WarrantType">
@@ -68,6 +83,21 @@
 		<xsd:attribute name="unit" type="xsd:string" use="required"/>
 		<xsd:attribute name="totalPrice" type="xsd:double" use="required"/>
 		<xsd:attribute name="warrantAppId" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="DriveType">
+		<xsd:attribute name="license" type="xsd:string" use="required"/>
+		<xsd:attribute name="driveTime" type="xsd:string" use="required"/>
+		<xsd:attribute name="poison" type="xsd:string" use="required"/>
+		<xsd:attribute name="weight" type="xsd:double" use="required"/>
+		<xsd:attribute name="unit" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="LicenseType">
+		<xsd:attribute name="license" type="xsd:string" use="required"/>
+		<xsd:attribute name="startTime" type="xsd:string" use="required"/>
+		<xsd:attribute name="endTime" type="xsd:string" use="required"/>
+		<xsd:attribute name="poison" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
     <xsd:simpleType name="SomeEnumEnu">

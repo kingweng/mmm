@@ -1,5 +1,8 @@
 package com.oforsky.mmm.timer;
 
+import com.truetel.jcore.data.Schedule;
+import com.truetel.jcore.part.ScheduleTimerTask;
+
 import java.util.Date;
 
 public interface TimerService {

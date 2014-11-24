@@ -6,6 +6,7 @@
 package com.oforsky.mmm.svc;
 
 import com.oforsky.mmm.timer.DailyTimerTask;
+import com.oforsky.mmm.timer.SchTimerTask;
 import org.apache.log4j.Logger;
 
 public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements
@@ -27,5 +28,6 @@ public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements
     protected void postPrimarizeSvcCb() throws Exception {
         super.postPrimarizeSvcCb();
         DailyTimerTask.schedule();
+        SchTimerTask.schedule();
     }
 }

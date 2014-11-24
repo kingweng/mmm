@@ -6,6 +6,13 @@
         <SvcAttr name="retryIntvl" label="retryInterval"/>
         <SvcAttr name="retryLimit" label="retryLimit"/>
         <SvcAttr name="dailyImportTime" label="dailyImportTime"/>
+        <SvcAttr name="tickInterval" label="tickIntervalSec"/>
+        <SvcAttr name="tickTimeRange" label="tickTimeRange"/>
+    </SvcProperty>
+    <SvcProperty name="ReportParams" label="ReportParams">
+        <SvcAttr name="svcName" label="svcName"/>
+        <SvcAttr name="dayCount" label="dayCount"/>
+        <SvcAttr name="overTimes" label="overTimes"/>
     </SvcProperty>
     <SvcTable name="Stock" label="Stock">
         <SvcAttr name="stockOid" label="stockOid"/>
@@ -23,6 +30,21 @@
         <SvcIndex name="CodeDate" label="CodeDate"/>
         <SvcIndex name="CodeMonth" label="CodeMonth"/>
         <SvcIndex name="Month" label="Month"/>
+    </SvcTable>
+    <SvcTable name="Tick" label="Tick">
+        <SvcAttr name="tickOid" label="tickOid"/>
+        <SvcAttr name="code" label="code"/>
+        <SvcAttr name="price" label="price"/>
+        <SvcAttr name="tickVolume" label="tickVolume"/>
+        <SvcAttr name="totalVolume" label="totalVolume"/>
+        <SvcAttr name="timestamp" label="timestamp"/>
+        <SvcAttr name="createTime" label="createTime"/>
+        <SvcAttr name="buyPrices" label="buyPrices"/>
+        <SvcAttr name="buyVolumes" label="buyVolumes"/>
+        <SvcAttr name="seldPrices" label="seldPrices"/>
+        <SvcAttr name="seldVolumes" label="seldVolumes"/>
+        <SvcIndex name="Code" label="Code"/>
+        <SvcIndex name="Time" label="Time"/>
     </SvcTable>
     <SvcTable name="Warrant" label="Warrant">
         <SvcAttr name="warrantOid" label="warrantOid"/>
@@ -83,6 +105,23 @@
         <SvcAttr name="createTime" label="Create Time"/>
         <SvcAttr name="updateTime" label="Update Time"/>
         <SvcForeignKey name="Warrant" label="Warrant"/>
+    </SvcTable>
+    <SvcTable name="Drive" label="Bid">
+        <SvcAttr name="driveOid" label="driveOid"/>
+        <SvcAttr name="license" label="license"/>
+        <SvcAttr name="driveTime" label="driveTime"/>
+        <SvcAttr name="poison" label="poison"/>
+        <SvcAttr name="weight" label="weight"/>
+        <SvcAttr name="unit" label="unit"/>
+        <SvcIndex name="License" label="License"/>
+    </SvcTable>
+    <SvcTable name="License" label="Bid">
+        <SvcAttr name="licenseOid" label="licenseOid"/>
+        <SvcAttr name="license" label="license"/>
+        <SvcAttr name="startTime" label="startTime"/>
+        <SvcAttr name="endTime" label="endTime"/>
+        <SvcAttr name="poison" label="poison"/>
+        <SvcIndex name="License" label="License"/>
     </SvcTable>
     <SvcApi name="callSomething" label="Call Something"/>
     <SvcEnum name="SomeEnum" label="Enum">

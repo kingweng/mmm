@@ -10,8 +10,15 @@ alter table mmm_Bid drop constraint mmm_Bid_Warrant;
 drop table mmm_SvcCfg;
 
 
+drop table mmm_ReportParams;
+
+
 drop sequence mmm_Stock_SEQ;
 drop table mmm_Stock;
+
+
+drop sequence mmm_Tick_SEQ;
+drop table mmm_Tick;
 
 
 drop sequence mmm_Warrant_SEQ;
@@ -32,6 +39,14 @@ drop table mmm_WatchStock;
 
 drop sequence mmm_Bid_SEQ;
 drop table mmm_Bid;
+
+
+drop sequence mmm_Drive_SEQ;
+drop table mmm_Drive;
+
+
+drop sequence mmm_License_SEQ;
+drop table mmm_License;
 
 
 /*  virtual tables */

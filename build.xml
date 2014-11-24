@@ -32,6 +32,8 @@
 		</fileset>
 		<pathelement location="${gson.lib.jar}" />
 		<pathelement location="${commonscsv.lib.jar}" />
+		<pathelement location="${junit.lib.jar}" />
+		<pathelement location="${mockito.lib.jar}" />
 	</path>
 
 	<target name="compile.schema">
@@ -70,28 +72,8 @@
 	<path id="test.platform.classpath">
 		<pathelement location="${junit.lib.jar}" />
 		<pathelement location="${mockito.lib.jar}" />
-		<pathelement location="${prj.classes.dir}" />
-		<pathelement location="${mysql.jdbc.jar}" />
-		<fileset dir="${tas.jar.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${jboss.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${jboss.client.dir}">
-			<include name="**/*.jar" />
-		</fileset>
 		<fileset dir="${jboss.home.dir}/server/all/lib">
 			<include name="*.jar" />
-		</fileset>
-		<fileset dir="${sky.dir}/cga/prod">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${sky.dir}/abs/prod">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${sky.dir}/acc/prod">
-			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -99,7 +81,7 @@
 		<pathelement location="${test.build.dir}" />
 		<pathelement location="${build.classes}" />
 		<path refid="test.platform.classpath" />
-		<path refid="oa.specific.class.path" />
+		<path refid="compile.classpath" />
 	</path>
 
 	<target name="compile.test" depends="test.clean">
@@ -125,6 +107,7 @@
 	<target name="test" depends="compile.test">
 		<junit printsummary="true" haltonfailure="true" maxmemory="512m" showoutput="true" fork="true" >
 			<classpath refid="test.classpath"/>
+
 			<sysproperty key="host" value="${host}" />
 			<sysproperty key="mib.port" value="${mib.port}" />
 			<sysproperty key="jndi.port" value="${jndi.port}" />

@@ -34,6 +34,7 @@ function toggleDiv(linkObj,divId) {
 		<div style="overflow-y: auto;width:100%;height: 100%;display: block;">
 			<p><a href="#link_svcProperty">SvcProperty List</a>[<span onclick="toggleDiv(this,'slide_svcProperty')">+</span>]</p>
 			<div id="slide_svcProperty" style="display:none">
+				<div style="margin:3px"><a href="#ReportParams" title="">ReportParams</a></div>
 				<div style="margin:3px"><a href="#SvcCfg" title="System Configuration">SvcCfg</a></div>
 			</div>
 			
@@ -41,8 +42,11 @@ function toggleDiv(linkObj,divId) {
 			<div id="slide_svcTable">
 				<div style="margin:3px"><a href="#Bid" title="Bid">Bid</a></div>
 				<div style="margin:3px"><a href="#DailyCsvReq" title="DailyCsvReq">DailyCsvReq</a></div>
+				<div style="margin:3px"><a href="#Drive" title="Bid">Drive</a></div>
+				<div style="margin:3px"><a href="#License" title="Bid">License</a></div>
 				<div style="margin:3px"><a href="#Stock" title="Stock">Stock</a></div>
 				<div style="margin:3px"><a href="#Storage" title="Purchase">Storage</a></div>
+				<div style="margin:3px"><a href="#Tick" title="Tick">Tick</a></div>
 				<div style="margin:3px"><a href="#Warrant" title="Warrant">Warrant</a></div>
 				<div style="margin:3px"><a href="#WatchStock" title="WatchStock">WatchStock</a></div>
 			</div>
@@ -113,11 +117,11 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfProperties</b></td>
-	<td width="90%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">2&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfTables</b></td>
-	<td width="90%" bgcolor="#E0F0DD">6&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">9&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfEnums</b></td>
@@ -129,11 +133,11 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfZones</b></td>
-	<td width="90%" bgcolor="#E0F0DD">2&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">3&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfTimers</b></td>
-	<td width="90%" bgcolor="#E0F0DD">2&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">4&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>comment</b></td>
@@ -154,11 +158,20 @@ function toggleDiv(linkObj,divId) {
 	<td width="80%" bgcolor="#CCDDFF"><b>comment</b></td>
   </tr>
   <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="ReportParamsDesc" href="#ReportParams">ReportParams </A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">3&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
+	<td width="80%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" bgcolor="#E0F0DD"><A name="SvcCfgDesc" href="#SvcCfg">SvcCfg </A>&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">System Configuration&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">5&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">7&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
 	<td width="80%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -233,6 +246,50 @@ function toggleDiv(linkObj,divId) {
 	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
   <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="DriveDesc" href="#Drive">Drive </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Bid&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#Drive.driveOid">driveOid</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">6&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="LicenseDesc" href="#License">License </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Bid&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#License.licenseOid">licenseOid</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">5&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" bgcolor="#E0F0DD"><A name="StockDesc" href="#Stock">Stock </A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">Stock&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
@@ -276,6 +333,28 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#E0F0DD">
 		Associating with <A style="color:red" href="#Warrant">Warrant</a> 
 		<br>
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="TickDesc" href="#Tick">Tick </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Tick&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#Tick.tickOid">tickOid</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rc&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">11&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
 	</td>
 	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -340,6 +419,70 @@ function toggleDiv(linkObj,divId) {
   </tr>
 </table>
 
+<p><b>SvcProperty:&nbsp; <A name="ReportParams">ReportParams</A> &nbsp<A href="#ReportParamsDesc">Description</A></b></p>
+<p><b>SvcProperty-><A href="#ReportParams">ReportParams</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="ReportParams.svcName">svcName</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">mmm &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="ReportParams.dayCount">dayCount</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">30 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">how many work days should be calculated &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="ReportParams.overTimes">overTimes</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">30 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">how many times of the average volume &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcProperty-><A href="#ReportParams">ReportParams</A>: Cache</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>eagerLoad</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attachState</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>deepGet</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b>false</b>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Ready&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
 <p><b>SvcProperty:&nbsp; <A name="SvcCfg">SvcCfg</A> &nbsp<A href="#SvcCfgDesc">Description</A></b></p>
 <p><b>SvcProperty-><A href="#SvcCfg">SvcCfg</A>: Persistent Attributes</b></p>
 <table border="1" width="103%" height="55">
@@ -408,6 +551,28 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD">format is hhmm, start to pull stock csv files &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.tickInterval">tickInterval</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">tickIntervalSec&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">10 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">the interval time in sec of TickTimer fires &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.tickTimeRange">tickTimeRange</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">tickTimeRange&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">0900-1330 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">when to fire tickReq until end time, format(hhmm-hhmm) &nbsp;</td>
   </tr>
 </table>
 <p><b>SvcProperty-><A href="#SvcCfg">SvcCfg</A>: Cache</b></p>
@@ -716,6 +881,209 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="Drive">Drive</A> &nbsp<A href="#DriveDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#Drive">Drive</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Drive.driveOid">driveOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Drive.license">license</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Drive.driveTime">driveTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Date &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Drive.poison">poison</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(50) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Drive.weight">weight</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Drive.unit">unit</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#Drive">Drive</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#License">License</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Drive.license">license</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="License">License</A> &nbsp<A href="#LicenseDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#License">License</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="License.licenseOid">licenseOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="License.license">license</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="License.startTime">startTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Date &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="License.endTime">endTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Date &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="License.poison">poison</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(256) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#License">License</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#License">License</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#License.license">license</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
 </table>
 
@@ -1106,6 +1474,176 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#E0F0DD">fkAndIndex&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="50%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="Tick">Tick</A> &nbsp<A href="#TickDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#Tick">Tick</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.tickOid">tickOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">tickOid&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.code">code</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">code&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.price">price</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">price&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.tickVolume">tickVolume</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">tickVolume&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.totalVolume">totalVolume</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">totalVolume&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.timestamp">timestamp</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">timestamp&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Long &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.createTime">createTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">createTime&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">CreateTime &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.buyPrices">buyPrices</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;String&gt;(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.buyVolumes">buyVolumes</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;Integer&gt;(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.seldPrices">seldPrices</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;String&gt;(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Tick.seldVolumes">seldVolumes</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;Integer&gt;(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#Tick">Tick</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Code">Code</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Tick.code">code</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Time">Time</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Tick.createTime">createTime</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
 </table>
 
@@ -1811,6 +2349,17 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD">TickReq&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Primary&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">20&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">20&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">Waiting&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
   </table>
 
   <p><b>Timers</b></p>
@@ -1833,6 +2382,20 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" bgcolor="#E0F0DD">RetryTimer&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">Primary&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">10&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">JcoreTimer&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD">SchTimer&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Primary&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">ScheduleTimer&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD">TickTimer&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Primary&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">1&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">JcoreTimer&nbsp;</td>
 	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
