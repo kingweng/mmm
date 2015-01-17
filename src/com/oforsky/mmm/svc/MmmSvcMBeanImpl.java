@@ -5,29 +5,30 @@
  */
 package com.oforsky.mmm.svc;
 
+import com.oforsky.mmm.cache.SvcCfgCacheStore;
 import com.oforsky.mmm.timer.DailyTimerTask;
 import com.oforsky.mmm.timer.SchTimerTask;
+
 import org.apache.log4j.Logger;
 
-public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements
-        MmmSvcMBean {
+public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements MmmSvcMBean {
 
-    private static final Logger log = Logger.getLogger(MmmSvcMBeanImpl.class);
+	private static final Logger log = Logger.getLogger(MmmSvcMBeanImpl.class);
 
-    private static final String TASVERSION = "TAS-OFF-R5V1P4 2014-04-30 16:43:36";
+	private static final String TASVERSION = "TAS-OFF-R5V1P4 2014-04-30 16:43:36";
 
-    public MmmSvcMBeanImpl() throws Exception {
-    }
+	public MmmSvcMBeanImpl() throws Exception {
+	}
 
-    @Override
-    protected void postActivateSvcCb() throws Exception {
-        super.postActivateSvcCb();
-    }
+	@Override
+	protected void postActivateSvcCb() throws Exception {
+		super.postActivateSvcCb();
+	}
 
-    @Override
-    protected void postPrimarizeSvcCb() throws Exception {
-        super.postPrimarizeSvcCb();
-        DailyTimerTask.schedule();
-        SchTimerTask.schedule();
-    }
+	@Override
+	protected void postPrimarizeSvcCb() throws Exception {
+		super.postPrimarizeSvcCb();
+		new DailyTimerTask(SvcCfgCacheStore.getDailyImportTime()).schedule();
+		SchTimerTask.schedule();
+	}
 }

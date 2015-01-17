@@ -41,4 +41,35 @@ public class StockDlo extends StockCoreDlo {
 		PageReq pageReq = new PageReq(0, size);
 		return listPage(query, pageReq).getList();
 	}
+
+	public List<StockEbo> listByCodeDateSize(String code, String yyyymmdd,
+			int size) throws Exception {
+		QueryReq<StockEbo> query = new QueryReq<StockEbo>();
+		query.setWhere("e." + StockEbo.ATTR_Code + " = ?1 and e."
+				+ StockEbo.ATTR_DateStr + " <= ?2");
+		query.setParams(new Object[] { code, yyyymmdd });
+		query.setOrderBy(StockEbo.ATTR_DateStr + " desc");
+		PageReq pageReq = new PageReq(0, size);
+		return listPage(query, pageReq).getList();
+	}
+
+	public List<StockEbo> listByCodeFromDate(String code, String startDate)
+			throws Exception {
+		QueryReq<StockEbo> query = new QueryReq<StockEbo>();
+		query.setWhere("e." + StockEbo.ATTR_Code + " = ?1 and e."
+				+ StockEbo.ATTR_DateStr + " >= ?2");
+		query.setParams(new Object[] { code, startDate });
+		query.setOrderBy(StockEbo.ATTR_DateStr + " desc");
+		return list(query);
+	}
+
+	public List<StockEbo> listByCodeFromDateReversed(String code,
+			String startDate) throws Exception {
+		QueryReq<StockEbo> query = new QueryReq<StockEbo>();
+		query.setWhere("e." + StockEbo.ATTR_Code + " = ?1 and e."
+				+ StockEbo.ATTR_DateStr + " >= ?2");
+		query.setParams(new Object[] { code, startDate });
+		query.setOrderBy(StockEbo.ATTR_DateStr);
+		return list(query);
+	}
 }

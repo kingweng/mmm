@@ -1,11 +1,14 @@
 package com.oforsky.mmm.part.req;
 
 import com.oforsky.mmm.proxy.MmmProxyUtil;
+import com.truetel.jcore.part.TransactionPolicy;
+import com.truetel.jcore.part.TransactionPolicyEnum;
 import com.truetel.jcore.part.ZoneReq;
 
 /**
  * Created by kingweng on 2014/11/6.
  */
+@TransactionPolicy(TransactionPolicyEnum.None)
 public class TickReq implements ZoneReq {
 
     private final String code;

@@ -16,16 +16,19 @@
 			<xsd:element name="Warrant" type="tdml:WarrantType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Storage" type="tdml:StorageType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="DailyCsvReq" type="tdml:DailyCsvReqType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="WatchStock" type="tdml:WatchStockType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="StockGroup" type="tdml:StockGroupType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Deal" type="tdml:DealType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Bid" type="tdml:BidType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Drive" type="tdml:DriveType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="License" type="tdml:LicenseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Training" type="tdml:TrainingType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:all>
 	</xsd:complexType>
 
 	<xsd:complexType name="StockType">
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="stockType" type="tdml:StockTypeEnu" use="required"/>
 		<xsd:attribute name="price" type="xsd:double" use="required"/>
 		<xsd:attribute name="startPrice" type="xsd:double" use="required"/>
 		<xsd:attribute name="lowestPrice" type="xsd:double" use="required"/>
@@ -51,11 +54,16 @@
 	<xsd:complexType name="WarrantType">
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="targetCode" type="xsd:string" use="required"/>
 		<xsd:attribute name="price" type="xsd:double" use="required"/>
-		<xsd:attribute name="priChange" type="xsd:double" use="required"/>
-		<xsd:attribute name="changePer" type="xsd:double" use="required"/>
-		<xsd:attribute name="volume" type="xsd:long" use="required"/>
-		<xsd:attribute name="stockAppId" type="xsd:string" use="optional"/>
+		<xsd:attribute name="buyPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="buyVolume" type="xsd:int" use="required"/>
+		<xsd:attribute name="sellPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="sellVolume" type="xsd:int" use="required"/>
+		<xsd:attribute name="diffPrices" type="xsd:double" use="required"/>
+		<xsd:attribute name="idealDiffPrices" type="xsd:double" use="required"/>
+		<xsd:attribute name="remainingDays" type="xsd:int" use="required"/>
+		<xsd:attribute name="leverage" type="xsd:double" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="StorageType">
@@ -69,12 +77,21 @@
 	<xsd:complexType name="DailyCsvReqType">
 		<xsd:attribute name="code" type="xsd:string" use="required"/>
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="stockType" type="tdml:StockTypeEnu" use="required"/>
 		<xsd:attribute name="monthStr" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
-	<xsd:complexType name="WatchStockType">
-		<xsd:attribute name="name" type="xsd:string" use="required"/>
+	<xsd:complexType name="StockGroupType">
 		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="stockType" type="tdml:StockTypeEnu" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="DealType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="sellType" type="tdml:SellTypeEnu" use="required"/>
+		<xsd:attribute name="buyStockAppId" type="xsd:string" use="optional"/>
+		<xsd:attribute name="sellStockAppId" type="xsd:string" use="optional"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="BidType">
@@ -100,6 +117,14 @@
 		<xsd:attribute name="poison" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
+	<xsd:complexType name="TrainingType">
+		<xsd:attribute name="trainingNum" type="xsd:string" use="required"/>
+		<xsd:attribute name="pid" type="xsd:string" use="required"/>
+		<xsd:attribute name="category" type="xsd:string" use="required"/>
+		<xsd:attribute name="startTime" type="xsd:string" use="required"/>
+		<xsd:attribute name="endTime" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
     <xsd:simpleType name="SomeEnumEnu">
 		<xsd:restriction base="xsd:string">
             <xsd:enumeration value="Monday"/>
@@ -109,6 +134,27 @@
             <xsd:enumeration value="Friday"/>
             <xsd:enumeration value="Saturday"/>
             <xsd:enumeration value="Sunday"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="StockTypeEnu">
+		<xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Listed"/>
+            <xsd:enumeration value="Cabinet"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ActionTypeEnu">
+		<xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Buy"/>
+            <xsd:enumeration value="Sell"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="SellTypeEnu">
+		<xsd:restriction base="xsd:string">
+            <xsd:enumeration value="KBreak"/>
+            <xsd:enumeration value="RevenueBreak"/>
 		</xsd:restriction>
     </xsd:simpleType>
 

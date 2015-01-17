@@ -8,6 +8,11 @@
         <SvcAttr name="dailyImportTime" label="dailyImportTime"/>
         <SvcAttr name="tickInterval" label="tickIntervalSec"/>
         <SvcAttr name="tickTimeRange" label="tickTimeRange"/>
+        <SvcAttr name="remainingDays" label="remainingDays"/>
+        <SvcAttr name="warrantDiffPrice" label="warrantDiffPrice"/>
+        <SvcAttr name="qualifiedDealers" label="qualifiedDealers"/>
+        <SvcAttr name="closedRateOfK" label="closedRateOfK"/>
+        <SvcAttr name="kList" label="kList"/>
     </SvcProperty>
     <SvcProperty name="ReportParams" label="ReportParams">
         <SvcAttr name="svcName" label="svcName"/>
@@ -18,6 +23,7 @@
         <SvcAttr name="stockOid" label="stockOid"/>
         <SvcAttr name="name" label="Name"/>
         <SvcAttr name="code" label="Code"/>
+        <SvcAttr name="stockType" label="stockType"/>
         <SvcAttr name="price" label="change"/>
         <SvcAttr name="startPrice" label="end price"/>
         <SvcAttr name="lowestPrice" label="lowest price"/>
@@ -50,14 +56,19 @@
         <SvcAttr name="warrantOid" label="warrantOid"/>
         <SvcAttr name="name" label="Name"/>
         <SvcAttr name="code" label="Code"/>
-        <SvcAttr name="stockOid" label="target"/>
+        <SvcAttr name="targetCode" label="target code"/>
         <SvcAttr name="price" label="change"/>
-        <SvcAttr name="priChange" label="change"/>
-        <SvcAttr name="changePer" label="change percentage"/>
-        <SvcAttr name="volume" label="volume"/>
+        <SvcAttr name="buyPrice" label="buyPrice"/>
+        <SvcAttr name="buyVolume" label="buyVolume"/>
+        <SvcAttr name="sellPrice" label="buyPrice"/>
+        <SvcAttr name="sellVolume" label="buyVolume"/>
+        <SvcAttr name="diffPrices" label="diffPrices"/>
+        <SvcAttr name="idealDiffPrices" label="diffPrices"/>
+        <SvcAttr name="remainingDays" label="remainingDays"/>
+        <SvcAttr name="leverage" label="leverage times"/>
         <SvcAttr name="createTime" label="Create Time"/>
-        <SvcAttr name="updateTime" label="Update Time"/>
-        <SvcForeignKey name="Stock" label="Stock"/>
+        <SvcIndex name="Code" label="Code"/>
+        <SvcIndex name="Target" label="Target"/>
     </SvcTable>
     <SvcTable name="Storage" label="Purchase">
         <SvcAttr name="storageOid" label="storageOid"/>
@@ -75,6 +86,7 @@
         <SvcAttr name="reqOid" label="reqOid"/>
         <SvcAttr name="code" label="stock or warrant code"/>
         <SvcAttr name="name" label="Name"/>
+        <SvcAttr name="stockType" label="stockType"/>
         <SvcAttr name="pullReqState" label="pullReqState"/>
         <SvcAttr name="csvUrl" label="csvUrl"/>
         <SvcAttr name="csvFilePath" label="csvFilePath"/>
@@ -84,15 +96,35 @@
         <SvcAttr name="createTime" label="Create Time"/>
         <SvcAttr name="updateTime" label="Update Time"/>
     </SvcTable>
-    <SvcTable name="WatchStock" label="Stock">
-        <SvcAttr name="watchOid" label="watchOid"/>
-        <SvcAttr name="name" label="Name"/>
+    <SvcTable name="StockGroup" label="StockGroup">
         <SvcAttr name="code" label="Code"/>
+        <SvcAttr name="name" label="Name"/>
+        <SvcAttr name="stockType" label="stockType"/>
         <SvcAttr name="createTime" label="Create Time"/>
+    </SvcTable>
+    <SvcTable name="Deal" label="Deal">
+        <SvcAttr name="realOid" label="actionOid"/>
+        <SvcAttr name="code" label="Code"/>
+        <SvcAttr name="buyStockOid" label="stockOid"/>
+        <SvcAttr name="recordHigh" label="recordHigh"/>
+        <SvcAttr name="sellStockOid" label="stockOid"/>
+        <SvcAttr name="sellType" label="sellType"/>
+        <SvcAttr name="diffPrice" label="diffPrice(sell price minus buy price)"/>
+        <SvcAttr name="keepDays" label="keepDays between buy and sell"/>
+        <SvcAttr name="revenueRate" label="revenueRate"/>
         <SvcIndex name="Code" label="Code"/>
-        <SvcApi name="importCsv" label="importCsv">
-            <Argument name="filepath" label="filepath"/>
-        </SvcApi>
+        <SvcForeignKey name="BuyStock" label="BuyStock"/>
+        <SvcForeignKey name="SellStock" label="SellStock"/>
+    </SvcTable>
+    <SvcTable name="DealStats" label="DealStats">
+        <SvcAttr name="statsOid" label="stixOid"/>
+        <SvcAttr name="code" label="code"/>
+        <SvcAttr name="succCnt" label="succCnt"/>
+        <SvcAttr name="failCnt" label="failCnt"/>
+        <SvcAttr name="winChance" label="winChance(%)"/>
+        <SvcAttr name="revenueRate" label="revenueRate"/>
+        <SvcAttr name="avgKeepDays" label="avgKeepDays"/>
+        <SvcIndex name="Code" label="Code"/>
     </SvcTable>
     <SvcTable name="Bid" label="Bid">
         <SvcAttr name="bidOid" label="bidOid"/>
@@ -123,6 +155,15 @@
         <SvcAttr name="poison" label="poison"/>
         <SvcIndex name="License" label="License"/>
     </SvcTable>
+    <SvcTable name="Training" label="Training">
+        <SvcAttr name="trainingOid" label="trainingOid"/>
+        <SvcAttr name="trainingNum" label="trainingNum"/>
+        <SvcAttr name="pid" label="pid"/>
+        <SvcAttr name="category" label="category"/>
+        <SvcAttr name="startTime" label="startTime"/>
+        <SvcAttr name="endTime" label="endTime"/>
+        <SvcIndex name="Num" label="Num"/>
+    </SvcTable>
     <SvcApi name="callSomething" label="Call Something"/>
     <SvcEnum name="SomeEnum" label="Enum">
         <SvcEnumItem name="Monday" label="Monday"/>
@@ -132,6 +173,18 @@
         <SvcEnumItem name="Friday" label="Friday"/>
         <SvcEnumItem name="Saturday" label="Saturday"/>
         <SvcEnumItem name="Sunday" label="Sunday"/>
+    </SvcEnum>
+    <SvcEnum name="StockType" label="StockType">
+        <SvcEnumItem name="Listed" label="Listed"/>
+        <SvcEnumItem name="Cabinet" label="Cabinet"/>
+    </SvcEnum>
+    <SvcEnum name="ActionType" label="ActionType">
+        <SvcEnumItem name="Buy" label="Buy"/>
+        <SvcEnumItem name="Sell" label="Sell"/>
+    </SvcEnum>
+    <SvcEnum name="SellType" label="SellType">
+        <SvcEnumItem name="KBreak" label="KBreak"/>
+        <SvcEnumItem name="RevenueBreak" label="RevenueBreak"/>
     </SvcEnum>
     <Fsm name="BidState" label="BidState">
         <FsmState name="Init" label="Init"/>

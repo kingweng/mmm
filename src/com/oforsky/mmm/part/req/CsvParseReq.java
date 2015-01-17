@@ -2,12 +2,16 @@ package com.oforsky.mmm.part.req;
 
 import com.oforsky.mmm.proxy.MmmProxy;
 import com.oforsky.mmm.proxy.MmmProxyUtil;
+import com.truetel.jcore.part.TransactionPolicy;
+import com.truetel.jcore.part.TransactionPolicyEnum;
 import com.truetel.jcore.part.ZoneReq;
+
 import org.apache.log4j.Logger;
 
 /**
  * Created by kingweng on 2014/10/25.
  */
+@TransactionPolicy(TransactionPolicyEnum.None)
 public class CsvParseReq implements ZoneReq {
 
     private static final Logger log = Logger

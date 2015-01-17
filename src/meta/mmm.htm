@@ -42,13 +42,16 @@ function toggleDiv(linkObj,divId) {
 			<div id="slide_svcTable">
 				<div style="margin:3px"><a href="#Bid" title="Bid">Bid</a></div>
 				<div style="margin:3px"><a href="#DailyCsvReq" title="DailyCsvReq">DailyCsvReq</a></div>
-				<div style="margin:3px"><a href="#Drive" title="Bid">Drive</a></div>
-				<div style="margin:3px"><a href="#License" title="Bid">License</a></div>
+				<div style="margin:3px"><a href="#Deal" title="Deal">Deal</a></div>
+				<div style="margin:3px"><a href="#DealStats" title="">DealStats</a></div>
+				<div style="margin:3px"><a href="#Drive" title="Drive">Drive</a></div>
+				<div style="margin:3px"><a href="#License" title="License">License</a></div>
 				<div style="margin:3px"><a href="#Stock" title="Stock">Stock</a></div>
+				<div style="margin:3px"><a href="#StockGroup" title="StockGroup">StockGroup</a></div>
 				<div style="margin:3px"><a href="#Storage" title="Purchase">Storage</a></div>
 				<div style="margin:3px"><a href="#Tick" title="Tick">Tick</a></div>
+				<div style="margin:3px"><a href="#Training" title="Training">Training</a></div>
 				<div style="margin:3px"><a href="#Warrant" title="Warrant">Warrant</a></div>
-				<div style="margin:3px"><a href="#WatchStock" title="WatchStock">WatchStock</a></div>
 			</div>
 
 			<p><a href="#link_svcDataBean">SvcDataBean List</a>[<span onclick="toggleDiv(this,'slide_svcDataBean')">+</span>]</p>
@@ -57,7 +60,10 @@ function toggleDiv(linkObj,divId) {
 			
 			<p><a href="#link_svcEnum">SvcEnums</a>[<span onclick="toggleDiv(this,'slide_svcEnum')">+</span>]</p>
 			<div id="slide_svcEnum" style="display:none">
+				<div style="margin:3px"><a href="#ActionType" title="">ActionType</a></div>
+				<div style="margin:3px"><a href="#SellType" title="">SellType</a></div>
 				<div style="margin:3px"><a href="#SomeEnum" title="Enum">SomeEnum</a></div>
+				<div style="margin:3px"><a href="#StockType" title="">StockType</a></div>
 			</div>
 
 			<p><a href="#link_svcFsm">SvcFsms</a>[<span onclick="toggleDiv(this,'slide_svcFsm')">+</span>]</p>
@@ -121,11 +127,11 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfTables</b></td>
-	<td width="90%" bgcolor="#E0F0DD">9&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">12&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfEnums</b></td>
-	<td width="90%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">4&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfFsms</b></td>
@@ -171,7 +177,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#E0F0DD">System Configuration&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">7&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">12&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
 	<td width="80%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -230,7 +236,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" bgcolor="#E0F0DD"><A href="#DailyCsvReq.reqOid">reqOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">11&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">12&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
@@ -246,8 +252,54 @@ function toggleDiv(linkObj,divId) {
 	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
   <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="DealDesc" href="#Deal">Deal </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Deal&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#Deal.realOid">realOid</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">9&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+		Associating with <A style="color:red" href="#Stock">Stock</a> 
+		<br>
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="DealStatsDesc" href="#DealStats">DealStats </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#DealStats.statsOid">statsOid</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#DealStats.code">code</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">7&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" bgcolor="#E0F0DD"><A name="DriveDesc" href="#Drive">Drive </A>&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">Bid&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Drive&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD"><A href="#Drive.driveOid">driveOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
@@ -269,7 +321,7 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" bgcolor="#E0F0DD"><A name="LicenseDesc" href="#License">License </A>&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">Bid&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">License&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD"><A href="#License.licenseOid">licenseOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
@@ -296,7 +348,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" bgcolor="#E0F0DD"><A href="#Stock.stockOid">stockOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD"><A href="#Stock.code">code</A><br/><A href="#Stock.dateStr">dateStr</A>&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">12&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">13&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">3&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
@@ -308,7 +360,29 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#E0F0DD">
 	</td>
 	<td width="5%" bgcolor="#E0F0DD">
-		Associated by <A href="#Warrant">Warrant</a> 
+		Associated by <A href="#Deal">Deal</a> 
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="StockGroupDesc" href="#StockGroup">StockGroup </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">StockGroup&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#StockGroup.code">code</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#StockGroup.code">code</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">4&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
 	</td>
 	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -359,15 +433,37 @@ function toggleDiv(linkObj,divId) {
 	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
   <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="TrainingDesc" href="#Training">Training </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Training&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#Training.trainingOid">trainingOid</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">6&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" bgcolor="#E0F0DD"><A name="WarrantDesc" href="#Warrant">Warrant </A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">Warrant&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD"><A href="#Warrant.warrantOid">warrantOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">10&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">14&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
@@ -377,31 +473,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#E0F0DD">
 	</td>
 	<td width="5%" bgcolor="#E0F0DD">
-		Associating with <A style="color:red" href="#Stock">Stock</a> 
-		<br>
 		Associated by <A href="#Storage">Storage</a> <A href="#Bid">Bid</a> 
-	</td>
-	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
-  </tr>
-  <tr>
-	<td width="10%" bgcolor="#E0F0DD"><A name="WatchStockDesc" href="#WatchStock">WatchStock </A>&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">WatchStock&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD"><A href="#WatchStock.watchOid">watchOid</A>&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD"><A href="#WatchStock.code">code</A>&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">4&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">
-	</td>
-	<td width="5%" bgcolor="#E0F0DD">
-	</td>
-	<td width="5%" bgcolor="#E0F0DD">
 	</td>
 	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -525,7 +597,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">1 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">60 &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD">retryInterval in mins &nbsp;</td>
@@ -573,6 +645,61 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD">when to fire tickReq until end time, format(hhmm-hhmm) &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.remainingDays">remainingDays</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">remainingDays&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">40 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">remainingDays limit for warrants &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.warrantDiffPrice">warrantDiffPrice</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">warrantDiffPrice&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">1.5 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">diffPrices limit for warrants &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.qualifiedDealers">qualifiedDealers</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">qualifiedDealers&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;String&gt;(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">qualifiedDealers &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.closedRateOfK">closedRateOfK</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">closedRateOfK&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">10 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">closedRateOfK(percentage[1-100]) &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.kList">kList</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">kList&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;Integer&gt;(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">k list for closed &nbsp;</td>
   </tr>
 </table>
 <p><b>SvcProperty-><A href="#SvcCfg">SvcCfg</A>: Cache</b></p>
@@ -795,6 +922,17 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DailyCsvReq.stockType">stockType</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">stockType&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><A href="#StockType">Enum&lt;StockType&gt;</A></td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DailyCsvReq.pullReqState">pullReqState</A></b></td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">pullReqState&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><A href="#PullReqState">Fsm&lt;PullReqState&gt;</A></td>
@@ -881,6 +1019,312 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="Deal">Deal</A> &nbsp<A href="#DealDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#Deal">Deal</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.realOid">realOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">actionOid&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.code">code</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Code&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(4) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.buyStockOid">buyStockOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">buyStockOid&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.recordHigh">recordHigh</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">recordHigh&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">0 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.sellStockOid">sellStockOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">sellStockOid&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.sellType">sellType</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">sellType&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><A href="#SellType">Enum&lt;SellType&gt;</A></td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.diffPrice">diffPrice</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">diffPrice(sell price minus buy price)&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.keepDays">keepDays</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">keepDays between buy and sell&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.revenueRate">revenueRate</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">revenueRate&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#Deal">Deal</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Code">Code</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Deal.code">code</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#Deal">Deal</A>: Foreign Key List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcTableName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcForeignKeyName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="10%" bgcolor="#CCDDFF"><b>relationship</b></td>
+	<td width="10%" bgcolor="#CCDDFF"><b>foreignSvcTable</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>foreignSvcIndex</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>mapAttrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>displayAttr</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>cascadeDelete</b></td>
+	<td width="50%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><A href="#Deal">Deal</A>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD"><b>BuyStock</b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Deal.buyStockOid">buyStockOid</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">association&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock">Stock</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock"></A>&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Stock.stockOid">stockOid</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">fkAndIndex&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="50%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><A href="#Deal">Deal</A>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD"><b>SellStock</b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Deal.sellStockOid">sellStockOid</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">association&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock">Stock</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock"></A>&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Stock.stockOid">stockOid</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">fkAndIndex&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="50%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="DealStats">DealStats</A> &nbsp<A href="#DealStatsDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#DealStats">DealStats</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DealStats.statsOid">statsOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">stixOid&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DealStats.code">code</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">code&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DealStats.succCnt">succCnt</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">succCnt&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DealStats.failCnt">failCnt</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">failCnt&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DealStats.winChance">winChance</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">winChance(%)&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DealStats.revenueRate">revenueRate</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">revenueRate&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="DealStats.avgKeepDays">avgKeepDays</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">avgKeepDays&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#DealStats">DealStats</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Code">Code</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#DealStats.code">code</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">true&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
 </table>
 
@@ -1141,6 +1585,17 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Stock.stockType">stockType</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">stockType&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><A href="#StockType">Enum&lt;StockType&gt;</A></td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Stock.price">price</A></b></td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">price&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
@@ -1153,7 +1608,7 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Stock.startPrice">startPrice</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">end price&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">startPrice&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1164,7 +1619,7 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Stock.lowestPrice">lowestPrice</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">lowest price&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">lowestPrice&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1175,7 +1630,7 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Stock.highestPrice">highestPrice</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">highest price&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">highestPrice&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1186,7 +1641,7 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Stock.changePrice">changePrice</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">change price&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">changePrice&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1294,10 +1749,25 @@ function toggleDiv(linkObj,divId) {
 	<td width="50%" bgcolor="#CCDDFF"><b>comment</b></td>
   </tr>
   <tr>
-	<td width="20%" bgcolor="#E0F0DD"><A href="#Warrant">Warrant</A>&nbsp;</td>
-	<td width="20%" bgcolor="#E0F0DD"><b>Stock</b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD"><A href="#Deal">Deal</A>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD"><b>BuyStock</b>&nbsp;</td>
 	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Stock.buyStockOid">buyStockOid</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">association&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock">Stock</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock"></A>&nbsp;</td>
 	<td width="30%" bgcolor="#E0F0DD"><A href="#Stock.stockOid">stockOid</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">fkAndIndex&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="50%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><A href="#Deal">Deal</A>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD"><b>SellStock</b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Stock.sellStockOid">sellStockOid</A>&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">association&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock">Stock</A>&nbsp;</td>
@@ -1312,6 +1782,87 @@ function toggleDiv(linkObj,divId) {
 
 
 
+
+
+<p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="StockGroup">StockGroup</A> &nbsp<A href="#StockGroupDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#StockGroup">StockGroup</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="StockGroup.code">code</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Code&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(4) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="StockGroup.name">name</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Name&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">CString(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="StockGroup.stockType">stockType</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">stockType&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><A href="#StockType">Enum&lt;StockType&gt;</A></td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="StockGroup.createTime">createTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Create Time&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">CreateTime &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+<p><b>SvcTable-><A href="#StockGroup">StockGroup</A>: Cache </b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>eagerLoad</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>deepGet</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attachState</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b>false</b>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Ready&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
 
 
 <p>&nbsp;</p>
@@ -1653,6 +2204,113 @@ function toggleDiv(linkObj,divId) {
 
 
 <p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="Training">Training</A> &nbsp<A href="#TrainingDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#Training">Training</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Training.trainingOid">trainingOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Training.trainingNum">trainingNum</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Training.pid">pid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Training.category">category</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Training.startTime">startTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Date &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Training.endTime">endTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Date &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#Training">Training</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Num">Num</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Training.trainingNum">trainingNum</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<p>&nbsp;</p>
 <p><b>SvcTable:&nbsp; <A name="Warrant">Warrant</A> &nbsp<A href="#WarrantDesc">Description</A></b></p>
 <p><b>SvcTable-><A href="#Warrant">Warrant</A>: Persistent Attributes</b></p>
 <table border="1" width="103%" height="55">
@@ -1701,9 +2359,9 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.stockOid">stockOid</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">target&nbsp;</td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.targetCode">targetCode</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">target code&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
@@ -1715,7 +2373,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.price">price</A></b></td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">change&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1723,10 +2381,10 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.priChange">priChange</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">change&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.buyPrice">buyPrice</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">buyPrice&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1734,10 +2392,21 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.changePer">changePer</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">change percentage&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.buyVolume">buyVolume</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">buyVolume&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.sellPrice">sellPrice</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">buyPrice&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1745,10 +2414,54 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.volume">volume</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">volume&nbsp;</td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">Long &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.sellVolume">sellVolume</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">buyVolume&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.diffPrices">diffPrices</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">diffPrices&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">difference between sell and buy prices &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.idealDiffPrices">idealDiffPrices</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">diffPrices&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">ideal difference between sell and buy prices &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.remainingDays">remainingDays</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">remainingDays&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.leverage">leverage</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">leverage times&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1766,49 +2479,32 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
-  <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Warrant.updateTime">updateTime</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">Update Time&nbsp;</td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">UpdateTime &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-  </tr>
 </table>
-<p><b>SvcTable-><A href="#Warrant">Warrant</A>: Foreign Key List</b></p>
+<p><b>SvcTable-><A href="#Warrant">Warrant</A>: Index List</b></p>
 <table border="1" width="100%">
   <tr>
-	<td width="20%" bgcolor="#CCDDFF"><b>svcTableName</b></td>
-	<td width="20%" bgcolor="#CCDDFF"><b>svcForeignKeyName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
 	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
 	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
-	<td width="5%" bgcolor="#CCDDFF"><b>required</b></td>
-	<td width="10%" bgcolor="#CCDDFF"><b>relationship</b></td>
-	<td width="10%" bgcolor="#CCDDFF"><b>foreignSvcTable</b></td>
-	<td width="5%" bgcolor="#CCDDFF"><b>foreignSvcIndex</b></td>
-	<td width="30%" bgcolor="#CCDDFF"><b>mapAttrNames</b></td>
-	<td width="5%" bgcolor="#CCDDFF"><b>displayAttr</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
 	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
-	<td width="5%" bgcolor="#CCDDFF"><b>cascadeDelete</b></td>
-	<td width="50%" bgcolor="#CCDDFF"><b>comment</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
   </tr>
   <tr>
-	<td width="20%" bgcolor="#E0F0DD"><A href="#Warrant">Warrant</A>&nbsp;</td>
-	<td width="20%" bgcolor="#E0F0DD"><b>Stock</b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Code">Code</A></b>&nbsp;</td>
 	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="30%" bgcolor="#E0F0DD"><A href="#Warrant.stockOid">stockOid</A>&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">association&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock">Stock</A>&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD"><A style="color:red" href="#Stock"></A>&nbsp;</td>
-	<td width="30%" bgcolor="#E0F0DD"><A href="#Stock.stockOid">stockOid</A>&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">fkAndIndex&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="50%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Warrant.code">code</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Target">Target</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#Warrant.targetCode">targetCode</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
 </table>
 
@@ -1865,119 +2561,6 @@ function toggleDiv(linkObj,divId) {
 
 
 
-<p>&nbsp;</p>
-<p><b>SvcTable:&nbsp; <A name="WatchStock">WatchStock</A> &nbsp<A href="#WatchStockDesc">Description</A></b></p>
-<p><b>SvcTable-><A href="#WatchStock">WatchStock</A>: Persistent Attributes</b></p>
-<table border="1" width="103%" height="55">
-  <tr>
-	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
-	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
-	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
-	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
-	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
-	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
-	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
-	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
-	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
-  </tr>
-	  <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WatchStock.watchOid">watchOid</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">watchOid&nbsp;</td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-  </tr>
-  <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WatchStock.name">name</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">Name&nbsp;</td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">CString(20) &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-  </tr>
-  <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WatchStock.code">code</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">Code&nbsp;</td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">String(4) &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-  </tr>
-  <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WatchStock.createTime">createTime</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">Create Time&nbsp;</td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">CreateTime &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
-  </tr>
-</table>
-<p><b>SvcTable-><A href="#WatchStock">WatchStock</A>: Index List</b></p>
-<table border="1" width="100%">
-  <tr>
-	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
-	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
-	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
-	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
-	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
-	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
-  </tr>
-  <tr>
-	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Code">Code</A></b>&nbsp;</td>
-	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="30%" bgcolor="#E0F0DD"><A href="#WatchStock.code">code</A>&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">true&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
-	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
-  </tr>
-</table>
-
-
-<p><b>SvcTable-><A href="#WatchStock">WatchStock</A>: Svc API List</b></p>
-<table border="1" width="100%">
-  <tr>
-	<td width="20%" bgcolor="#CCDDFF"><b>svcApiName</b></td>
-	<td width="5%" bgcolor="#CCDDFF"><b>static</b></td>
-	<td width="10%" bgcolor="#CCDDFF"><b>label</b></td>
-	<td width="10%" bgcolor="#CCDDFF"><b>argName</b></td>
-	<td width="10%" bgcolor="#CCDDFF"><b>argType</b></td>
-	<td width="10%" bgcolor="#CCDDFF"><b>defaultValue</b></td>
-	<td width="20%" bgcolor="#CCDDFF"><b>comment</b></td>
-  </tr>
-  <tr>
-	<td width="20%" bgcolor="#E0F0DD" rowspan="2"><b>importCsv</b>&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD" rowspan="2">true&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">RETURN</td>
-	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="20%" bgcolor="#E0F0DD">import the csv file&nbsp;</td>
-  </tr>
-  <tr>
-	<td width="10%" bgcolor="#E0F0DD"></td>
-	<td width="10%" bgcolor="#E0F0DD">filepath&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">String&nbsp;</td>
-	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
-	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
-  </tr>
-</table>
-
-
-
-
 
 
 <a name="link_svcEnum"/>
@@ -1994,6 +2577,44 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#CCDDFF"><b>enumIntValue</b></td>
 	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
   </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="ActionType">ActionType</A></b></td>
+	<td width="80%" colspan="4" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">Buy&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">Sell&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+   <tr></tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="SellType">SellType</A></b></td>
+	<td width="80%" colspan="4" bgcolor="#E0F0DD"><A href="#Deal.sellType">Deal.sellType</A>&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">KBreak&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">RevenueBreak&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+   <tr></tr>
   <tr>
 	<td width="20%" bgcolor="#E0F0DD"><b><A name="SomeEnum">SomeEnum</A></b></td>
 	<td width="80%" colspan="4" bgcolor="#E0F0DD">&nbsp;</td>
@@ -2045,6 +2666,25 @@ function toggleDiv(linkObj,divId) {
 	<td width="20%" bgcolor="#E0F0DD">Sunday&nbsp;</td>
 	<td width="20%" bgcolor="#E0F0DD">Sunday&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">7&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+   <tr></tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="StockType">StockType</A></b></td>
+	<td width="80%" colspan="4" bgcolor="#E0F0DD"><A href="#Stock.stockType">Stock.stockType</A>, <A href="#DailyCsvReq.stockType">DailyCsvReq.stockType</A>, <A href="#StockGroup.stockType">StockGroup.stockType</A>&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">Listed&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
+	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">Cabinet&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
 	<td width="45%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
    <tr></tr>

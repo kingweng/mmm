@@ -5,13 +5,14 @@
  */
 package com.oforsky.mmm.proxy;
 
-import com.oforsky.mmm.ebo.StockEbo;
-import com.oforsky.mmm.ebo.WatchStockEbo;
-import com.truetel.jcore.util.AppException;
+import java.util.List;
 
 import javax.ejb.Remote;
 
-import java.util.List;
+import com.oforsky.mmm.data.BigVolume;
+import com.oforsky.mmm.ebo.DealEbo;
+import com.oforsky.mmm.ebo.StockGroupEbo;
+import com.truetel.jcore.util.AppException;
 
 @Remote
 public interface MmmProxy extends MmmBaseProxy {
@@ -35,10 +36,21 @@ public interface MmmProxy extends MmmBaseProxy {
 
 	public void deleteAllStocks() throws AppException;
 
-	public void importStockHistory(WatchStockEbo watchStock)
+	public void importStockHistory(StockGroupEbo ebo) throws AppException;
+
+	public List<StockGroupEbo> findoutKClosedStocks(String date, Double ratio)
 			throws AppException;
 
-	public List<WatchStockEbo> findoutBigVolumeStocks(Integer dayCount,
-			Double times) throws AppException;
+	public void deleteAllDeals() throws AppException;
+
+	public void deleteDealStats() throws AppException;
+
+	public List<DealEbo> findPastDeals(String startDate, int dayCount,
+			int times, int breakK, double revenueRate) throws AppException;
+
+	public void analyzeDeals() throws AppException;
+
+	public List<BigVolume> findBigVolume(String baseDate, Integer dayCount,
+			Integer times) throws AppException;
 
 }

@@ -8,7 +8,7 @@
 		<SvcAttr svcAttrName="simMode" isRequired="true" type="Boolean"
 			defaultValue="false" admAccessMode="rw" label="SimMode" comment="Simulation mode" />
 		<SvcAttr svcAttrName="retryIntvl" isRequired="true" type="Integer"
-			defaultValue="1" admAccessMode="rw" label="retryInterval" comment="retryInterval in mins" />
+			defaultValue="60" admAccessMode="rw" label="retryInterval" comment="retryInterval in mins" />
 		<SvcAttr svcAttrName="retryLimit" isRequired="true" type="Integer"
 			defaultValue="3" admAccessMode="rw" label="retryLimit" comment="maximum retry times" />
 		<SvcAttr svcAttrName="dailyImportTime" isRequired="true" type="String"
@@ -20,10 +20,25 @@
 		<SvcAttr svcAttrName="tickTimeRange" isRequired="true" type="String"
 			defaultValue="0900-1330" admAccessMode="rw" label="tickTimeRange"
 			comment="when to fire tickReq until end time, format(hhmm-hhmm)" />
+		<SvcAttr svcAttrName="remainingDays" isRequired="true" type="Integer"
+			defaultValue="40" admAccessMode="rw" label="remainingDays"
+			comment="remainingDays limit for warrants" />
+		<SvcAttr svcAttrName="warrantDiffPrice" isRequired="true" type="Double"
+			defaultValue="1.5" admAccessMode="rw" label="warrantDiffPrice"
+			comment="diffPrices limit for warrants" />
+		<SvcAttr svcAttrName="qualifiedDealers" isRequired="true" type="ObjectList"
+			subType="String" admAccessMode="rw" label="qualifiedDealers"
+			comment="qualifiedDealers" />
+		<SvcAttr svcAttrName="closedRateOfK" isRequired="true" type="Integer"
+			defaultValue="10" admAccessMode="rw" label="closedRateOfK"
+			comment="closedRateOfK(percentage[1-100])" />
+		<SvcAttr svcAttrName="kList" isRequired="true" type="ObjectList"
+			subType="Integer" admAccessMode="rw" label="kList"
+			comment="k list for closed" />
 		<SvcCache attachState="Ready" eagerLoad="false" template="superClass" />
 	</SvcProperty>
-	<SvcProperty svcPropertyName="ReportParams"
-		admAccessMode="rw" scope="global">
+	<SvcProperty svcPropertyName="ReportParams" admAccessMode="rw"
+		scope="global">
 		<SvcAttr svcAttrName="dayCount" isRequired="true" type="Integer"
 			defaultValue="30" admAccessMode="rw"
 			comment="how many work days should be calculated" />
@@ -40,16 +55,18 @@
 			maxLength="20" admAccessMode="rc" label="Name" />
 		<SvcAttr svcAttrName="code" isRequired="true" type="String"
 			maxLength="4" admAccessMode="rc" label="Code" />
+		<SvcAttr svcAttrName="stockType" isRequired="true" type="Enum"
+			subType="StockType" admAccessMode="rc" label="stockType" />
 		<SvcAttr svcAttrName="price" isRequired="true" type="Double"
 			admAccessMode="rw" label="price" />
 		<SvcAttr svcAttrName="startPrice" isRequired="true" type="Double"
-			admAccessMode="rw" label="end price" />
+			admAccessMode="rw" label="startPrice" />
 		<SvcAttr svcAttrName="lowestPrice" isRequired="true" type="Double"
-			admAccessMode="rw" label="lowest price" />
+			admAccessMode="rw" label="lowestPrice" />
 		<SvcAttr svcAttrName="highestPrice" isRequired="true" type="Double"
-			admAccessMode="rw" label="highest price" />
+			admAccessMode="rw" label="highestPrice" />
 		<SvcAttr svcAttrName="changePrice" isRequired="true" type="Double"
-			admAccessMode="rw" label="change price" />
+			admAccessMode="rw" label="changePrice" />
 		<SvcAttr svcAttrName="dateStr" isRequired="true" type="String"
 			maxLength="8" admAccessMode="rw" label="yyyymmdd" />
 		<SvcAttr svcAttrName="monthStr" isRequired="true" type="String"
@@ -115,27 +132,37 @@
 			admAccessMode="rc" label="Name" />
 		<SvcAttr svcAttrName="code" isRequired="true" type="String"
 			admAccessMode="rc" label="Code" />
-		<SvcAttr svcAttrName="stockOid" isRequired="true" type="Integer"
-			admAccessMode="rc" label="target" />
+		<SvcAttr svcAttrName="targetCode" isRequired="true" type="String"
+			admAccessMode="rc" label="target code" />
 		<SvcAttr svcAttrName="price" isRequired="true" type="Double"
-			admAccessMode="rw" label="change" />
-		<SvcAttr svcAttrName="priChange" isRequired="true" type="Double"
-			admAccessMode="rw" label="change" />
-		<SvcAttr svcAttrName="changePer" isRequired="true" type="Double"
-			admAccessMode="rw" label="change percentage" />
-		<SvcAttr svcAttrName="volume" isRequired="true" type="Long"
-			admAccessMode="rw" label="volume" />
+			admAccessMode="rc" label="change" />
+		<SvcAttr svcAttrName="buyPrice" isRequired="true" type="Double"
+			admAccessMode="rc" label="buyPrice" />
+		<SvcAttr svcAttrName="buyVolume" isRequired="true" type="Integer"
+			admAccessMode="rc" label="buyVolume" />
+		<SvcAttr svcAttrName="sellPrice" isRequired="true" type="Double"
+			admAccessMode="rc" label="buyPrice" />
+		<SvcAttr svcAttrName="sellVolume" isRequired="true" type="Integer"
+			admAccessMode="rc" label="buyVolume" />
+		<SvcAttr svcAttrName="diffPrices" isRequired="true" type="Double"
+			admAccessMode="rc" label="diffPrices" comment="difference between sell and buy prices" />
+		<SvcAttr svcAttrName="idealDiffPrices" isRequired="true" type="Double"
+			admAccessMode="rc" label="diffPrices" comment="ideal difference between sell and buy prices" />
+		<SvcAttr svcAttrName="remainingDays" isRequired="true" type="Integer"
+			admAccessMode="rc" label="remainingDays" />
+		<SvcAttr svcAttrName="leverage" isRequired="true" type="Double"
+			admAccessMode="rc" label="leverage times" />
 		<SvcAttr svcAttrName="createTime" isRequired="false" type="CreateTime"
 			admAccessMode="ro" label="Create Time" />
-		<SvcAttr svcAttrName="updateTime" isRequired="false" type="UpdateTime"
-			admAccessMode="ro" label="Update Time" />
 		<SvcTableKey>
 			<AttrName>warrantOid</AttrName>
 		</SvcTableKey>
-		<SvcForeignKey svcForeignKeyName="Stock"
-			foreignSvcTableName="Stock" dbSchema="fkAndIndex">
-			<AttrName>stockOid</AttrName>
-		</SvcForeignKey>
+		<SvcIndex svcIndexName="Code" isUnique="false" comment="">
+			<AttrName>code</AttrName>
+		</SvcIndex>
+		<SvcIndex svcIndexName="Target" isUnique="false" comment="">
+			<AttrName>targetCode</AttrName>
+		</SvcIndex>
 	</SvcTable>
 	<SvcTable svcTableName="Storage" admAccessMode="rw" scope="global"
 		tdmlGen="default" label="Purchase" comment="">
@@ -174,6 +201,8 @@
 			maxLength="6" admAccessMode="rc" label="stock or warrant code" />
 		<SvcAttr svcAttrName="name" isRequired="true" type="CString"
 			maxLength="20" admAccessMode="rc" label="Name" />
+		<SvcAttr svcAttrName="stockType" isRequired="true" type="Enum"
+			subType="StockType" admAccessMode="rc" label="stockType" />
 		<SvcAttr svcAttrName="pullReqState" isRequired="true" type="Fsm"
 			subType="PullReqState" admAccessMode="ro" label="pullReqState"
 			defaultValue="Init" />
@@ -195,27 +224,82 @@
 			<AttrName>reqOid</AttrName>
 		</SvcTableKey>
 	</SvcTable>
-	<SvcTable svcTableName="WatchStock" admAccessMode="rw" scope="global"
-		tdmlGen="default" label="WatchStock" comment="">
-		<SvcAttr svcAttrName="watchOid" isRequired="true" type="RecId"
-			admAccessMode="ro" label="watchOid" />
-		<SvcAttr svcAttrName="name" isRequired="true" type="CString"
-			maxLength="20" admAccessMode="rc" label="Name" />
+	
+	<SvcTable svcTableName="StockGroup" admAccessMode="rw" scope="global"
+		tdmlGen="default" label="StockGroup" comment="">
 		<SvcAttr svcAttrName="code" isRequired="true" type="String"
 			maxLength="4" admAccessMode="rc" label="Code" />
+		<SvcAttr svcAttrName="name" isRequired="true" type="CString"
+			maxLength="20" admAccessMode="rc" label="Name" />
+		<SvcAttr svcAttrName="stockType" isRequired="true" type="Enum"
+			subType="StockType" admAccessMode="rc" label="stockType" />
 		<SvcAttr svcAttrName="createTime" isRequired="false" type="CreateTime"
 			admAccessMode="ro" label="Create Time" />
 		<SvcTableKey>
-			<AttrName>watchOid</AttrName>
+			<AttrName>code</AttrName>
+		</SvcTableKey>
+		<SvcCache attachState="Ready" eagerLoad="false" template="superClass" />
+	</SvcTable>
+	
+	<SvcTable svcTableName="Deal" admAccessMode="rw" scope="global"
+		tdmlGen="default" label="Deal" comment="">
+		<SvcAttr svcAttrName="realOid" isRequired="true" type="RecId"
+			admAccessMode="ro" label="actionOid" />
+		<SvcAttr svcAttrName="code" isRequired="true" type="String"
+			maxLength="4" admAccessMode="rc" label="Code" />
+		<SvcAttr svcAttrName="buyStockOid" isRequired="true" type="Integer"
+			admAccessMode="rc" label="buyStockOid" />
+		<SvcAttr svcAttrName="recordHigh" isRequired="true" type="Integer"
+			admAccessMode="ro" defaultValue="0" label="recordHigh" />
+		<SvcAttr svcAttrName="sellStockOid" isRequired="true" type="Integer"
+			admAccessMode="rc" label="sellStockOid" />
+		<SvcAttr svcAttrName="sellType" isRequired="true" type="Enum" subType="SellType"
+			admAccessMode="rc" label="sellType" />
+		<SvcAttr svcAttrName="diffPrice" isRequired="false" type="Double"
+			admAccessMode="ro" label="diffPrice(sell price minus buy price)" />
+		<SvcAttr svcAttrName="keepDays" isRequired="false" type="Integer"
+			admAccessMode="ro" label="keepDays between buy and sell" />
+		<SvcAttr svcAttrName="revenueRate" isRequired="false" type="Double"
+			admAccessMode="ro" label="revenueRate" />
+		<SvcTableKey>
+			<AttrName>realOid</AttrName>
+		</SvcTableKey>
+		<SvcIndex svcIndexName="Code" isUnique="false" comment="">
+			<AttrName>code</AttrName>
+		</SvcIndex>
+		<SvcForeignKey svcForeignKeyName="BuyStock"
+			foreignSvcTableName="Stock" dbSchema="fkAndIndex">
+			<AttrName>buyStockOid</AttrName>
+		</SvcForeignKey>
+		<SvcForeignKey svcForeignKeyName="SellStock"
+			foreignSvcTableName="Stock" dbSchema="fkAndIndex">
+			<AttrName>sellStockOid</AttrName>
+		</SvcForeignKey>
+	</SvcTable>
+	
+	<SvcTable svcTableName="DealStats" admAccessMode="rw" scope="global">
+		<SvcAttr svcAttrName="statsOid" isRequired="true" type="RecId"
+			admAccessMode="ro" label="stixOid" />
+		<SvcAttr svcAttrName="code" isRequired="true" type="String"
+			admAccessMode="rc" label="code" />
+		<SvcAttr svcAttrName="succCnt" isRequired="true" type="Integer"
+			admAccessMode="rc" label="succCnt" />
+		<SvcAttr svcAttrName="failCnt" isRequired="true" type="Integer"
+			admAccessMode="rc" label="failCnt" />
+		<SvcAttr svcAttrName="winChance" isRequired="true" type="Integer"
+			admAccessMode="rc" label="winChance(%)" />
+		<SvcAttr svcAttrName="revenueRate" isRequired="true" type="Double"
+			admAccessMode="rc" label="revenueRate" />
+		<SvcAttr svcAttrName="avgKeepDays" isRequired="true" type="Double"
+			admAccessMode="rc" label="avgKeepDays" />
+		<SvcTableKey>
+			<AttrName>statsOid</AttrName>
 		</SvcTableKey>
 		<SvcIndex svcIndexName="Code" isUnique="true" comment="">
 			<AttrName>code</AttrName>
 		</SvcIndex>
-		<SvcApi svcApiName="importCsv" static="true" comment="import the csv file">
-			<Argument type="String" argName="filepath" />
-		</SvcApi>
 	</SvcTable>
-
+	
 	<SvcTable svcTableName="Bid" admAccessMode="rw" scope="global"
 		tdmlGen="default" label="Bid" comment="">
 		<SvcAttr svcAttrName="bidOid" isRequired="true" type="RecId"
@@ -245,7 +329,7 @@
 		</SvcForeignKey>
 	</SvcTable>
 	<SvcTable svcTableName="Drive" admAccessMode="rw" scope="global"
-		tdmlGen="default" label="Bid" comment="">
+		tdmlGen="default" label="Drive" comment="">
 		<SvcAttr svcAttrName="driveOid" isRequired="true" type="RecId"
 			admAccessMode="ro" />
 		<SvcAttr svcAttrName="license" isRequired="true" type="String"
@@ -266,7 +350,7 @@
 		</SvcIndex>
 	</SvcTable>
 	<SvcTable svcTableName="License" admAccessMode="rw" scope="global"
-		tdmlGen="default" label="Bid" comment="">
+		tdmlGen="default" label="License" comment="">
 		<SvcAttr svcAttrName="licenseOid" isRequired="true" type="RecId"
 			admAccessMode="ro" />
 		<SvcAttr svcAttrName="license" isRequired="true" type="String"
@@ -282,6 +366,27 @@
 		</SvcTableKey>
 		<SvcIndex svcIndexName="License" isUnique="false" comment="">
 			<AttrName>license</AttrName>
+		</SvcIndex>
+	</SvcTable>
+	<SvcTable svcTableName="Training" admAccessMode="rw" scope="global"
+		tdmlGen="default" label="Training" comment="">
+		<SvcAttr svcAttrName="trainingOid" isRequired="true" type="RecId"
+			admAccessMode="ro" />
+		<SvcAttr svcAttrName="trainingNum" isRequired="true" type="String"
+			admAccessMode="rc" />
+		<SvcAttr svcAttrName="pid" isRequired="true" type="String"
+			admAccessMode="rc" />
+		<SvcAttr svcAttrName="category" isRequired="true" type="String"
+			admAccessMode="rc" />
+		<SvcAttr svcAttrName="startTime" isRequired="true" type="Date"
+			admAccessMode="rc" />
+		<SvcAttr svcAttrName="endTime" isRequired="true" type="Date"
+			admAccessMode="rc" />
+		<SvcTableKey>
+			<AttrName>trainingOid</AttrName>
+		</SvcTableKey>
+		<SvcIndex svcIndexName="Num" isUnique="false" comment="">
+			<AttrName>trainingNum</AttrName>
 		</SvcIndex>
 	</SvcTable>
 
@@ -303,6 +408,19 @@
 		<SvcEnumItem enumIntValue="7" svcEnumItemName="Sunday"
 			label="Sunday" />
 	</SvcEnum>
+	<SvcEnum svcEnumName="StockType">
+		<SvcEnumItem enumIntValue="1" svcEnumItemName="Listed" />
+		<SvcEnumItem enumIntValue="2" svcEnumItemName="Cabinet" />
+	</SvcEnum>
+	<SvcEnum svcEnumName="ActionType">
+		<SvcEnumItem enumIntValue="1" svcEnumItemName="Buy" />
+		<SvcEnumItem enumIntValue="2" svcEnumItemName="Sell" />
+	</SvcEnum>
+	<SvcEnum svcEnumName="SellType">
+		<SvcEnumItem enumIntValue="1" svcEnumItemName="KBreak" />
+		<SvcEnumItem enumIntValue="2" svcEnumItemName="RevenueBreak" />
+	</SvcEnum>
+
 	<Fsm fsmName="BidState" label="BidState">
 		<FsmState name="Init" value="0" type="init" label="Init" />
 		<FsmState name="Success" value="1" type="final" label="Success" />

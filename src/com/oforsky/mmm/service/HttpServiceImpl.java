@@ -58,11 +58,12 @@ public class HttpServiceImpl implements HttpService {
 	@Override
 	public String downloadBySession(String url, String sessionId)
 			throws Exception {
+		log.debug("downloadBySession() url=" + url);
 		URLConnection urlConn = new URL(url).openConnection();
 		setTimeout(urlConn);
 		setSessionId(sessionId, urlConn);
 		BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(urlConn.getInputStream()));
+				new InputStreamReader(urlConn.getInputStream(), "big5"));
 		StringBuilder content = new StringBuilder();
 		String line = null;
 		// read from the urlconnection via the bufferedreader

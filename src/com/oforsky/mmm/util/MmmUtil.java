@@ -1,16 +1,16 @@
 package com.oforsky.mmm.util;
 
-import com.oforsky.mmm.cache.SvcCfgCacheStore;
-import com.truetel.jcore.util.TimeUtil;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+
+import com.truetel.jcore.util.TimeUtil;
 
 /**
  * Created by kingweng on 2014/8/24.
@@ -39,5 +39,9 @@ public class MmmUtil {
 		now.set(Calendar.HOUR_OF_DAY, hhmm.get(Calendar.HOUR_OF_DAY));
 		now.set(Calendar.MINUTE, hhmm.get(Calendar.MINUTE));
 		return now;
+	}
+	
+	public static String getStr() {
+		return "1234";
 	}
 }

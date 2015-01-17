@@ -5,7 +5,9 @@
  */
 package com.oforsky.mmm.ebo;
 
+import com.oforsky.mmm.dlo.SvcCfgDlo;
 import com.truetel.jcore.util.TimeUtil;
+
 import org.apache.commons.csv.CSVRecord;
 import org.apache.log4j.Logger;
 
@@ -13,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
 import java.util.List;
 
 @Entity
@@ -43,6 +46,12 @@ public class DriveEbo extends DriveCoreEbo {
         ebo.setWeight(Double.parseDouble(record.get(3).trim().replace(",", "")));
         ebo.setUnit(record.get(4).trim());
         return ebo;
+    }
+    
+    public void test() throws Exception{
+    	SvcCfgDlo dlo = new SvcCfgDlo();
+    	System.out.println("dlo="+dlo);
+    	System.out.println(dlo.get().dbgstr());
     }
 }
 

@@ -13,4 +13,5 @@ public interface HttpService {
 	String getSessionId(String url) throws Exception;
 
 	String downloadBySession(String url, String sessionId) throws Exception;
+
 }

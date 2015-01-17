@@ -5,23 +5,31 @@
  */
 package com.oforsky.mmm.proxy;
 
-import com.oforsky.mmm.dlo.StockDlo;
-import com.oforsky.mmm.ebo.MmmConstant;
-import com.oforsky.mmm.ebo.StockEbo;
-import com.oforsky.mmm.ebo.WatchStockEbo;
-import com.oforsky.mmm.handler.DailyCsvReqHandler;
-import com.oforsky.mmm.handler.HistoryImporter;
-import com.oforsky.mmm.handler.ReportHandler;
-import com.oforsky.mmm.handler.TickHandler;
-import com.truetel.jcore.proxy.ProxyInterceptor;
-import com.truetel.jcore.util.AppException;
+import java.util.List;
+
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 
 import org.apache.log4j.Logger;
 
-import javax.ejb.*;
-import javax.interceptor.Interceptors;
-
-import java.util.List;
+import com.oforsky.mmm.cache.SvcCfgCacheStore;
+import com.oforsky.mmm.data.BigVolume;
+import com.oforsky.mmm.dlo.DealDlo;
+import com.oforsky.mmm.dlo.DealStatsDlo;
+import com.oforsky.mmm.dlo.StockDlo;
+import com.oforsky.mmm.ebo.DealEbo;
+import com.oforsky.mmm.ebo.MmmConstant;
+import com.oforsky.mmm.ebo.StockGroupEbo;
+import com.oforsky.mmm.handler.DailyCsvReqHandler;
+import com.oforsky.mmm.handler.ReportHandler;
+import com.oforsky.mmm.handler.TickHandler;
+import com.oforsky.mmm.util.YahooStockParser;
+import com.truetel.jcore.proxy.ProxyInterceptor;
+import com.truetel.jcore.util.AppException;
 
 @Stateless(name = MmmProxyUtil.PROXY_EJB, mappedName = MmmConstant.APP_NAME)
 @Remote(MmmProxy.class)
@@ -52,7 +60,7 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 			throws AppException {
 		log.info("dailyCsvReqReqFail() reqOid=" + reqOid + ", errMsg=" + errMsg);
 		try {
-			new DailyCsvReqHandler().fail(reqOid, errMsg);
+			new DailyCsvReqHandler(reqOid).fail(errMsg);
 		} catch (Exception e) {
 			log.error("dailyCsvReqReqFail failed!", e);
 			handleException(e);
@@ -86,7 +94,7 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 		log.info("dailyCsvReqFailRetrieval() reqOid=" + reqOid + ", errMsg="
 				+ errMsg);
 		try {
-			new DailyCsvReqHandler().failRetrieval(reqOid, errMsg);
+			new DailyCsvReqHandler(reqOid).failRetrieval(errMsg);
 		} catch (Exception e) {
 			log.error("dailyCsvReqFailRetrieval failed!", e);
 			handleException(e);
@@ -97,7 +105,7 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	public void dailyCsvReqRetrieve(Integer reqOid) throws AppException {
 		log.info("dailyCsvReqRetrieve() reqOid=" + reqOid);
 		try {
-			new DailyCsvReqHandler().retrieve(reqOid);
+			new DailyCsvReqHandler(reqOid).retrieve();
 		} catch (Exception e) {
 			log.error("dailyCsvReqRetrieve failed!", e);
 			handleException(e);
@@ -108,7 +116,7 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	public void dailyCsvReqParse(Integer reqOid) throws AppException {
 		log.info("dailyCsvReqParse() reqOid=" + reqOid);
 		try {
-			new DailyCsvReqHandler().parse(reqOid);
+			new DailyCsvReqHandler(reqOid).parse();
 		} catch (Exception e) {
 			log.error("dailyCsvReqParse failed!", e);
 			handleException(e);
@@ -126,12 +134,10 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	}
 
 	@Override
-	public void importStockHistory(WatchStockEbo watchStock)
-			throws AppException {
+	public void importStockHistory(StockGroupEbo ebo) throws AppException {
 		try {
-			List<StockEbo> stocks = new HistoryImporter(watchStock)
-					.retrieveStocks();
-			new StockDlo().batchCreate(stocks);
+			YahooStockParser parser = YahooStockParser.aParser(ebo);
+			new StockDlo().batchCreate(parser.list());
 		} catch (Exception e) {
 			log.error("importStockHistory failed!", e);
 			handleException(e);
@@ -139,15 +145,75 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	}
 
 	@Override
-	public List<WatchStockEbo> findoutBigVolumeStocks(Integer dayCount,
-			Double times) throws AppException {
+	public List<StockGroupEbo> findoutKClosedStocks(String date, Double ratio)
+			throws AppException {
 		try {
-			return new ReportHandler().findoutBigVolumeStocks(dayCount, times);
+			Integer[] ks = SvcCfgCacheStore.getKList().toArray(new Integer[0]);
+			return new ReportHandler().findoutKClosedStocks(ratio, date, ks);
 		} catch (Exception e) {
-			log.error("findoutBigVolumeStocks failed!", e);
+			log.error("findoutKClosedStocks failed!", e);
 			handleException(e);
-			return null;
 		}
+		return null;
+	}
+
+	@Override
+	public void deleteAllDeals() throws AppException {
+		try {
+			int num = new DealDlo().deleteAll();
+			log.info("delete " + num + " Deals.");
+		} catch (Exception e) {
+			log.error("deleteAllDeals failed!", e);
+			handleException(e);
+		}
+	}
+
+	@Override
+	public void deleteDealStats() throws AppException {
+		try {
+			int num = new DealStatsDlo().deleteAll();
+			log.info("delete " + num + " DealStats.");
+		} catch (Exception e) {
+			log.error("deleteDealStats failed!", e);
+			handleException(e);
+		}
+	}
+
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	@Override
+	public List<DealEbo> findPastDeals(String startDate, int days, int times,
+			int breakK, double revenueRate) throws AppException {
+		try {
+			return new ReportHandler().findPastDeals(startDate, days, times,
+					breakK, revenueRate);
+		} catch (Exception e) {
+			log.error("findPastDeal failed!", e);
+			handleException(e);
+		}
+		return null;
+	}
+
+	@Override
+	public void analyzeDeals() throws AppException {
+		try {
+			new ReportHandler().analyzeDeals();
+		} catch (Exception e) {
+			log.error("analyzeDeals failed!", e);
+			handleException(e);
+		}
+	}
+
+	@Override
+	public List<BigVolume> findBigVolume(String baseDate, Integer dayCount,
+			Integer times) throws AppException {
+		try {
+			return new ReportHandler()
+					.findBigVolumes(baseDate, dayCount, times);
+		} catch (Exception e) {
+			log.error("analyzeDeals failed!", e);
+			handleException(e);
+		}
+		return null;
 	}
 
 }
