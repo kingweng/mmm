@@ -6,16 +6,20 @@ import java.util.List;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.oforsky.mmm.capture.data.stock.MsgArray;
 import com.oforsky.mmm.capture.data.stock.Stock;
 import com.truetel.jcore.util.AppException;
+import com.truetel.jcore.util.StringUtil;
 
 /**
  * Created by kingweng on 2014/8/4.
  */
 public class Tick {
+
+	private static final Logger log = Logger.getLogger(Tick.class);
 
 	private String code;
 
@@ -108,15 +112,12 @@ public class Tick {
 	}
 
 	public static Tick valueOf(String content) throws Exception {
-		Stock stockInfo = new Gson().fromJson(content, Stock.class);
-		checkContent(content, stockInfo);
-		MsgArray array = stockInfo.getMsgArray().get(0);
-		return asTick(array);
-	}
-
-	private static void checkContent(String content, Stock stockInfo)
-			throws AppException {
-		if (stockInfo.getMsgArray().isEmpty()) {
+		try {
+			Stock stockInfo = new Gson().fromJson(content, Stock.class);
+			MsgArray array = stockInfo.getMsgArray().get(0);
+			return asTick(array);
+		} catch (Exception e) {
+			log.error("valueOf failed!", e);
 			throw new AppException(5005, content);
 		}
 	}
@@ -124,10 +125,10 @@ public class Tick {
 	private static Tick asTick(MsgArray array) {
 		Tick tick = new Tick();
 		tick.setCode(array.getC());
-		tick.setPrice(Double.parseDouble(array.getZ()));
-		tick.setTimestamp(Long.parseLong(array.getTlong()));
-		tick.setTickVolume(Integer.parseInt(array.getTv()));
-		tick.setTotalVolume(Integer.parseInt(array.getV()));
+		tick.setPrice(parseDouble(array.getZ()));
+		tick.setTimestamp(parseLong(array.getTlong()));
+		tick.setTickVolume(parseInt(array.getTv()));
+		tick.setTotalVolume(parseInt(array.getV()));
 		tick.setBuyPrices(getPricesList(array.getB()));
 		tick.setBuyVolumes(getVolumesList(array.getG()));
 		tick.setSeldPrices(getPricesList(array.getA()));
@@ -135,24 +136,43 @@ public class Tick {
 		return tick;
 	}
 
-	private static List<Double> getPricesList(String input) {
-		if ("-".equals(input)) { // limit up or down
-			return null;
+	private static Integer parseInt(String input) {
+		if (StringUtil.isEmpty(input) && "-".equals(input)) {
+			return 0;
 		}
+		return Integer.parseInt(input);
+	}
+
+	private static Double parseDouble(String input) {
+		if (StringUtil.isEmpty(input) && "-".equals(input)) {
+			return 0.0;
+		}
+		return Double.parseDouble(input);
+	}
+
+	private static Long parseLong(String input) {
+		if (StringUtil.isEmpty(input) && "-".equals(input)) {
+			return 0l;
+		}
+		return Long.parseLong(input);
+	}
+
+	private static List<Double> getPricesList(String input) {
 		List<Double> prices = new ArrayList<Double>();
-		for (String token : input.split("_")) {
-			prices.add(Double.parseDouble(token));
+		if (!"-".equals(input)) { // limit up or down
+			for (String token : input.split("_")) {
+				prices.add(Double.parseDouble(token));
+			}
 		}
 		return prices;
 	}
 
 	private static List<Integer> getVolumesList(String input) {
-		if ("-".equals(input)) { // limit up or down
-			return null;
-		}
 		List<Integer> volumes = new ArrayList<Integer>();
-		for (String token : input.split("_")) {
-			volumes.add(Integer.parseInt(token));
+		if (!"-".equals(input)) { // limit up or down
+			for (String token : input.split("_")) {
+				volumes.add(Integer.parseInt(token));
+			}
 		}
 		return volumes;
 	}

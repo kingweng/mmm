@@ -13,6 +13,9 @@ import com.google.gson.reflect.TypeToken;
 import com.oforsky.mmm.capture.data.stock.OriWarrant;
 import com.oforsky.mmm.ebo.WarrantEbo;
 import com.oforsky.mmm.service.HttpService;
+import com.oforsky.mmm.service.HttpServiceImpl;
+import com.truetel.jcore.util.AppException;
+import com.truetel.jcore.util.StringUtil;
 
 public class WarrantHandler {
 
@@ -20,11 +23,9 @@ public class WarrantHandler {
 
 	private static final String WARRANT_BASE_URL = "http://iwarrant.capital.com.tw/warrants/wScreenerPull.aspx";
 
-	private static final String WARRANT_QUERY_URL = "http://iwarrant.capital.com.tw/data/warrants/Get_wScreenerResultScodes.aspx?ul=";
+	private static final String WARRANT_QUERY_URL = "http://iwarrant.capital.com.tw/data/warrants/Get_wScreenerResultScodes.aspx?histv=60&oir1=0&oir2=50&ul=";
 
 	private static final String WARRANT_DETAIL_URL = "http://iwarrant.capital.com.tw/data/warrants/Get_wScreenerResultCont.aspx?wcodelist=";
-
-	private String code;
 
 	private List<String> warrantCodes;
 
@@ -34,20 +35,23 @@ public class WarrantHandler {
 
 	private String sessionId;
 
-	public WarrantHandler(String code, HttpService httpSvc) {
-		this.code = code;
+	public WarrantHandler(HttpService httpSvc) {
 		this.httpSvc = httpSvc;
 	}
 
-	public void retrieve() throws Exception {
+	public WarrantHandler() {
+		this(new HttpServiceImpl());
+	}
+
+	public void retrieve(String code) throws Exception {
 		sessionId = httpSvc.getSessionId(WARRANT_BASE_URL);
-		warrantCodes = retrieveCodes();
+		warrantCodes = retrieveCodes(code);
 		warrants = retrieveWarrants();
 	}
 
 	private List<WarrantEbo> retrieveWarrants() throws Exception {
 		String content = httpSvc.downloadBySession(WARRANT_DETAIL_URL
-				+ asCodes(warrantCodes) + "&ndays_sv=60", sessionId);
+				+ asCodes(warrantCodes) + "&ndays_sv=60", sessionId, "big5");
 		List<OriWarrant> oriWarrants = new Gson().fromJson(content,
 				new TypeToken<List<OriWarrant>>() {
 				}.getType());
@@ -74,14 +78,23 @@ public class WarrantHandler {
 		}
 	}
 
-	private List<String> retrieveCodes() throws Exception {
+	private List<String> retrieveCodes(String code) throws Exception {
 		String codesContent = httpSvc.downloadBySession(WARRANT_QUERY_URL
-				+ code, sessionId);
+				+ code, sessionId, "big5");
 		codesContent = codesContent.split("\\|")[0];
+		checkCodesContent(code, codesContent);
 		return Arrays.asList(codesContent.split(","));
+	}
+
+	private void checkCodesContent(String code, String codesContent)
+			throws AppException {
+		if (StringUtil.isEmpty(codesContent)) {
+			throw new AppException(5012, code);
+		}
 	}
 
 	public List<WarrantEbo> getWarrants() {
 		return warrants;
 	}
+
 }

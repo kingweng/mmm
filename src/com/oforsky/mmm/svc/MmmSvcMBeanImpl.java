@@ -5,11 +5,14 @@
  */
 package com.oforsky.mmm.svc;
 
+import org.apache.log4j.Logger;
+
+import com.oforsky.mmm.cache.DealCfgCacheStore;
 import com.oforsky.mmm.cache.SvcCfgCacheStore;
+import com.oforsky.mmm.handler.BigVolumeStrategy;
+import com.oforsky.mmm.handler.StrategyHandler;
 import com.oforsky.mmm.timer.DailyTimerTask;
 import com.oforsky.mmm.timer.SchTimerTask;
-
-import org.apache.log4j.Logger;
 
 public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements MmmSvcMBean {
 
@@ -23,6 +26,8 @@ public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements MmmSvcMBean 
 	@Override
 	protected void postActivateSvcCb() throws Exception {
 		super.postActivateSvcCb();
+		StrategyHandler.init();
+		StrategyHandler.get().addStrategy(new BigVolumeStrategy());
 	}
 
 	@Override

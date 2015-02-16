@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class MmmUtil {
 		now.set(Calendar.MINUTE, hhmm.get(Calendar.MINUTE));
 		return now;
 	}
-	
-	public static String getStr() {
-		return "1234";
+
+	public static String getTodayStr() {
+		return TimeUtil.date2String(new Date(), TimeUtil.FORMAT_YYYYMMDD);
 	}
 }

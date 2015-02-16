@@ -4,7 +4,9 @@ import java.net.MalformedURLException;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.cache.StockGroupCacheStore;
 import com.oforsky.mmm.capture.data.Tick;
+import com.oforsky.mmm.ebo.StockGroupEbo;
 import com.oforsky.mmm.service.HttpService;
 import com.oforsky.mmm.service.HttpServiceImpl;
 
@@ -14,8 +16,6 @@ import com.oforsky.mmm.service.HttpServiceImpl;
 public class TickRetrieverImpl implements TickRetriever {
 
 	private static final Logger log = Logger.getLogger(TickRetrieverImpl.class);
-
-	private static final String TWSE_GET_TICK_URL = "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_%s.tw_%s";
 
 	private HttpService fileSvc;
 
@@ -28,14 +28,30 @@ public class TickRetrieverImpl implements TickRetriever {
 	}
 
 	@Override
-	public Tick getTick(String yyyymmdd, String stockCode) throws Exception {
-		String content = fileSvc.download(getTickUrl(yyyymmdd, stockCode));
+	public Tick getTick(String yyyymmdd, String code) throws Exception {
+		String content = fileSvc.download(getTickUrl(yyyymmdd, code), "utf-8");
 		log.trace("download tick content == " + content);
 		return Tick.valueOf(content);
 	}
 
 	private String getTickUrl(String yyyymmdd, String code)
 			throws MalformedURLException {
-		return String.format(TWSE_GET_TICK_URL, yyyymmdd, code);
+		StockGroupEbo stock = StockGroupCacheStore.getStore().get(code);
+		return stock.getStockType().getTickUrl(code, yyyymmdd);
+	}
+
+	@Override
+	public Tick getWarrantTick(String yyyymmdd, String targetCode,
+			String warrantCode) throws Exception {
+		String content = fileSvc.download(
+				getWarrantTickUrl(yyyymmdd, targetCode, warrantCode), "utf-8");
+		log.trace("download tick content == " + content);
+		return Tick.valueOf(content);
+	}
+
+	private String getWarrantTickUrl(String yyyymmdd, String targetCode,
+			String warrantCode) {
+		StockGroupEbo stock = StockGroupCacheStore.getStore().get(targetCode);
+		return stock.getStockType().getTickUrl(warrantCode, yyyymmdd);
 	}
 }

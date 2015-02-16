@@ -14,6 +14,8 @@ public class MmmConstant extends MmmBaseConstant {
 	public static final String LISTED_DAILY_URL = "http://www.twse.com.tw/ch/trading/exchange/STOCK_DAY/STOCK_DAY_print.php?"
 			+ "genpage=genpage/Report%s/%s_F3_1_8_%s.php&type=csv";
 	
+	public static final String TICK_URL = "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=%1$s_%2$s.tw_%3$s";
+	
 	public static final String CABINET_DAILY_URL = "http://www.otc.org.tw/web/stock/aftertrading/daily_trading_info/st43_result.php?l=zh-tw&d=%s&stkno=%s";
 	
 	public static final String[] QUALIFIED_DEALERS = { "凱基", "元大", "國泰", "永豐",

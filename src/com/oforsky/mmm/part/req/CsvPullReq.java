@@ -14,6 +14,11 @@ import com.truetel.jcore.part.TransactionPolicyEnum;
 @TransactionPolicy(TransactionPolicyEnum.None)
 public class CsvPullReq extends RetryReqBase {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Integer reqOid;
 
 	public CsvPullReq(Integer reqOid) {
@@ -40,27 +45,27 @@ public class CsvPullReq extends RetryReqBase {
 	public String getTaskId() {
 		return "CsvPullReq-" + reqOid;
 	}
-}
 
-class ReqRetryArgs implements com.oforsky.mmm.part.req.RetryArgs {
+	static class ReqRetryArgs implements com.oforsky.mmm.part.req.RetryArgs {
 
-	@Override
-	public Integer getRetryIntvl() {
-		return SvcCfgCacheStore.getRetryIntvl();
-	}
+		@Override
+		public Integer getRetryIntvl() {
+			return SvcCfgCacheStore.getRetryIntvl() * 60;
+		}
 
-	@Override
-	public Integer getRetryLimit() {
-		return SvcCfgCacheStore.getRetryLimit();
-	}
+		@Override
+		public Integer getRetryLimit() {
+			return SvcCfgCacheStore.getRetryLimit();
+		}
 
-	@Override
-	public MmmZone getRetryZone() {
-		return CsvPullReqZone.get();
-	}
+		@Override
+		public MmmZone getRetryZone() {
+			return CsvPullReqZone.get();
+		}
 
-	@Override
-	public TimerService getRetryTimer() {
-		return RetryTimer.get();
+		@Override
+		public TimerService getRetryTimer() {
+			return RetryTimer.get();
+		}
 	}
 }

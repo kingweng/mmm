@@ -3,16 +3,28 @@ package com.oforsky.mmm.service;
 import java.util.Collection;
 import java.util.List;
 
+import com.oforsky.mmm.dlo.BiasDlo;
+import com.oforsky.mmm.dlo.BidReqDlo;
 import com.oforsky.mmm.dlo.DailyCsvReqDlo;
 import com.oforsky.mmm.dlo.DealDlo;
 import com.oforsky.mmm.dlo.DealStatsDlo;
+import com.oforsky.mmm.dlo.QueryJobDlo;
 import com.oforsky.mmm.dlo.StockDlo;
+import com.oforsky.mmm.dlo.StorageDlo;
+import com.oforsky.mmm.dlo.StorageLogDlo;
 import com.oforsky.mmm.dlo.TickDlo;
+import com.oforsky.mmm.dlo.WarrantDlo;
+import com.oforsky.mmm.ebo.BiasEbo;
+import com.oforsky.mmm.ebo.BidReqEbo;
 import com.oforsky.mmm.ebo.DailyCsvReqEbo;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.DealStatsEbo;
+import com.oforsky.mmm.ebo.QueryJobEbo;
 import com.oforsky.mmm.ebo.StockEbo;
+import com.oforsky.mmm.ebo.StorageEbo;
+import com.oforsky.mmm.ebo.StorageLogEbo;
 import com.oforsky.mmm.ebo.TickEbo;
+import com.oforsky.mmm.ebo.WarrantEbo;
 
 /**
  * Created by kingweng on 2014/10/25.
@@ -69,5 +81,41 @@ public class DloServiceImpl implements DloService {
 	@Override
 	public void batchCreateDealStats(List<DealStatsEbo> ebos) throws Exception {
 		new DealStatsDlo().batchCreate(ebos);
+	}
+
+	@Override
+	public void createStorage(StorageEbo ebo) throws Exception {
+		new StorageDlo().create(ebo);
+	}
+
+	@Override
+	public void createStorageLog(StorageLogEbo ebo) throws Exception {
+		new StorageLogDlo().create(ebo);
+	}
+
+	@Override
+	public void createBidReq(BidReqEbo ebo) throws Exception {
+		new BidReqDlo().create(ebo);
+	}
+
+	@Override
+	public void updateQueryJob(QueryJobEbo job) throws Exception {
+		new QueryJobDlo().update(job);
+	}
+
+	@Override
+	public void updateBidReq(BidReqEbo bid) throws Exception {
+		new BidReqDlo().update(bid);
+	}
+
+	@Override
+	public WarrantEbo createWarrant(WarrantEbo ebo) throws Exception {
+		new WarrantDlo().create(ebo);
+		return ebo;
+	}
+
+	@Override
+	public void createBias(BiasEbo bias) throws Exception {
+		new BiasDlo().forceUpdate(bias);
 	}
 }

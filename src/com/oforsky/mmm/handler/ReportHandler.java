@@ -2,8 +2,10 @@ package com.oforsky.mmm.handler;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -39,6 +41,7 @@ public class ReportHandler {
 				+ revenueRate);
 		List<DealEbo> result = new LinkedList<DealEbo>();
 		for (String code : StockGroupCacheStore.getStore().getKeySet()) {
+			log.info("findPastDeals code[" + code + "] enter...");
 			findDealToResult(startDate, days, times, breakK, revenueRate,
 					result, code);
 		}
@@ -105,6 +108,23 @@ public class ReportHandler {
 			}
 		}
 		return result;
+	}
+
+	public Map<String, HistoricalStock> getHistoryMap(Integer dayCount)
+			throws Exception {
+		Map<String, HistoricalStock> result = new HashMap<String, HistoricalStock>();
+		for (String code : StockGroupCacheStore.getStore().getKeySet()) {
+			putHistoryToResult(dayCount, result, code);
+		}
+		return result;
+	}
+
+	private void putHistoryToResult(Integer dayCount,
+			Map<String, HistoricalStock> result, String code) throws Exception {
+		result.put(
+				code,
+				new HistoricalStock(code, dloSvc.listStocksByCodeSize(code,
+						dayCount)));
 	}
 
 }

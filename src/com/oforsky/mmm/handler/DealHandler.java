@@ -5,24 +5,24 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.cache.BuyingStockCacheStore;
 import com.oforsky.mmm.data.HistoricalStock;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.SellTypeEnum;
 import com.oforsky.mmm.ebo.StockEbo;
-import com.truetel.jcore.util.AppException;
 
 public class DealHandler {
 
 	private static final Logger log = Logger.getLogger(DealHandler.class);
 
-	private HistoricalStock stocks;
+	private HistoricalStock history;
 
 	private StockEbo buyStock;
 
 	private SellTypeEnum sellType;
 
 	public DealHandler(HistoricalStock list) {
-		this.stocks = list;
+		this.history = list;
 	}
 
 	public List<DealEbo> findPastDeals(String startDate, int k, int times,
@@ -36,18 +36,18 @@ public class DealHandler {
 		if (buyStock != null && !buyStock.equals(each)
 				&& canSell(breakK, revenueRate, each)) {
 			log.debug("sell on " + each.getDateStr());
-			result.add(new DealEbo(buyStock, each, sellType, stocks));
+			result.add(new DealEbo(buyStock, each, sellType, history));
 			buyStock = null;
 		}
 	}
 
 	private boolean canSell(int breakK, double revenueRate, StockEbo each)
 			throws Exception {
-		if (stocks.isBelowK(each.getDateStr(), breakK)) {
+		if (history.isBelowK(each.getDateStr(), breakK)) {
 			sellType = SellTypeEnum.KBreak;
 			return true;
 		}
-		if (higherRevenueRate(each.getPrice(), revenueRate)) {
+		if (higherRevenueRate(each.getHighestPrice(), revenueRate)) {
 			sellType = SellTypeEnum.RevenueBreak;
 			return true;
 		}
@@ -64,20 +64,42 @@ public class DealHandler {
 
 	private void findBuyStock(int k, int times, StockEbo each) {
 		try {
+			// if (buyStock == null
+			// && history.isBigVolume(each.getDateStr(), k, times)
+			// && each.getPrice() > priceThreshold(each)) {
+			// log.debug("is BigVolume on " + each.getDateStr());
+			// buyStock = each;
+			// }
 			if (buyStock == null
-					&& stocks.isBigVolume(each.getDateStr(), k, times)) {
+					&& history.isBigVolume(each.getDateStr(), k, times)
+					&& each.getChangePrice() > 0
+					&& BuyingStockCacheStore.getStore().get(each.getCode()) != null) {
 				log.debug("is BigVolume on " + each.getDateStr());
 				buyStock = each;
 			}
-		} catch (AppException e) {
+		} catch (Exception e) {
 			// ignore error
 		}
 	}
 
+//	private Double priceThreshold(StockEbo each) throws Exception {
+//		double maxPrice = Double.MIN_VALUE;
+//		for (int k : DealCfgCacheStore.getAboveKDays()) {
+//			double value = history.computeK(k);
+//			if (value > maxPrice) {
+//				maxPrice = value;
+//			}
+//		}
+//		return maxPrice;
+//	}
+
 	public List<DealEbo> findPastDeals(String startDate, int k, int times,
 			int breakK, double revenueRate) throws Exception {
 		List<DealEbo> result = new LinkedList<DealEbo>();
-		for (StockEbo each : stocks.getStocks(startDate)) {
+		for (StockEbo each : history.getStocks(startDate)) {
+//			if (each.getDateStr().startsWith("2010")) {
+//				break;
+//			}
 			findBuyStock(k, times, each);
 			findSellStockAddToResult(breakK, revenueRate, result, each);
 		}

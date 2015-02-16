@@ -37,6 +37,9 @@ public class DealStatsEbo extends DealStatsCoreEbo {
 	}
 
 	private Double calculateAvgKeepDays(List<DealEbo> deals) {
+		if (deals.size() == 0) {
+			return 0.0;
+		}
 		int totalKeepDays = 0;
 		for (DealEbo ebo : deals) {
 			totalKeepDays += ebo.getKeepDays();
@@ -63,6 +66,20 @@ public class DealStatsEbo extends DealStatsCoreEbo {
 	}
 
 	private int calculateWinChance(List<DealEbo> deals, int succCnt) {
+		if (deals.size() == 0) {
+			return 0;
+		}
 		return (int) (((double) succCnt / (double) deals.size()) * 100.0);
+	}
+
+	@Override
+	protected void postCreateSkyCb() throws Exception {
+		super.postCreateSkyCb();
+//		if(getWinChance() >= 40){
+//			BuyingStockEbo data = new BuyingStockEbo();
+//			data.setCode(getCode());
+//			getProxy().createBuyingStock(data );
+//		}
+		
 	}
 }

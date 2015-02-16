@@ -15,10 +15,14 @@
 			<xsd:element name="Tick" type="tdml:TickType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Warrant" type="tdml:WarrantType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Storage" type="tdml:StorageType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="StorageLog" type="tdml:StorageLogType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="DailyCsvReq" type="tdml:DailyCsvReqType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="StockGroup" type="tdml:StockGroupType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BuyingStock" type="tdml:BuyingStockType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Deal" type="tdml:DealType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="Bid" type="tdml:BidType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="QueryJob" type="tdml:QueryJobType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BidReq" type="tdml:BidReqType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Bias" type="tdml:BiasType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Drive" type="tdml:DriveType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="License" type="tdml:LicenseType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Training" type="tdml:TrainingType" minOccurs="0" maxOccurs="unbounded"/>
@@ -26,15 +30,15 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="StockType">
-		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="dateStr" type="xsd:string" use="required"/>
 		<xsd:attribute name="stockType" type="tdml:StockTypeEnu" use="required"/>
 		<xsd:attribute name="price" type="xsd:double" use="required"/>
 		<xsd:attribute name="startPrice" type="xsd:double" use="required"/>
 		<xsd:attribute name="lowestPrice" type="xsd:double" use="required"/>
 		<xsd:attribute name="highestPrice" type="xsd:double" use="required"/>
 		<xsd:attribute name="changePrice" type="xsd:double" use="required"/>
-		<xsd:attribute name="dateStr" type="xsd:string" use="required"/>
 		<xsd:attribute name="monthStr" type="xsd:string" use="required"/>
 		<xsd:attribute name="volume" type="xsd:long" use="required"/>
 	</xsd:complexType>
@@ -67,11 +71,26 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="StorageType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="price" type="xsd:double" use="required"/>
-		<xsd:attribute name="unit" type="xsd:string" use="required"/>
-		<xsd:attribute name="totalPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="targetPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="unit" type="xsd:int" use="required"/>
+		<xsd:attribute name="amount" type="xsd:int" use="required"/>
 		<xsd:attribute name="warrantAppId" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="StorageLogType">
+		<xsd:attribute name="warrantOid" type="xsd:int" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="buyPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="sellPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="targetCode" type="xsd:string" use="required"/>
+		<xsd:attribute name="targetPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="unit" type="xsd:int" use="required"/>
+		<xsd:attribute name="amount" type="xsd:int" use="required"/>
+		<xsd:attribute name="buyTime" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="DailyCsvReqType">
@@ -87,19 +106,37 @@
 		<xsd:attribute name="stockType" type="tdml:StockTypeEnu" use="required"/>
 	</xsd:complexType>
 
-	<xsd:complexType name="DealType">
+	<xsd:complexType name="BuyingStockType">
 		<xsd:attribute name="code" type="xsd:string" use="required"/>
-		<xsd:attribute name="sellType" type="tdml:SellTypeEnu" use="required"/>
-		<xsd:attribute name="buyStockAppId" type="xsd:string" use="optional"/>
-		<xsd:attribute name="sellStockAppId" type="xsd:string" use="optional"/>
 	</xsd:complexType>
 
-	<xsd:complexType name="BidType">
+	<xsd:complexType name="DealType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="buyDateStr" type="xsd:string" use="required"/>
+		<xsd:attribute name="sellDateStr" type="xsd:string" use="required"/>
+		<xsd:attribute name="sellType" type="tdml:SellTypeEnu" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="QueryJobType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="price" type="xsd:double" use="required"/>
+		<xsd:attribute name="amount" type="xsd:int" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="BidReqType">
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="price" type="xsd:double" use="required"/>
-		<xsd:attribute name="unit" type="xsd:string" use="required"/>
-		<xsd:attribute name="totalPrice" type="xsd:double" use="required"/>
+		<xsd:attribute name="unit" type="xsd:int" use="required"/>
+		<xsd:attribute name="action" type="tdml:ActionTypeEnu" use="required"/>
+		<xsd:attribute name="amount" type="xsd:int" use="required"/>
 		<xsd:attribute name="warrantAppId" type="xsd:string" use="optional"/>
+		<xsd:attribute name="jobAppId" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="BiasType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="dateStr" type="xsd:string" use="required"/>
+		<xsd:attribute name="value" type="xsd:double" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="DriveType">
@@ -158,12 +195,23 @@
 		</xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:simpleType name="JobStateEnu">
+		<xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Init"/>
+            <xsd:enumeration value="RetryRetrieval"/>
+            <xsd:enumeration value="Complete"/>
+            <xsd:enumeration value="Failed"/>
+		</xsd:restriction>
+    </xsd:simpleType>
+
     <xsd:simpleType name="BidStateEnu">
 		<xsd:restriction base="xsd:string">
             <xsd:enumeration value="Init"/>
             <xsd:enumeration value="Success"/>
             <xsd:enumeration value="Failure"/>
             <xsd:enumeration value="Cancel"/>
+            <xsd:enumeration value="Processing"/>
+            <xsd:enumeration value="PartialSuccess"/>
 		</xsd:restriction>
     </xsd:simpleType>
 

@@ -26,7 +26,9 @@ import com.oforsky.mmm.ebo.DriveEbo;
 import com.oforsky.mmm.ebo.LicenseEbo;
 import com.oforsky.mmm.ebo.MmmEnum;
 import com.oforsky.mmm.ebo.StockGroupEbo;
+import com.oforsky.mmm.ebo.TickEbo;
 import com.oforsky.mmm.ebo.TrainingEbo;
+import com.oforsky.mmm.ebo.WarrantEbo;
 import com.oforsky.mmm.proxy.MmmProxy;
 import com.oforsky.mmm.proxy.MmmProxyUtil;
 import com.oforsky.mmm.util.StockGroupParser;
@@ -194,6 +196,17 @@ public class MmmTest extends MmmBaseTest {
 		List<DealEbo> ebos = proxy.findPastDeals(startDate, dayCount, times,
 				breakK, Double.parseDouble(revenueRate));
 		cui.output("persisting Deals to Database");
+		List<DealEbo> bucket = new ArrayList<DealEbo>();
+		while (true) {
+			bucket.add(ebos.remove(0));
+			if (bucket.size() == 100) {
+				proxy.batchCreateDeal(bucket);
+				bucket.clear();
+			}
+			if (ebos.size() == 0) {
+				break;
+			}
+		}
 		proxy.batchCreateDeal(ebos);
 		cui.output("analyze Deals ...");
 		proxy.analyzeDeals();
@@ -218,4 +231,26 @@ public class MmmTest extends MmmBaseTest {
 		}
 	}
 
+	@SvcTest(value = 211, paramNames = { "code" })
+	public void selectWarrants(String code) throws Exception {
+		List<WarrantEbo> ebos = proxy.selectWarrants(code);
+		for (WarrantEbo each : ebos) {
+			cui.output(each.dbgstr() + "\n");
+		}
+	}
+
+	@SvcTest(value = 211)
+	public void invokeTickTimerManually() throws Exception {
+		proxy.invokeTickTimerManully();
+	}
+
+	@SvcTest(value = 212, paramNames = { "code", "price", "totalVolume" })
+	public void genFakeTick(String code, String price, Integer totalVolume)
+			throws Exception {
+		TickEbo ebo = new TickEbo();
+		ebo.setCode(code);
+		ebo.setPrice(Double.parseDouble(price));
+		ebo.setTotalVolume(totalVolume);
+		proxy.genFakeTick(ebo);
+	}
 }

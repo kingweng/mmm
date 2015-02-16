@@ -23,7 +23,7 @@ public class YahooStockParser extends CsvParser<StockEbo> {
 
 	public static YahooStockParser aParser(StockGroupEbo ebo) throws Exception {
 		String downloadUrl = ebo.getStockType().getHistoryUrl(ebo.getCode());
-		String content = new HttpServiceImpl().download(downloadUrl);
+		String content = new HttpServiceImpl().download(downloadUrl, "big5");
 		return new YahooStockParser(ebo, content);
 	}
 

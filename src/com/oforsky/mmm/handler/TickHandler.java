@@ -1,6 +1,8 @@
 package com.oforsky.mmm.handler;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -30,11 +32,17 @@ public class TickHandler {
 
 	private TickRetriever retriever;
 
+	private List<TickListener> listeners = new ArrayList<TickListener>();
+
 	public TickHandler(DloService dloSvc, MmmZone tickZone,
 			TickRetriever retriever) {
 		this.dloSvc = dloSvc;
 		this.tickZone = tickZone;
 		this.retriever = retriever;
+	}
+
+	public void addListener(TickListener listener) {
+		listeners.add(listener);
 	}
 
 	public TickHandler() {
@@ -54,8 +62,19 @@ public class TickHandler {
 
 	public void retrieve(String code, String y6d) throws Exception {
 		log.trace("retrieve() code=" + code + ", y6d=" + y6d);
-		Tick tick = retriever.getTick(code, y6d);
-		dloSvc.createTick(TickEbo.valueOf(tick));
+		Tick tick = retriever.getTick(y6d, code);
+		TickEbo ebo = TickEbo.valueOf(tick);
+		if (ebo.getTotalVolume() != 0) {
+			notifyListeners(ebo);
+		}
+		dloSvc.createTick(ebo);
+	}
+
+	private void notifyListeners(TickEbo ebo) {
+		log.trace("notifyListeners");
+		for (TickListener each : listeners) {
+			each.handleTick(ebo);
+		}
 	}
 
 }

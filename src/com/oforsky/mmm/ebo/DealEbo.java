@@ -5,7 +5,11 @@
  */
 package com.oforsky.mmm.ebo;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 
@@ -33,29 +37,25 @@ public class DealEbo extends DealCoreEbo {
 		history = stocks;
 		setSellType(type);
 		setCode(buyStock.getCode());
-		setBuyStockEbo(buyStock);
-		setBuyStockOid(buyStock.getStockOid());
-		setSellStockEbo(sellStock);
-		setSellStockOid(sellStock.getStockOid());
+		setBuyDateStr(buyStock.getDateStr());
+		setSellDateStr(sellStock.getDateStr());
 		recordHigh();
-		diffPrice();
+		if (type == SellTypeEnum.KBreak) {
+			setDiffPrice(sellStock.getLowestPrice() - buyStock.getPrice());
+		} else {
+			setDiffPrice(sellStock.getHighestPrice() - buyStock.getPrice());
+		}
 		setKeepDays(diffStocksSize());
-		setRevenueRate(getDiffPrice() / getBuyStockEbo().getPrice());
-	}
-
-	private void diffPrice() throws Exception {
-		setDiffPrice(getSellStockEbo().getPrice() - getBuyStockEbo().getPrice());
+		setRevenueRate(getDiffPrice() / buyStock.getPrice());
 	}
 
 	private int diffStocksSize() throws Exception {
-		return history.getStocks(getBuyStockEbo().getDateStr(),
-				getSellStockEbo().getDateStr()).size();
+		return history.getStocks(getBuyDateStr(), getSellDateStr()).size();
 	}
 
 	private void recordHigh() throws Exception, AppException {
-		String date = getBuyStockEbo().getDateStr();
-		log.debug("compute stock[" + getCode() + "] recordHigh on [" + date
-				+ "]");
-		setRecordHigh(history.recordHigh(date));
+		log.debug("compute stock[" + getCode() + "] recordHigh on ["
+				+ getBuyDateStr() + "]");
+		setRecordHigh(history.recordHigh(getBuyDateStr()));
 	}
 }

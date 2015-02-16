@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.data.HistoricalStock;
+import com.oforsky.mmm.ebo.BiasEbo;
 import com.oforsky.mmm.ebo.DailyCsvReqEbo;
 import com.oforsky.mmm.ebo.StockEbo;
 import com.oforsky.mmm.ebo.StockTypeEnum;
@@ -50,7 +52,7 @@ public class DailyCsvReqHandler {
 	}
 
 	public DailyCsvReqEbo retrieve() throws Exception {
-		String content = fileSvc.download(ebo.getCsvUrl());
+		String content = fileSvc.download(ebo.getCsvUrl(), "big5");
 		if (StockTypeEnum.Cabinet == ebo.getStockType()) {
 			content = jsonToCsv(content);
 		}
@@ -82,7 +84,14 @@ public class DailyCsvReqHandler {
 		dloSvc.deleteStock(ebo.getCode(), ebo.getMonthStr());
 		dloSvc.batchCreateStock(stocks);
 		dloSvc.updateDailyCsvReq(ebo);
+		//createBias();
 		return ebo;
+	}
+
+	private void createBias() throws Exception {
+		List<StockEbo> stocks = dloSvc.listStocksByCodeSize(ebo.getCode(), 20);
+		HistoricalStock history = new HistoricalStock(ebo.getCode(), stocks);
+		dloSvc.createBias(history.getBias());
 	}
 
 	private List<StockEbo> parseCsvFile() throws IOException,
@@ -102,4 +111,5 @@ public class DailyCsvReqHandler {
 		dloSvc.updateDailyCsvReq(ebo);
 		return ebo;
 	}
+
 }

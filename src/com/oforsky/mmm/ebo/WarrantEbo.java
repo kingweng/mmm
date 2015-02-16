@@ -5,16 +5,16 @@
  */
 package com.oforsky.mmm.ebo;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-import org.apache.commons.collections.ComparatorUtils;
 import org.apache.log4j.Logger;
 
-import com.oforsky.mmm.cache.SvcCfgCacheStore;
+import com.oforsky.mmm.cache.WarrantCfgCacheStore;
 import com.oforsky.mmm.capture.data.stock.Item;
 import com.oforsky.mmm.capture.data.stock.OriWarrant;
-import com.oforsky.mmm.util.MmmUtil;
-import com.truetel.jcore.util.AppException;
 
 @Entity
 @Table(name = WarrantCoreEbo.DB_TABLE_NAME)
@@ -67,20 +67,26 @@ public class WarrantEbo extends WarrantCoreEbo {
 	}
 
 	public boolean isQualified() throws Exception {
-		if (getRemainingDays() < SvcCfgCacheStore.getRemainingDays()) {
+		if (getRemainingDays() < WarrantCfgCacheStore.getRemainingDays()) {
 			return false;
 		}
-		if (getDiffPrices() > SvcCfgCacheStore.getWarrantDiffPrice()) {
+		if (getDiffPrices() > WarrantCfgCacheStore.getWarrantDiffPrice()) {
 			return false;
 		}
 		if (!qualifiedDealer()) {
+			return false;
+		}
+		if (getBuyVolume() < 100) {
+			return false;
+		}
+		if (getLeverage() < WarrantCfgCacheStore.getMinLeverage()) {
 			return false;
 		}
 		return true;
 	}
 
 	private boolean qualifiedDealer() throws Exception {
-		for (String dealer : SvcCfgCacheStore.getQualifiedDealers()) {
+		for (String dealer : WarrantCfgCacheStore.getQualifiedDealers()) {
 			if (getName().contains(dealer)) {
 				return true;
 			}

@@ -1,5 +1,6 @@
 package com.oforsky.mmm.data;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.NavigableMap;
@@ -8,10 +9,16 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.ebo.BiasEbo;
 import com.oforsky.mmm.ebo.StockEbo;
 import com.truetel.jcore.util.AppException;
 
-public class HistoricalStock {
+public class HistoricalStock implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger log = Logger.getLogger(HistoricalStock.class);
 
 	private final TreeMap<String, StockEbo> stocks = new TreeMap<String, StockEbo>();
@@ -78,6 +85,38 @@ public class HistoricalStock {
 		return timesGreater(date, days, times);
 	}
 
+	public boolean isBigVolume(int volume, int days, int times)
+			throws AppException {
+		checkBoundary(stocks.lastKey(), days);
+		return timesGreater(volume, days, times);
+	}
+
+	private boolean timesGreater(int volume, int days, int times) {
+		double total = 0;
+		int count = 0;
+		for (String code : stocks.descendingKeySet()) {
+			total += stocks.get(code).getVolume();
+			count++;
+			if (count == days - 1) {
+				break;
+			}
+		}
+		return volume > (((total + volume) / days) * times);
+	}
+
+	public int predictBigVolume(int days, int times) {
+		double total = 0;
+		int count = 0;
+		for (String code : stocks.descendingKeySet()) {
+			total += stocks.get(code).getVolume();
+			count++;
+			if (count == days - 1) {
+				break;
+			}
+		}
+		return (int) ((total / ((double) days / (double) times) - 1) + 1);
+	}
+
 	private boolean timesGreater(String date, int days, int times) {
 		double total = 0;
 		for (StockEbo stock : subLessMap(date, days).values()) {
@@ -97,7 +136,7 @@ public class HistoricalStock {
 
 	public boolean isBelowK(String date, int days) throws Exception {
 		double k = computeK(date, days);
-		return stocks.get(date).getPrice() < k;
+		return stocks.get(date).getLowestPrice() < k;
 	}
 
 	public int recordHigh(String date) throws AppException {
@@ -141,5 +180,26 @@ public class HistoricalStock {
 			total += stock.getVolume();
 		}
 		return stocks.get(date).getVolume() / ((total / days));
+	}
+
+	public Double computeK(Integer days) throws Exception {
+		return computeK(stocks.lastKey(), days);
+	}
+
+	public Double computeBias(String date) throws Exception {
+		double k20 = computeK(date, 20);
+		return ((getStock(date).getPrice() - k20) / k20);
+	}
+
+	public StockEbo getLatest() {
+		return stocks.lastEntry().getValue();
+	}
+
+	public BiasEbo getBias() throws Exception {
+		BiasEbo bias = new BiasEbo();
+		bias.setCode(code);
+		bias.setDateStr(getLatest().getDateStr());
+		bias.setValue(computeBias(getLatest().getDateStr()));
+		return bias;
 	}
 }

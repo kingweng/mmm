@@ -3,11 +3,17 @@ package com.oforsky.mmm.service;
 import java.util.Collection;
 import java.util.List;
 
+import com.oforsky.mmm.ebo.BiasEbo;
+import com.oforsky.mmm.ebo.BidReqEbo;
 import com.oforsky.mmm.ebo.DailyCsvReqEbo;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.DealStatsEbo;
+import com.oforsky.mmm.ebo.QueryJobEbo;
 import com.oforsky.mmm.ebo.StockEbo;
+import com.oforsky.mmm.ebo.StorageEbo;
+import com.oforsky.mmm.ebo.StorageLogEbo;
 import com.oforsky.mmm.ebo.TickEbo;
+import com.oforsky.mmm.ebo.WarrantEbo;
 
 /**
  * Created by kingweng on 2014/10/21.
@@ -34,4 +40,18 @@ public interface DloService {
 	List<DealEbo> listDealByCode(String code) throws Exception;
 
 	void batchCreateDealStats(List<DealStatsEbo> result) throws Exception;
+
+	void createStorage(StorageEbo storageEbo) throws Exception;
+
+	void createStorageLog(StorageLogEbo ebo) throws Exception;
+
+	void createBidReq(BidReqEbo result) throws Exception;
+
+	void updateQueryJob(QueryJobEbo job) throws Exception;
+
+	void updateBidReq(BidReqEbo bid) throws Exception;
+
+	WarrantEbo createWarrant(WarrantEbo each) throws Exception;
+
+	void createBias(BiasEbo bias) throws Exception;
 }

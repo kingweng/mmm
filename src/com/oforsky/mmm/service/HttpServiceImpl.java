@@ -1,18 +1,17 @@
 package com.oforsky.mmm.service;
 
-import com.truetel.jcore.util.FileUtil;
-import com.truetel.jcore.util.StringUtil;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import com.oforsky.mmm.cache.SvcCfgCacheStore;
+import com.truetel.jcore.util.FileUtil;
+import com.truetel.jcore.util.StringUtil;
 
 /**
  * Created by kingweng on 2014/10/19.
@@ -21,22 +20,20 @@ public class HttpServiceImpl implements HttpService {
 
 	private static final Logger log = Logger.getLogger(HttpServiceImpl.class);
 
-	private static final int TIMEOUT = 2000;
-
 	@Override
-	public void download(String url, File file) throws Exception {
+	public void download(String url, File file, String encoding)
+			throws Exception {
 		log.trace("retrieveFile url[" + url + "] to file[" + file + "]");
 		file.getParentFile().mkdirs();
 		URLConnection conn = new URL(url).openConnection();
-		conn.setConnectTimeout(3000);
-		conn.setReadTimeout(3000);
+		setTimeout(conn);
 		String content = IOUtils.toString(conn.getInputStream(), "Big5");
 		FileUtil.writeFile(content, file);
 	}
 
 	@Override
-	public String download(String url) throws Exception {
-		return downloadBySession(url, null);
+	public String download(String url, String encoding) throws Exception {
+		return downloadBySession(url, null, encoding);
 	}
 
 	@Override
@@ -51,19 +48,19 @@ public class HttpServiceImpl implements HttpService {
 	}
 
 	private void setTimeout(URLConnection urlConn) {
-		urlConn.setConnectTimeout(TIMEOUT);
-		urlConn.setReadTimeout(TIMEOUT);
+		urlConn.setConnectTimeout(SvcCfgCacheStore.getTickTimeout() * 1000);
+		urlConn.setReadTimeout(SvcCfgCacheStore.getTickTimeout() * 1000);
 	}
 
 	@Override
-	public String downloadBySession(String url, String sessionId)
-			throws Exception {
+	public String downloadBySession(String url, String sessionId,
+			String encoding) throws Exception {
 		log.debug("downloadBySession() url=" + url);
 		URLConnection urlConn = new URL(url).openConnection();
 		setTimeout(urlConn);
 		setSessionId(sessionId, urlConn);
 		BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(urlConn.getInputStream(), "big5"));
+				new InputStreamReader(urlConn.getInputStream(), encoding));
 		StringBuilder content = new StringBuilder();
 		String line = null;
 		// read from the urlconnection via the bufferedreader

@@ -6,12 +6,17 @@
 package com.oforsky.mmm.proxy;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Remote;
 
 import com.oforsky.mmm.data.BigVolume;
+import com.oforsky.mmm.data.HistoricalStock;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.StockGroupEbo;
+import com.oforsky.mmm.ebo.StorageEbo;
+import com.oforsky.mmm.ebo.TickEbo;
+import com.oforsky.mmm.ebo.WarrantEbo;
 import com.truetel.jcore.util.AppException;
 
 @Remote
@@ -52,5 +57,27 @@ public interface MmmProxy extends MmmBaseProxy {
 
 	public List<BigVolume> findBigVolume(String baseDate, Integer dayCount,
 			Integer times) throws AppException;
+
+	public List<WarrantEbo> selectWarrants(String code) throws AppException;
+
+	public Map<String, HistoricalStock> getHistoryMap(Integer dayCount)
+			throws AppException;
+
+	public void invokeTickTimerManully() throws AppException;
+
+	public void createBidReq(Integer jobOid) throws AppException;
+
+	public void queryJobFailRetrieval(Integer jobOid, Exception e)
+			throws AppException;
+
+	public void queryJobFail(Integer jobOid, Exception e) throws AppException;
+
+	public void sellStorage(StorageEbo ebo) throws AppException;
+
+	public void proceedBidReq(Integer bidOid) throws AppException;
+
+	public void failBidReq(Integer bidOid, Exception e) throws AppException;
+
+	public void genFakeTick(TickEbo ebo) throws AppException;
 
 }

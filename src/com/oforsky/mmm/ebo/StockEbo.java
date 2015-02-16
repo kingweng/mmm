@@ -37,7 +37,7 @@ public class StockEbo extends StockCoreEbo implements CsvParsable<StockEbo> {
 	}
 
 	private Double parseDouble(String input) {
-		if (input.equals("--")) {
+		if (input.equals("--") || input.startsWith("X")) {
 			return 0.0;
 		}
 		return Double.parseDouble(input.replaceAll(",", ""));

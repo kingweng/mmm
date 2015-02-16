@@ -22,6 +22,12 @@ public enum StockTypeEnum {
 					return code;
 				}
 
+				@Override
+				public String getTickUrl(String code, String yyyymm) {
+					new UnsupportedOperationException("Cannot be here!");
+					return null;
+				}
+
 			}
 			, Listed(1) {
 				@Override
@@ -36,6 +42,11 @@ public enum StockTypeEnum {
 							code);
 				}
 
+				@Override
+				public String getTickUrl(String code, String yyyymmdd) {
+					return String.format(MmmConstant.TICK_URL, "tse", code, yyyymmdd);
+				}
+
 			}
 			, Cabinet(2) {
 				@Override
@@ -48,6 +59,11 @@ public enum StockTypeEnum {
 				public String getDailyUrl(String code, String yyyymm) throws Exception {
 					return String.format(MmmConstant.CABINET_DAILY_URL,
 							getReMonthStr(yyyymm), code);
+				}
+
+				@Override
+				public String getTickUrl(String code, String yyyymmdd) {
+					return String.format(MmmConstant.TICK_URL, "otc", code, yyyymmdd);
 				}
 
 			}
@@ -114,4 +130,6 @@ public enum StockTypeEnum {
 	}
     
     public abstract String getDailyUrl(String code, String yyyymm) throws Exception;
+    
+    public abstract String getTickUrl(String code, String yyyymmdd);
 }

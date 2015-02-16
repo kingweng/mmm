@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.oforsky.mmm.cache.SvcCfgCacheStore;
+import com.oforsky.mmm.handler.StrategyHandler;
 import com.oforsky.mmm.proxy.MmmProxy;
 import com.oforsky.mmm.proxy.MmmProxyUtil;
 import com.oforsky.mmm.svc.MmmPart;
@@ -63,8 +64,7 @@ public class SchTimerTask implements ScheduleTimerTask {
 	}
 
 	private static String getStartTime() {
-		return SvcCfgCacheStore
-				.getTickTimeRange().split("-")[0];
+		return SvcCfgCacheStore.getTickTimeRange().split("-")[0];
 	}
 
 	@Override
@@ -81,6 +81,7 @@ public class SchTimerTask implements ScheduleTimerTask {
 	public void timerFiredCb() throws Exception {
 		log.info("SchTimerTask() fire...");
 		MmmProxy proxy = MmmProxyUtil.getProxy();
+		StrategyHandler.get().reset(proxy.getHistoryMap(120));
 		proxy.genTickReqs();
 		TickTimerTask.schedule();
 	}

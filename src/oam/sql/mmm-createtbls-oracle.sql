@@ -7,45 +7,52 @@ create table mmm_SvcCfg (
 	retryLimit number(10),
 	dailyImportTime varchar2(20),
 	tickInterval number(10),
+	tickTimeout number(10),
 	tickTimeRange varchar2(20),
-	remainingDays number(10),
-	warrantDiffPrice float(126),
-	qualifiedDealers varchar2(20),
 	closedRateOfK number(10),
 	kList varchar2(20),
         constraint mmm_SvcCfg_PK
 		primary key (svcName) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
 
-create table mmm_ReportParams (
+create table mmm_WarrantCfg (
+	svcName varchar2(20) not null,
+	remainingDays number(10),
+	warrantDiffPrice float(126),
+	qualifiedDealers varchar2(256),
+	minLeverage number(10),
+	warrantRetryIntvl number(10),
+        constraint mmm_WarrantCfg_PK
+		primary key (svcName) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+
+create table mmm_DealCfg (
 	svcName varchar2(20) not null,
 	dayCount number(10),
 	overTimes number(10),
-        constraint mmm_ReportParams_PK
+	kBreak number(10),
+	winChance number(10),
+	revenueRate float(126),
+        constraint mmm_DealCfg_PK
 		primary key (svcName) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
 
 create table mmm_Stock (
-	stockOid number(10) not null,
+	code varchar2(4) not null,
 	name varchar2(20 char),
-	code varchar2(4),
+	dateStr varchar2(8) not null,
 	stockType number(3),
 	price float(126),
 	startPrice float(126),
 	lowestPrice float(126),
 	highestPrice float(126),
 	changePrice float(126),
-	dateStr varchar2(8),
 	monthStr varchar2(8),
 	volume number(20),
 	createTime date,
-    	constraint mmm_Stock_CodeDate
-		unique (code, dateStr)  using index tablespace tasind_svc,
         constraint mmm_Stock_PK
-		primary key (stockOid) using index tablespace tasind_svc
+		primary key (code, dateStr) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
-                	
-create sequence mmm_Stock_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
 create  index
 	mmm_Stock_CodeMonth on mmm_Stock (code, monthStr) tablespace tasind_svc;
 create  index
@@ -59,10 +66,10 @@ create table mmm_Tick (
 	totalVolume number(10),
 	timestamp number(20),
 	createTime date,
-	buyPrices varchar2(20),
-	buyVolumes varchar2(20),
-	seldPrices varchar2(20),
-	seldVolumes varchar2(20),
+	buyPrices varchar2(100),
+	buyVolumes varchar2(100),
+	seldPrices varchar2(100),
+	seldVolumes varchar2(100),
         constraint mmm_Tick_PK
 		primary key (tickOid) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
@@ -99,18 +106,44 @@ create  index
 	mmm_Warrant_Target on mmm_Warrant (targetCode) tablespace tasind_svc;
 
 create table mmm_Storage (
-	storageOid number(10) not null,
+	code varchar2(20) not null,
 	warrantOid number(10),
 	name varchar2(20 char),
 	price float(126),
-	unit varchar2(20),
-	totalPrice float(126),
+	targetPrice float(126),
+	unit number(10),
+	amount number(10),
 	createTime date,
         constraint mmm_Storage_PK
-		primary key (storageOid) using index tablespace tasind_svc
+		primary key (code) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+
+create table mmm_StorageLog (
+	logOid number(10) not null,
+	warrantOid number(10),
+	name varchar2(20 char),
+	code varchar2(20),
+	buyPrice float(126),
+	sellPrice float(126),
+	targetCode varchar2(20),
+	targetPrice float(126),
+	unit number(10),
+	amount number(10),
+	revenue number(10),
+	logTime date,
+	buyTime date,
+	keepDays number(10),
+        constraint mmm_StorageLog_PK
+		primary key (logOid) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
                 	
-create sequence mmm_Storage_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create sequence mmm_StorageLog_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_StorageLog_Code on mmm_StorageLog (targetCode) tablespace tasind_svc;
+create  index
+	mmm_StorageLog_Time on mmm_StorageLog (logTime) tablespace tasind_svc;
+create  index
+	mmm_StorageLog_Warrant on mmm_StorageLog (warrantOid) tablespace tasind_svc;
 
 create table mmm_DailyCsvReq (
 	reqOid number(10) not null,
@@ -140,16 +173,26 @@ create table mmm_StockGroup (
 		primary key (code) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
 
+create table mmm_BuyingStock (
+	code varchar2(4) not null,
+        constraint mmm_BuyingStock_PK
+		primary key (code) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+
 create table mmm_Deal (
 	realOid number(10) not null,
 	code varchar2(4),
-	buyStockOid number(10),
+	buyDateStr varchar2(20),
 	recordHigh number(10),
-	sellStockOid number(10),
+	sellDateStr varchar2(20),
 	sellType number(3),
 	diffPrice float(126),
 	keepDays number(10),
 	revenueRate float(126),
+    	constraint mmm_Deal_BuyStock
+		unique (code, buyDateStr)  using index tablespace tasind_svc,
+    	constraint mmm_Deal_SellStock
+		unique (code, sellDateStr)  using index tablespace tasind_svc,
         constraint mmm_Deal_PK
 		primary key (realOid) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
@@ -174,21 +217,57 @@ create table mmm_DealStats (
                 	
 create sequence mmm_DealStats_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
 
-create table mmm_Bid (
-	bidOid number(10) not null,
-	warrantOid number(10),
-	name varchar2(20 char),
+create table mmm_QueryJob (
+	jobOid number(10) not null,
+	code varchar2(20),
 	price float(126),
-	unit varchar2(20),
-	bidState number(3),
-	totalPrice float(126),
+	amount number(10),
+	retryCnt number(10),
+	jobState number(3),
+	failMsg varchar2(512),
 	createTime date,
 	updateTime date,
-        constraint mmm_Bid_PK
+        constraint mmm_QueryJob_PK
+		primary key (jobOid) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+                	
+create sequence mmm_QueryJob_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_QueryJob_Code on mmm_QueryJob (code) tablespace tasind_svc;
+
+create table mmm_BidReq (
+	bidOid number(10) not null,
+	warrantOid number(10),
+	jobOid number(10),
+	name varchar2(20 char),
+	price float(126),
+	unit number(10),
+	action number(3),
+	bidState number(3),
+	amount number(10),
+	failMsg varchar2(512),
+	createTime date,
+	updateTime date,
+        constraint mmm_BidReq_PK
 		primary key (bidOid) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
                 	
-create sequence mmm_Bid_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create sequence mmm_BidReq_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+
+create table mmm_Bias (
+	biasOid number(10) not null,
+	code varchar2(20),
+	dateStr varchar2(20),
+	value float(126),
+    	constraint mmm_Bias_CodeDate
+		unique (code, dateStr)  using index tablespace tasind_svc,
+        constraint mmm_Bias_PK
+		primary key (biasOid) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+                	
+create sequence mmm_Bias_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_Bias_Code on mmm_Bias (code) tablespace tasind_svc;
 
 create table mmm_Drive (
 	driveOid number(10) not null,
@@ -245,27 +324,14 @@ alter table mmm_Storage add constraint
 create index
 	mmm_Storage_Warrant on mmm_Storage (warrantOid) tablespace tasind_svc;
 	
-        
-alter table mmm_Deal add constraint
-    mmm_Deal_BuyStock foreign key (buyStockOid)
-    references mmm_Stock;
-    
 create index
-	mmm_Deal_BuyStock on mmm_Deal (buyStockOid) tablespace tasind_svc;
+	mmm_BidReq_Warrant on mmm_BidReq (warrantOid) tablespace tasind_svc;
 	
         
-alter table mmm_Deal add constraint
-    mmm_Deal_SellStock foreign key (sellStockOid)
-    references mmm_Stock;
+alter table mmm_BidReq add constraint
+    mmm_BidReq_Job foreign key (jobOid)
+    references mmm_QueryJob;
     
 create index
-	mmm_Deal_SellStock on mmm_Deal (sellStockOid) tablespace tasind_svc;
-	
-        
-alter table mmm_Bid add constraint
-    mmm_Bid_Warrant foreign key (warrantOid)
-    references mmm_Warrant;
-    
-create index
-	mmm_Bid_Warrant on mmm_Bid (warrantOid) tablespace tasind_svc;
+	mmm_BidReq_Job on mmm_BidReq (jobOid) tablespace tasind_svc;
 	
