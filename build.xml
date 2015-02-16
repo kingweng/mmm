@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="mmm" basedir="." default="package">
-	<property name="sky.pkg.name" value="com.oforsky.sky"/>
-	<property name="svcName" value="mmm"/>
-	<property name="svcNameUp" value="MMM"/>
-	<property name="svcOrder" value=""/>
-	<property name="migsvcList" value="mmm"/>
-	<property name="app.type" value="svc"/>
-	<property name="template.type" value="FREE_MARKER_EJB3"/>
+	<property name="sky.pkg.name" value="com.oforsky.sky" />
+	<property name="svcName" value="mmm" />
+	<property name="svcNameUp" value="MMM" />
+	<property name="svcOrder" value="" />
+	<property name="migsvcList" value="mmm" />
+	<property name="app.type" value="svc" />
+	<property name="template.type" value="FREE_MARKER_EJB3" />
 	<!--property name="importTsdlFiles" value="${basedir}/../hrs/src/meta/HRS-TableMeta.xml,${basedir}/../lvs/src/meta/LVS-TableMeta.xml" />
 	<property name="hrs.sclient.jar" value="${basedir}/../hrs/prod/jar/hrssclient.jar"/>
 	<property name="lvs.sclient.jar" value="${basedir}/../lvs/prod/jar/lvssclient.jar"/-->
@@ -16,12 +16,14 @@
 	<property name="commonscsv.lib.jar" value="${basedir}/../3rdparty/commonscsv/commons-csv-1.0-20140121.172117-249.jar" />
 	<property name="junit.lib.jar" value="${basedir}/../3rdparty/junit/4.8.2/junit-4.8.2.jar" />
 	<property name="mockito.lib.jar" value="${basedir}/../3rdparty/mockito/1.9.5/mockito-all-1.9.5.jar" />
+	<property name="powermock.dir" value="${basedir}/../3rdparty/powermock/1.5.4/" />
+	<property name="guava.jar" value="${basedir}/../3rdparty/guava/18/guava-18.0.jar" />
 
-	<import file="../bld/build.base.xml"/>
+	<import file="../bld/build.base.xml" />
 
-	<property name="awebpath" value="build/awebwarsar"/>
-	<property name="awebsar" value="mmmaweb.sar"/>
-	<property name="awebwar" value="mmmaweb.war"/>
+	<property name="awebpath" value="build/awebwarsar" />
+	<property name="awebsar" value="mmmaweb.sar" />
+	<property name="awebwar" value="mmmaweb.war" />
 
 	<path id="oa.specific.class.path">
 		<!-- Add the project specific classpath here-->
@@ -32,17 +34,25 @@
 		</fileset>
 		<pathelement location="${gson.lib.jar}" />
 		<pathelement location="${commonscsv.lib.jar}" />
-		<pathelement location="${junit.lib.jar}" />
-		<pathelement location="${mockito.lib.jar}" />
+		<pathelement location="${guava.jar}" />
+		<!--<pathelement location="${junit.lib.jar}" />
+		<pathelement location="${mockito.lib.jar}" />-->
 	</path>
 
+	<!-- ================================================================== -->
+	<!-- Define 3rdparty libraries for sar file							   -->
+	<!-- ================================================================== -->
+	<target name="copy.mib.jar" description="Copy 3rdparty jar files">
+		<echo message="copy the 3rd party jar files that will be included in sar" />
+		<copy todir="${build.jar}" file="${guava.jar}" />
+		<copy todir="${build.jar}" file="${commonscsv.lib.jar}" />
+		<copy todir="${build.jar}" file="${gson.lib.jar}" />
+	</target>
+
 	<target name="compile.schema">
-		<javac classpathref="compile.classpath" debug="true" deprecation="true"
-			   destdir="${build.classes}" encoding="UTF-8" fork="yes"
-			   memoryInitialSize="128m" memoryMaximumSize="1024m" nowarn="false"
-			   target="1.5">
-			<src path="${src}"/>
-			<include name="**/SchemaGenerator.java"/>
+		<javac classpathref="compile.classpath" debug="true" deprecation="true" destdir="${build.classes}" encoding="UTF-8" fork="yes" memoryInitialSize="128m" memoryMaximumSize="1024m" nowarn="false" target="1.5">
+			<src path="${src}" />
+			<include name="**/SchemaGenerator.java" />
 		</javac>
 	</target>
 
@@ -56,10 +66,7 @@
 
 	<target name="codegen.pojo" depends="init,compile.schema">
 		<!--<jsonschema2pojo source="${gensrc}/json/activiti/resp" targetDirectory="${gensrc}" targetPackage="com.oforsky.bpm.activiti.resp" sourceType="JSONSCHEMA" annotationStyle="JACKSON1" />-->
-		<jsonschema2pojo source="${src}/com/oforsky/mmm/capture/schema/json"
-						 targetDirectory="${gensrc}"
-						 targetPackage="com.oforsky.mmm.capture.data.stock"
-						 sourceType="JSON" annotationStyle="JACKSON1"/>
+		<jsonschema2pojo source="${src}/com/oforsky/mmm/capture/schema/json" targetDirectory="${gensrc}" targetPackage="com.oforsky.mmm.capture.data.stock" sourceType="JSON" annotationStyle="JACKSON1" />
 	</target>
 
 	<target name="compile.svc" depends="codegen.pojo,share.compile.svc">
@@ -70,8 +77,11 @@
 	<property file="build.properties" />
 
 	<path id="test.platform.classpath">
-		<pathelement location="${junit.lib.jar}" />
-		<pathelement location="${mockito.lib.jar}" />
+		<!--<pathelement location="${junit.lib.jar}" />
+		<pathelement location="${mockito.lib.jar}" />-->
+		<fileset dir="${powermock.dir}">
+			<include name="**/*.jar" />
+		</fileset>
 		<fileset dir="${jboss.home.dir}/server/all/lib">
 			<include name="*.jar" />
 		</fileset>
@@ -105,20 +115,20 @@
 	</target>
 
 	<target name="test" depends="compile.test">
-		<junit printsummary="true" haltonfailure="true" maxmemory="512m" showoutput="true" fork="true" >
-			<classpath refid="test.classpath"/>
+		<junit printsummary="true" haltonfailure="true" maxmemory="512m" showoutput="true" fork="true">
+			<classpath refid="test.classpath" />
 
-			<sysproperty key="host" value="${host}" />
-			<sysproperty key="mib.port" value="${mib.port}" />
-			<sysproperty key="jndi.port" value="${jndi.port}" />
-			<sysproperty key="db.name" value="${db.name}" />
-			<sysproperty key="db.userid" value="${db.userid}" />
-			<sysproperty key="db.password" value="${db.password}" />
-			<sysproperty key="db.url" value="${db.url}" />
+			<sysproperty key="host" value="${TAS_HOST_IP}" />
+			<sysproperty key="mib.port" value="${TAS_MIB_BASE_PORT}" />
+			<sysproperty key="jndi.port" value="${JBOSS_PORT_JNP_MIB}" />
+			<sysproperty key="db.name" value="${TAS_DB_SCHEMA}" />
+			<sysproperty key="db.userid" value="${TAS_DB_USER}" />
+			<sysproperty key="db.password" value="${TAS_DB_PASSWORD}" />
+			<sysproperty key="db.url" value="${TAS_DB_CONNECTION_URL}" />
 			<formatter type="brief" usefile="false" />
 			<test name="${testcase}" todir="${test.build.dir}" if="testcase" />
 			<batchtest todir="${test.build.dir}" unless="testcase">
-				<fileset dir="${test.build.dir}" includes="**/*Test.class" excludes="**/test/*Test.class"/>
+				<fileset dir="${test.build.dir}" includes="**/*Test.class" excludes="**/test/*Test.class" />
 			</batchtest>
 		</junit>
 	</target>
