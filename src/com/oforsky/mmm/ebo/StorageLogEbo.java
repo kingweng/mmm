@@ -5,6 +5,8 @@
  */
 package com.oforsky.mmm.ebo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 import org.apache.log4j.Logger;
 
 import com.oforsky.mmm.cache.StorageCacheStore;
+import com.truetel.jcore.util.TimeUtil;
 
 @Entity
 @Table(name = StorageLogCoreEbo.DB_TABLE_NAME)
@@ -36,7 +39,7 @@ public class StorageLogEbo extends StorageLogCoreEbo {
 		setTargetCode(warrant.getTargetCode());
 		StorageEbo storage = StorageCacheStore.getStore().get(getTargetCode());
 		setTargetPrice(storage.getTargetPrice());
-		setUnit(bid.getUnit());
+		setUnit(bid.getApplyUnit());
 		setAmount(bid.getAmount());
 		setBuyTime(warrant.getCreateTime());
 		setWarrantOid(warrant.getWarrantOid());
@@ -49,10 +52,11 @@ public class StorageLogEbo extends StorageLogCoreEbo {
 		setRevenue();
 	}
 
-	private void setKeepDays() {
-		long diff = System.currentTimeMillis() - getBuyTime().getTime();
-		long days = diff / 86400000;
-		setKeepDays((int) days);
+	private void setKeepDays() throws Exception {
+		List<StockEbo> ebos = getProxy()
+				.listStockByCodeFromDate(getTargetCode(),
+						TimeUtil.date2String(getBuyTime(), "yyyyMMdd"));
+		setKeepDays(ebos.size() + 1);
 	}
 
 	private void setRevenue() {

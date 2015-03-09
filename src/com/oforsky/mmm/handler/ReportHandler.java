@@ -12,10 +12,13 @@ import org.apache.log4j.Logger;
 import com.oforsky.mmm.cache.StockGroupCacheStore;
 import com.oforsky.mmm.data.BigVolume;
 import com.oforsky.mmm.data.HistoricalStock;
+import com.oforsky.mmm.ebo.DealCfgEbo;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.DealStatsEbo;
 import com.oforsky.mmm.ebo.StockEbo;
 import com.oforsky.mmm.ebo.StockGroupEbo;
+import com.oforsky.mmm.handler.strategy.DealContext;
+import com.oforsky.mmm.handler.strategy.DealStrategyImpl;
 import com.oforsky.mmm.service.DloService;
 import com.oforsky.mmm.service.DloServiceImpl;
 import com.truetel.jcore.util.AppException;
@@ -34,28 +37,37 @@ public class ReportHandler {
 		this.dloSvc = dloSvc;
 	}
 
-	public List<DealEbo> findPastDeals(String startDate, int days, int times,
-			int breakK, double revenueRate) throws Exception {
-		log.info("findPastDeals() startDate=" + startDate + ", days=" + days
-				+ ", times=" + times + ", breakK=" + breakK + ", revenueRate="
-				+ revenueRate);
+	public List<DealEbo> findPastDeals(String startDate, DealCfgEbo cfg)
+			throws Exception {
+		log.info("findPastDeals() startDate=" + startDate + ", cfg=="
+				+ cfg.dbgstr());
 		List<DealEbo> result = new LinkedList<DealEbo>();
 		for (String code : StockGroupCacheStore.getStore().getKeySet()) {
 			log.info("findPastDeals code[" + code + "] enter...");
-			findDealToResult(startDate, days, times, breakK, revenueRate,
-					result, code);
+			HistoricalStock history = getHistory(startDate, code);
+			DealContext context = aDealContext(startDate, cfg, history);
+			result.addAll(context.getDeals());
 		}
 		return result;
 	}
 
-	private void findDealToResult(String startDate, int days, int times,
-			int breakK, double revenueRate, List<DealEbo> result, String code)
+	private HistoricalStock getHistory(String startDate, String code)
 			throws Exception {
+		log.debug("getHistory startDate=" + startDate + ", code=" + code);
 		HistoricalStock history = new HistoricalStock(code,
 				dloSvc.listStocksByCodeFromDate(code, startDate));
-		DealHandler handler = new DealHandler(history);
-		result.addAll(handler.findPastDeals(startDate, days, times, breakK,
-				revenueRate));
+		log.debug("history size=" + history.getStocks().size());
+		return history;
+	}
+
+	private DealContext aDealContext(String startDate, DealCfgEbo cfg,
+			HistoricalStock history) throws Exception {
+		DealStrategyImpl strategy = new DealStrategyImpl(cfg, history);
+		DealContext context = new DealContext(strategy);
+		for (StockEbo each : history.getStocks(startDate)) {
+			context.handle(context, each);
+		}
+		return context;
 	}
 
 	private boolean isBigVolumeIgnoreErr(HistoricalStock history, String date,

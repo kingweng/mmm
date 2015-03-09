@@ -68,8 +68,8 @@ class BidReqEboBuilderBase<GeneratorT extends BidReqEboBuilderBase<GeneratorT>> 
 	}
 
 	@SuppressWarnings("unchecked")
-	public GeneratorT withUnit(Integer aValue) {
-		instance.setUnit(aValue);
+	public GeneratorT withApplyUnit(Integer aValue) {
+		instance.setApplyUnit(aValue);
 
 		return (GeneratorT) this;
 	}

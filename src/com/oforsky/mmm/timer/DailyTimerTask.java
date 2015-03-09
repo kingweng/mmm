@@ -38,6 +38,7 @@ public class DailyTimerTask implements JcoreTimerTask {
 		log.info("schedule at [" + hhmm + "]");
 		MmmPart.getDailyTimerTimer().scheduleDaily(
 				DailyTimerTask.class.getSimpleName(), this, toMinsOfDay(hhmm));
+		
 	}
 
 	@Override

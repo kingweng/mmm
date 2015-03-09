@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import com.oforsky.mmm.cache.WarrantCfgCacheStore;
 import com.oforsky.mmm.capture.data.stock.Item;
 import com.oforsky.mmm.capture.data.stock.OriWarrant;
+import com.truetel.jcore.util.StringUtil;
 
 @Entity
 @Table(name = WarrantCoreEbo.DB_TABLE_NAME)
@@ -48,14 +49,14 @@ public class WarrantEbo extends WarrantCoreEbo {
 	}
 
 	private static Integer getInteger(String value) {
-		if (value.contains("-")) {
+		if (StringUtil.isEmpty(value) || value.contains("-")) {
 			return 0;
 		}
 		return Integer.parseInt(value);
 	}
 
 	private static Double getDouble(String value) {
-		if ("-".equals(value)) {
+		if (StringUtil.isEmpty(value) || "-".equals(value)) {
 			return 0.0;
 		}
 		return Double.parseDouble(value);

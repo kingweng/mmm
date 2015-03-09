@@ -17,7 +17,8 @@ import javax.interceptor.Interceptors;
 
 import org.apache.log4j.Logger;
 
-import com.oforsky.mmm.cache.DealCfgCacheStore;
+import com.oforsky.mmm.bid.BidContext;
+import com.oforsky.mmm.cache.StorageCacheStore;
 import com.oforsky.mmm.cache.SvcCfgCacheStore;
 import com.oforsky.mmm.capture.TickRetrieverImpl;
 import com.oforsky.mmm.data.BigVolume;
@@ -27,25 +28,26 @@ import com.oforsky.mmm.dlo.DealDlo;
 import com.oforsky.mmm.dlo.DealStatsDlo;
 import com.oforsky.mmm.dlo.QueryJobDlo;
 import com.oforsky.mmm.dlo.StockDlo;
+import com.oforsky.mmm.ebo.ActionTypeEnum;
 import com.oforsky.mmm.ebo.BidReqEbo;
+import com.oforsky.mmm.ebo.DealCfgEbo;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.MmmConstant;
 import com.oforsky.mmm.ebo.QueryJobEbo;
+import com.oforsky.mmm.ebo.StockEbo;
 import com.oforsky.mmm.ebo.StockGroupEbo;
 import com.oforsky.mmm.ebo.StorageEbo;
 import com.oforsky.mmm.ebo.TickEbo;
 import com.oforsky.mmm.ebo.WarrantEbo;
+import com.oforsky.mmm.ebo.WarrantTickEbo;
 import com.oforsky.mmm.handler.BidReqHandler;
+import com.oforsky.mmm.handler.ContextHandler;
 import com.oforsky.mmm.handler.DailyCsvReqHandler;
 import com.oforsky.mmm.handler.QueryJobHandler;
 import com.oforsky.mmm.handler.ReportHandler;
-import com.oforsky.mmm.handler.StorageHandler;
-import com.oforsky.mmm.handler.Strategy;
-import com.oforsky.mmm.handler.StrategyHandler;
 import com.oforsky.mmm.handler.TickHandler;
 import com.oforsky.mmm.handler.WarrantHandler;
-import com.oforsky.mmm.service.DloServiceImpl;
-import com.oforsky.mmm.timer.TickTimerTask;
+import com.oforsky.mmm.timer.SchTimerTask;
 import com.oforsky.mmm.util.YahooStockParser;
 import com.truetel.jcore.proxy.ProxyInterceptor;
 import com.truetel.jcore.util.AppException;
@@ -90,7 +92,7 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	public void retrieveTick(String code, String y6d) throws AppException {
 		try {
 			TickHandler handler = new TickHandler();
-			handler.addListener(StrategyHandler.get());
+			handler.addListener(ContextHandler.get());
 			handler.retrieve(code, y6d);
 		} catch (Exception e) {
 			log.error("retrieveTick failed!", e);
@@ -200,20 +202,6 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 		}
 	}
 
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	@Override
-	public List<DealEbo> findPastDeals(String startDate, int days, int times,
-			int breakK, double revenueRate) throws AppException {
-		try {
-			return new ReportHandler().findPastDeals(startDate, days, times,
-					breakK, revenueRate);
-		} catch (Exception e) {
-			log.error("findPastDeal failed!", e);
-			handleException(e);
-		}
-		return null;
-	}
-
 	@Override
 	public void analyzeDeals() throws AppException {
 		try {
@@ -252,10 +240,7 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	@Override
 	public void invokeTickTimerManully() throws AppException {
 		try {
-			StrategyHandler.get().reset(
-					getHistoryMap(DealCfgCacheStore.getDayCount()));
-			genTickReqs();
-			TickTimerTask.schedule();
+			new SchTimerTask().timerFiredCb();
 		} catch (Exception e) {
 			log.error("invokeTickTimerManully failed!", e);
 			handleException(e);
@@ -272,7 +257,14 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	public void createBidReq(Integer jobOid) throws AppException {
 		try {
 			QueryJobEbo job = new QueryJobDlo().get(jobOid);
-			new QueryJobHandler(job).createBidReq(new WarrantHandler());
+			if (job.getAction() == ActionTypeEnum.Buy) {
+				new QueryJobHandler(job).createBidReq(new WarrantHandler());
+			} else {
+				StorageEbo storage = StorageCacheStore.getStore().get(
+						job.getCode());
+				new QueryJobHandler(job).createBidReq(storage,
+						new TickRetrieverImpl());
+			}
 		} catch (Exception e) {
 			log.error("createBidReq failed!", e);
 			handleException(e);
@@ -303,23 +295,13 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	}
 
 	@Override
-	public void sellStorage(StorageEbo ebo) throws AppException {
-		try {
-			new StorageHandler(new DloServiceImpl(), new TickRetrieverImpl())
-					.sellStorage(ebo);
-		} catch (Exception ee) {
-			log.error("sellStorage failed!", ee);
-			handleException(ee);
-		}
-	}
-
-	@Override
 	public void proceedBidReq(Integer bidOid) throws AppException {
 		try {
-			getBidReqHandler(bidOid).proceed();
-		} catch (Exception ee) {
-			log.error("proceedBidReq failed!", ee);
-			handleException(ee);
+			BidReqEbo req = getBidReq(bidOid);
+			new BidContext(req).handle(null);
+		} catch (Exception e) {
+			log.error("proceedBidReq failed!", e);
+			handleException(e);
 		}
 	}
 
@@ -341,14 +323,88 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 	@Override
 	public void genFakeTick(TickEbo ebo) throws AppException {
 		try {
-			StrategyHandler.get().reset(
-					getHistoryMap(DealCfgCacheStore.getDayCount()));
-			for (Strategy each : StrategyHandler.get().getStrategies()) {
-				each.handleTick(ebo);
-			}
+			ContextHandler.get().putFakeTick(ebo);
 		} catch (Exception ee) {
 			log.error("genFakeTick failed!", ee);
 			handleException(ee);
 		}
 	}
+
+	@Override
+	public int getRecordHigh(String code, String dateStr) throws AppException {
+		try {
+			return new StockDlo(getEntityManager())
+					.getRecordHigh(code, dateStr);
+		} catch (Exception e) {
+			log.error("getRecordHigh failed!", e);
+			handleException(e);
+		}
+		return 0;
+	}
+
+	@Override
+	public int getKeepDays(String code, String buyDateStr, String sellDateStr)
+			throws AppException {
+		try {
+			return new StockDlo(getEntityManager()).getKeepDays(code,
+					buyDateStr, sellDateStr);
+		} catch (Exception e) {
+			log.error("getKeepDays failed!", e);
+			handleException(e);
+		}
+		return 0;
+	}
+
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	@Override
+	public List<DealEbo> findPastDeals(String startDate, DealCfgEbo cfg)
+			throws AppException {
+		try {
+			return new ReportHandler().findPastDeals(startDate, cfg);
+		} catch (Exception e) {
+			log.error("findPastDeals failed!", e);
+			handleException(e);
+		}
+		return null;
+	}
+
+	@Override
+	public List<StockEbo> listStockByCodeFromDate(String code, String yyyymmdd)
+			throws AppException {
+		try {
+			return new StockDlo().listByCodeFromDate(code, yyyymmdd);
+		} catch (Exception e) {
+			log.error("listByCodeFromDate failed!", e);
+			handleException(e);
+		}
+		return null;
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@Override
+	public WarrantTickEbo createWarrantTick(WarrantTickEbo data)
+			throws AppException {
+		return super.createWarrantTick(data);
+	}
+
+	@Override
+	public void createStorage(BidReqEbo bid) throws AppException {
+		try {
+			new BidReqHandler(bid).createStorage();
+		} catch (Exception e) {
+			log.error("createStorage failed!", e);
+			handleException(e);
+		}
+	}
+
+	@Override
+	public void sellStorage(BidReqEbo bid) throws AppException {
+		try {
+			new BidReqHandler(bid).sellStorage();
+		} catch (Exception e) {
+			log.error("sellStorage failed!", e);
+			handleException(e);
+		}
+	}
+
 }

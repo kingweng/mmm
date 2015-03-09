@@ -14,6 +14,7 @@ import com.oforsky.mmm.ebo.StorageEbo;
 import com.oforsky.mmm.ebo.StorageLogEbo;
 import com.oforsky.mmm.ebo.TickEbo;
 import com.oforsky.mmm.ebo.WarrantEbo;
+import com.oforsky.mmm.ebo.WarrantTickEbo;
 
 /**
  * Created by kingweng on 2014/10/21.
@@ -54,4 +55,11 @@ public interface DloService {
 	WarrantEbo createWarrant(WarrantEbo each) throws Exception;
 
 	void createBias(BiasEbo bias) throws Exception;
+
+	void createWarrantTick(WarrantTickEbo logEbo) throws Exception;
+
+	int getAndLockBalance() throws Exception;
+
+	int updateBalance(int value) throws Exception;
+
 }

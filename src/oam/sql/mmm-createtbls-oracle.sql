@@ -6,6 +6,8 @@ create table mmm_SvcCfg (
 	retryIntvl number(10),
 	retryLimit number(10),
 	dailyImportTime varchar2(20),
+	revenueSellTime varchar2(20),
+	kBreakSellTime varchar2(20),
 	tickInterval number(10),
 	tickTimeout number(10),
 	tickTimeRange varchar2(20),
@@ -22,6 +24,8 @@ create table mmm_WarrantCfg (
 	qualifiedDealers varchar2(256),
 	minLeverage number(10),
 	warrantRetryIntvl number(10),
+	buyRetryLimit number(10),
+	sellRetryLimit number(10),
         constraint mmm_WarrantCfg_PK
 		primary key (svcName) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
@@ -34,6 +38,14 @@ create table mmm_DealCfg (
 	winChance number(10),
 	revenueRate float(126),
         constraint mmm_DealCfg_PK
+		primary key (svcName) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+
+create table mmm_BalanceCfg (
+	svcName varchar2(20) not null,
+	balance number(10),
+	singleBid number(10),
+        constraint mmm_BalanceCfg_PK
 		primary key (svcName) using index tablespace tasind_svc
 ) tablespace  tas_svc  ;
 
@@ -183,8 +195,10 @@ create table mmm_Deal (
 	realOid number(10) not null,
 	code varchar2(4),
 	buyDateStr varchar2(20),
+	buyPrice float(126),
 	recordHigh number(10),
 	sellDateStr varchar2(20),
+	sellPrice float(126),
 	sellType number(3),
 	diffPrice float(126),
 	keepDays number(10),
@@ -219,6 +233,7 @@ create sequence mmm_DealStats_SEQ  increment by 1 cache 100 start with 1 maxvalu
 
 create table mmm_QueryJob (
 	jobOid number(10) not null,
+	action number(3),
 	code varchar2(20),
 	price float(126),
 	amount number(10),
@@ -241,7 +256,8 @@ create table mmm_BidReq (
 	jobOid number(10),
 	name varchar2(20 char),
 	price float(126),
-	unit number(10),
+	applyUnit number(10),
+	remainUnit number(10),
 	action number(3),
 	bidState number(3),
 	amount number(10),
@@ -253,6 +269,8 @@ create table mmm_BidReq (
 ) tablespace  tas_svc  ;
                 	
 create sequence mmm_BidReq_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_BidReq_State on mmm_BidReq (bidState) tablespace tasind_svc;
 
 create table mmm_Bias (
 	biasOid number(10) not null,
@@ -268,6 +286,28 @@ create table mmm_Bias (
 create sequence mmm_Bias_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
 create  index
 	mmm_Bias_Code on mmm_Bias (code) tablespace tasind_svc;
+
+create table mmm_WarrantTick (
+	tickOid number(10) not null,
+	code varchar2(20),
+	price float(126),
+	tickVolume number(10),
+	totalVolume number(10),
+	timestamp number(20),
+	createTime date,
+	buyPrices varchar2(100),
+	buyVolumes varchar2(100),
+	seldPrices varchar2(100),
+	seldVolumes varchar2(100),
+        constraint mmm_WarrantTick_PK
+		primary key (tickOid) using index tablespace tasind_svc
+) tablespace  tas_svc  ;
+                	
+create sequence mmm_WarrantTick_SEQ  increment by 1 cache 100 start with 1 maxvalue 2147483647 nocycle;
+create  index
+	mmm_WarrantTick_Code on mmm_WarrantTick (code) tablespace tasind_svc;
+create  index
+	mmm_WarrantTick_Time on mmm_WarrantTick (createTime) tablespace tasind_svc;
 
 create table mmm_Drive (
 	driveOid number(10) not null,

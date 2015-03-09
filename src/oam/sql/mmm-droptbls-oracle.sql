@@ -15,6 +15,9 @@ drop table mmm_WarrantCfg;
 drop table mmm_DealCfg;
 
 
+drop table mmm_BalanceCfg;
+
+
 drop table mmm_Stock;
 
 
@@ -61,6 +64,10 @@ drop table mmm_BidReq;
 
 drop sequence mmm_Bias_SEQ;
 drop table mmm_Bias;
+
+
+drop sequence mmm_WarrantTick_SEQ;
+drop table mmm_WarrantTick;
 
 
 drop sequence mmm_Drive_SEQ;

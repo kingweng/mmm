@@ -5,18 +5,17 @@
  */
 package com.oforsky.mmm.dlo;
 
-import java.util.*;
+import java.math.BigInteger;
+import java.util.List;
 
-import javax.naming.NamingException;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.ebo.StockEbo;
 import com.truetel.jcore.data.PageReq;
 import com.truetel.jcore.data.QueryReq;
-import com.truetel.jcore.util.AppException;
-import com.truetel.jcore.util.QueryUtil;
-import com.oforsky.mmm.ebo.*;
 
 public class StockDlo extends StockCoreDlo {
 
@@ -71,5 +70,33 @@ public class StockDlo extends StockCoreDlo {
 		query.setParams(new Object[] { code, startDate });
 		query.setOrderBy(StockEbo.ATTR_DateStr);
 		return list(query);
+	}
+
+	public int getRecordHigh(String code, String date) throws Exception {
+		String sql = "select count(*) from mmm_stock as s1 inner join "
+				+ "(select s.* from mmm_stock as s inner join "
+				+ "(select * from mmm_stock where code = :code"
+				+ " and dateStr = :date )"
+				+ " as tmp where s.code = :code"
+				+ " and s.dateStr < :date "
+				+ "and s.price > tmp.price order by s.dateStr desc limit 0,1)"
+				+ "as barrier where s1.code = barrier.code and s1.dateStr > barrier.dateStr "
+				+ "and s1.dateStr <= :date";
+		Query query = getEmgr().createNativeQuery(sql);
+		query.setParameter("code", code);
+		query.setParameter("date", date);
+		log.debug("query==" + sql);
+		return ((BigInteger) query.getSingleResult()).intValue();
+	}
+
+	public int getKeepDays(String code, String startDate, String endDate)
+			throws Exception {
+		String sql = "select count(*) from mmm_stock where dateStr >= :startDate and dateStr <= :endDate and code = :code";
+		Query query = getEmgr().createNativeQuery(sql);
+		query.setParameter("code", code);
+		query.setParameter("startDate", startDate);
+		query.setParameter("endDate", endDate);
+		log.debug("query==" + sql);
+		return ((BigInteger) query.getSingleResult()).intValue();
 	}
 }

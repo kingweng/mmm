@@ -20,6 +20,8 @@ import org.apache.commons.csv.CSVRecord;
 
 import com.oforsky.mmm.data.BigVolume;
 import com.oforsky.mmm.ebo.DailyCsvReqEbo;
+import com.oforsky.mmm.ebo.DealCfgEbo;
+import com.oforsky.mmm.ebo.DealCfgEboBuilder;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.DealStatsEbo;
 import com.oforsky.mmm.ebo.DriveEbo;
@@ -33,6 +35,7 @@ import com.oforsky.mmm.proxy.MmmProxy;
 import com.oforsky.mmm.proxy.MmmProxyUtil;
 import com.oforsky.mmm.util.StockGroupParser;
 import com.truetel.jcore.proxy.SvcTest;
+import com.truetel.jcore.util.AppException;
 import com.truetel.jcore.util.FileUtil;
 import com.truetel.jcore.util.TimeUtil;
 import com.truetel.jcorex.util.ExceptionUtil;
@@ -188,13 +191,22 @@ public class MmmTest extends MmmBaseTest {
 			"times", "breakK", "revenueRate" })
 	public void analyzeBigVolumeDeals(String startDate, Integer dayCount,
 			Integer times, Integer breakK, String revenueRate) throws Exception {
+		DealCfgEbo cfg = DealCfgEboBuilder.dealCfgEbo().withDayCount(dayCount)
+				.withOverTimes(times).withKBreak(breakK)
+				.withRevenueRate(Double.parseDouble(revenueRate)).build();
+		cfg.checkRequired();
 		cui.output("clean Deal table");
 		proxy.deleteAllDeals();
 		cui.output("clean DealStats table");
 		proxy.deleteDealStats();
 		cui.output("start finding Deals ...");
-		List<DealEbo> ebos = proxy.findPastDeals(startDate, dayCount, times,
-				breakK, Double.parseDouble(revenueRate));
+		List<DealEbo> ebos = proxy.findPastDeals(startDate, cfg);
+		batchCreateDeals(ebos);
+		cui.output("analyze Deals ...");
+		proxy.analyzeDeals();
+	}
+
+	private void batchCreateDeals(List<DealEbo> ebos) throws AppException {
 		cui.output("persisting Deals to Database");
 		List<DealEbo> bucket = new ArrayList<DealEbo>();
 		while (true) {
@@ -207,9 +219,7 @@ public class MmmTest extends MmmBaseTest {
 				break;
 			}
 		}
-		proxy.batchCreateDeal(ebos);
-		cui.output("analyze Deals ...");
-		proxy.analyzeDeals();
+		proxy.batchCreateDeal(bucket);
 	}
 
 	@SvcTest(value = 209, paramNames = { "month(yyyymm)" })
@@ -253,4 +263,5 @@ public class MmmTest extends MmmBaseTest {
 		ebo.setTotalVolume(totalVolume);
 		proxy.genFakeTick(ebo);
 	}
+	
 }

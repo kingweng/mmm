@@ -63,11 +63,11 @@ public class TickHandler {
 	public void retrieve(String code, String y6d) throws Exception {
 		log.trace("retrieve() code=" + code + ", y6d=" + y6d);
 		Tick tick = retriever.getTick(y6d, code);
-		TickEbo ebo = TickEbo.valueOf(tick);
-		if (ebo.getTotalVolume() != 0) {
+		if (tick.getTotalVolume() != 0) {
+			TickEbo ebo = TickEbo.valueOf(tick);
 			notifyListeners(ebo);
+			dloSvc.createTick(ebo);
 		}
-		dloSvc.createTick(ebo);
 	}
 
 	private void notifyListeners(TickEbo ebo) {

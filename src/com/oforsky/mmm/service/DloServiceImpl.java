@@ -3,6 +3,7 @@ package com.oforsky.mmm.service;
 import java.util.Collection;
 import java.util.List;
 
+import com.oforsky.mmm.dlo.BalanceCfgDlo;
 import com.oforsky.mmm.dlo.BiasDlo;
 import com.oforsky.mmm.dlo.BidReqDlo;
 import com.oforsky.mmm.dlo.DailyCsvReqDlo;
@@ -25,6 +26,8 @@ import com.oforsky.mmm.ebo.StorageEbo;
 import com.oforsky.mmm.ebo.StorageLogEbo;
 import com.oforsky.mmm.ebo.TickEbo;
 import com.oforsky.mmm.ebo.WarrantEbo;
+import com.oforsky.mmm.ebo.WarrantTickEbo;
+import com.oforsky.mmm.proxy.MmmProxyUtil;
 
 /**
  * Created by kingweng on 2014/10/25.
@@ -118,4 +121,20 @@ public class DloServiceImpl implements DloService {
 	public void createBias(BiasEbo bias) throws Exception {
 		new BiasDlo().forceUpdate(bias);
 	}
+
+	@Override
+	public void createWarrantTick(WarrantTickEbo logEbo) throws Exception {
+		MmmProxyUtil.getProxy().createWarrantTick(logEbo);
+	}
+
+	@Override
+	public int getAndLockBalance() throws Exception {
+		return new BalanceCfgDlo().getAndLockBalance();
+	}
+
+	@Override
+	public int updateBalance(int value) throws Exception {
+		return new BalanceCfgDlo().updateBalance(value);
+	}
+
 }

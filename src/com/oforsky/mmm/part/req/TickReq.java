@@ -1,5 +1,7 @@
 package com.oforsky.mmm.part.req;
 
+import org.apache.log4j.Logger;
+
 import com.oforsky.mmm.proxy.MmmProxyUtil;
 import com.truetel.jcore.part.TransactionPolicy;
 import com.truetel.jcore.part.TransactionPolicyEnum;
@@ -11,17 +13,29 @@ import com.truetel.jcore.part.ZoneReq;
 @TransactionPolicy(TransactionPolicyEnum.None)
 public class TickReq implements ZoneReq {
 
-    private final String code;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private final String y6d;
+	private static final Logger log = Logger.getLogger(TickReq.class);
 
-    public TickReq(String code, String y6d) {
-        this.code = code;
-        this.y6d = y6d;
-    }
+	private final String code;
 
-    @Override
-    public void handleReq() throws Exception {
-        MmmProxyUtil.getProxy().retrieveTick(code, y6d);
-    }
+	private final String y6d;
+
+	public TickReq(String code, String y6d) {
+		this.code = code;
+		this.y6d = y6d;
+	}
+
+	@Override
+	public void handleReq() throws Exception {
+		try {
+			MmmProxyUtil.getProxy().retrieveTick(code, y6d);
+		} catch (Exception e) {
+			log.error("retrieveTick failed!", e);
+			// ignore
+		}
+	}
 }

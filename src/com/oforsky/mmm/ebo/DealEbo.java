@@ -9,11 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 
-import com.oforsky.mmm.data.HistoricalStock;
 import com.truetel.jcore.util.AppException;
 
 @Entity
@@ -26,36 +24,34 @@ public class DealEbo extends DealCoreEbo {
 	private static final String TASVERSION = "TAS-OFF-R5V1P10 2014-08-01 15:49:52";
 	private static final Logger log = Logger.getLogger(DealEbo.class);
 
-	@Transient
-	private transient HistoricalStock history;
-
 	public DealEbo() {
 	}
 
-	public DealEbo(StockEbo buyStock, StockEbo sellStock, SellTypeEnum type,
-			HistoricalStock stocks) throws Exception {
-		history = stocks;
-		setSellType(type);
-		setCode(buyStock.getCode());
-		setBuyDateStr(buyStock.getDateStr());
-		setSellDateStr(sellStock.getDateStr());
-		recordHigh();
-		if (type == SellTypeEnum.KBreak) {
-			setDiffPrice(sellStock.getLowestPrice() - buyStock.getPrice());
-		} else {
-			setDiffPrice(sellStock.getHighestPrice() - buyStock.getPrice());
-		}
-		setKeepDays(diffStocksSize());
-		setRevenueRate(getDiffPrice() / buyStock.getPrice());
+	@Override
+	protected void preCreateSkyCb() throws Exception {
+		super.preCreateSkyCb();
+		setRecordHigh();
+		setKeepDays();
+		setDiffPrice();
+		setRevenueRate();
 	}
 
-	private int diffStocksSize() throws Exception {
-		return history.getStocks(getBuyDateStr(), getSellDateStr()).size();
+	private void setRevenueRate() {
+		setRevenueRate(getDiffPrice() / getBuyPrice());
 	}
 
-	private void recordHigh() throws Exception, AppException {
-		log.debug("compute stock[" + getCode() + "] recordHigh on ["
-				+ getBuyDateStr() + "]");
-		setRecordHigh(history.recordHigh(getBuyDateStr()));
+	private void setDiffPrice() {
+		setDiffPrice(getSellPrice() - getBuyPrice());
+	}
+
+	private void setKeepDays() throws AppException, Exception {
+		int keepDays = getProxy().getKeepDays(getCode(), getBuyDateStr(),
+				getSellDateStr());
+		setKeepDays(keepDays);
+	}
+
+	private void setRecordHigh() throws AppException, Exception {
+		int recordHigh = getProxy().getRecordHigh(getCode(), getBuyDateStr());
+		setRecordHigh(recordHigh);
 	}
 }

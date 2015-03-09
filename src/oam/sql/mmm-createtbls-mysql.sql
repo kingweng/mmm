@@ -6,6 +6,8 @@ create table mmm_SvcCfg (
 	retryIntvl integer,
 	retryLimit integer,
 	dailyImportTime varchar(20),
+	revenueSellTime varchar(20),
+	kBreakSellTime varchar(20),
 	tickInterval integer,
 	tickTimeout integer,
 	tickTimeRange varchar(20),
@@ -22,6 +24,8 @@ create table mmm_WarrantCfg (
 	qualifiedDealers varchar(256),
 	minLeverage integer,
 	warrantRetryIntvl integer,
+	buyRetryLimit integer,
+	sellRetryLimit integer,
         constraint mmm_WarrantCfg_PK
 		primary key (svcName) 
 )   ENGINE=InnoDB ;
@@ -34,6 +38,14 @@ create table mmm_DealCfg (
 	winChance integer,
 	revenueRate double precision,
         constraint mmm_DealCfg_PK
+		primary key (svcName) 
+)   ENGINE=InnoDB ;
+
+create table mmm_BalanceCfg (
+	svcName varchar(20) not null,
+	balance integer,
+	singleBid integer,
+        constraint mmm_BalanceCfg_PK
 		primary key (svcName) 
 )   ENGINE=InnoDB ;
 
@@ -175,8 +187,10 @@ create table mmm_Deal (
 	realOid integer not null auto_increment,
 	code varchar(4),
 	buyDateStr varchar(20),
+	buyPrice double precision,
 	recordHigh integer,
 	sellDateStr varchar(20),
+	sellPrice double precision,
 	sellType integer,
 	diffPrice double precision,
 	keepDays integer,
@@ -207,6 +221,7 @@ create table mmm_DealStats (
 
 create table mmm_QueryJob (
 	jobOid integer not null auto_increment,
+	action integer,
 	code varchar(20),
 	price double precision,
 	amount integer,
@@ -227,7 +242,8 @@ create table mmm_BidReq (
 	jobOid integer,
 	name varchar(20),
 	price double precision,
-	unit integer,
+	applyUnit integer,
+	remainUnit integer,
 	action integer,
 	bidState integer,
 	amount integer,
@@ -237,6 +253,8 @@ create table mmm_BidReq (
         constraint mmm_BidReq_PK
 		primary key (bidOid) 
 )   ENGINE=InnoDB ;
+create  index
+	mmm_BidReq_State on mmm_BidReq (bidState) ;
 
 create table mmm_Bias (
 	biasOid integer not null auto_increment,
@@ -250,6 +268,26 @@ create table mmm_Bias (
 )   ENGINE=InnoDB ;
 create  index
 	mmm_Bias_Code on mmm_Bias (code) ;
+
+create table mmm_WarrantTick (
+	tickOid integer not null auto_increment,
+	code varchar(20),
+	price double precision,
+	tickVolume integer,
+	totalVolume integer,
+	timestamp bigint,
+	createTime timestamp  null,
+	buyPrices varchar(100),
+	buyVolumes varchar(100),
+	seldPrices varchar(100),
+	seldVolumes varchar(100),
+        constraint mmm_WarrantTick_PK
+		primary key (tickOid) 
+)   ENGINE=InnoDB ;
+create  index
+	mmm_WarrantTick_Code on mmm_WarrantTick (code) ;
+create  index
+	mmm_WarrantTick_Time on mmm_WarrantTick (createTime) ;
 
 create table mmm_Drive (
 	driveOid integer not null auto_increment,

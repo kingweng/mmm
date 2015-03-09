@@ -27,6 +27,12 @@ public class BidReqEbo extends BidReqCoreEbo {
 
 	public static final Integer BID_UNIT = 1000;
 
+	public static final Double FEE_RATIO = 0.001425;
+
+	public static final Double TAX_RATIO = 0.001;
+
+	public static final int MIN_FEE = 20;
+
 	public BidReqEbo() {
 	}
 
@@ -37,8 +43,8 @@ public class BidReqEbo extends BidReqCoreEbo {
 		ebo.setWarrantOid(each.getWarrantOid());
 		ebo.setPrice(each.getSellPrice());
 		ebo.setName(each.getName());
-		ebo.setUnit(getBuyUnit(job.getAmount(), each));
-		ebo.setAmount((int) (ebo.getUnit() * ebo.getPrice() * BID_UNIT));
+		ebo.setApplyUnit(getBuyUnit(job.getAmount(), each));
+		ebo.setAmount((int) (ebo.getApplyUnit() * ebo.getPrice() * BID_UNIT));
 		return ebo;
 	}
 
@@ -54,6 +60,7 @@ public class BidReqEbo extends BidReqCoreEbo {
 
 	public void succeed() throws Exception {
 		setBidState(BidStateFsm.Action.Succeed);
+		setRemainUnit(0);
 	}
 
 	public void fail(Exception e) throws Exception {
@@ -73,11 +80,28 @@ public class BidReqEbo extends BidReqCoreEbo {
 		BidReqEbo ebo = new BidReqEbo();
 		ebo.setAction(ActionTypeEnum.Sell);
 		ebo.setWarrantOid(storage.getWarrantEboForced().getWarrantOid());
-		ebo.setUnit(storage.getUnit());
+		ebo.setApplyUnit(storage.getUnit());
 		ebo.setName(storage.getWarrantEboForced().getName());
 		ebo.setPrice(tick.getBuyPrice(storage.getUnit()));
-		ebo.setAmount((int) (ebo.getPrice() * ebo.getUnit() * BID_UNIT));
+		ebo.setAmount((int) (ebo.getPrice() * ebo.getApplyUnit() * BID_UNIT));
 		return ebo;
 	}
 
+	public int getFee() {
+		int fee = (int) Math.round(getAmount() * FEE_RATIO);
+		if (fee < MIN_FEE) {
+			fee = MIN_FEE;
+		}
+		return fee;
+	}
+
+	public int getSellTax() {
+		return (int) Math.round(getAmount() * TAX_RATIO);
+	}
+
+	@Override
+	protected void preDeleteSkyCb() throws Exception {
+		super.preDeleteSkyCb();
+		setRemainUnit(getApplyUnit());
+	}
 }

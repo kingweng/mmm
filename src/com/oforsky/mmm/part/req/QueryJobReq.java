@@ -1,11 +1,7 @@
 package com.oforsky.mmm.part.req;
 
-import com.oforsky.mmm.cache.SvcCfgCacheStore;
-import com.oforsky.mmm.part.zone.MmmZone;
-import com.oforsky.mmm.part.zone.QueryJobZone;
+import com.oforsky.mmm.ebo.ActionTypeEnum;
 import com.oforsky.mmm.proxy.MmmProxyUtil;
-import com.oforsky.mmm.timer.RetryTimer;
-import com.oforsky.mmm.timer.TimerService;
 import com.truetel.jcore.part.TransactionPolicy;
 import com.truetel.jcore.part.TransactionPolicyEnum;
 
@@ -19,8 +15,8 @@ public class QueryJobReq extends RetryReqBase {
 
 	private Integer jobOid;
 
-	public QueryJobReq(Integer jobOid) {
-		super(new ReqRetryArgs());
+	public QueryJobReq(Integer jobOid, ActionTypeEnum type) {
+		super(new QueryJobRetryArg(type));
 		this.jobOid = jobOid;
 	}
 
@@ -44,26 +40,4 @@ public class QueryJobReq extends RetryReqBase {
 		MmmProxyUtil.getProxy().queryJobFail(jobOid, e);
 	}
 
-	static class ReqRetryArgs implements com.oforsky.mmm.part.req.RetryArgs {
-
-		@Override
-		public Integer getRetryIntvl() {
-			return SvcCfgCacheStore.getRetryIntvl();
-		}
-
-		@Override
-		public Integer getRetryLimit() {
-			return SvcCfgCacheStore.getRetryLimit();
-		}
-
-		@Override
-		public MmmZone getRetryZone() {
-			return QueryJobZone.get();
-		}
-
-		@Override
-		public TimerService getRetryTimer() {
-			return RetryTimer.get();
-		}
-	}
 }

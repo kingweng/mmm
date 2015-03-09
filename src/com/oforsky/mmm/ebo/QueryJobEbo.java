@@ -7,14 +7,18 @@ package com.oforsky.mmm.ebo;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.capture.TickRetriever;
 import com.oforsky.mmm.handler.WarrantHandler;
 import com.oforsky.mmm.part.req.QueryJobReq;
 import com.oforsky.mmm.svc.MmmPart;
-import com.truetel.jcore.util.AppException;
+import com.oforsky.mmm.util.MmmUtil;
 
 @Entity
 @Table(name = QueryJobCoreEbo.DB_TABLE_NAME)
@@ -27,12 +31,6 @@ public class QueryJobEbo extends QueryJobCoreEbo {
 	private static final Logger log = Logger.getLogger(QueryJobEbo.class);
 
 	public QueryJobEbo() {
-	}
-
-	public List<WarrantEbo> retrieve(WarrantHandler handler) throws Exception {
-		setJobState(JobStateFsm.Action.Retrieve);
-		handler.retrieve(getCode());
-		return handler.getWarrants();
 	}
 
 	public void failRetrieval(Exception e) throws Exception {
@@ -50,7 +48,21 @@ public class QueryJobEbo extends QueryJobCoreEbo {
 	@Override
 	protected void postCreateSkyCb() throws Exception {
 		super.postCreateSkyCb();
-		log.info("put BidJobReq[" + getJobOid() + "] into zone");
-		MmmPart.getQueryJobReqZone().putReq(new QueryJobReq(getJobOid()));
+		log.info("put QueryJobReq[" + getJobOid() + "] into zone");
+		MmmPart.getQueryJobReqZone().putReq(
+				new QueryJobReq(getJobOid(), getAction()));
+	}
+
+	public TickEbo retrieve(StorageEbo ebo, TickRetriever retriever)
+			throws Exception {
+		setJobState(JobStateFsm.Action.Retrieve);
+		WarrantEbo warrant = ebo.getWarrantEboForced();
+		TickEbo tick = TickEbo.valueOf(retriever.getWarrantTick(
+				MmmUtil.getTodayStr(), ebo.getCode(), warrant.getCode()));
+		return tick;
+	}
+
+	public void retrieve() throws Exception {
+		setJobState(JobStateFsm.Action.Retrieve);
 	}
 }

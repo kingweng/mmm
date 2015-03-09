@@ -1,6 +1,5 @@
 package com.oforsky.mmm.handler;
 
-import com.oforsky.mmm.capture.data.Tick;
 import com.oforsky.mmm.ebo.TickEbo;
 
 public interface TickListener {

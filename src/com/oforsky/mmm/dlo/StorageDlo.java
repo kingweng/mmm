@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.ebo.MmmConstant;
 import com.oforsky.mmm.ebo.StorageEbo;
 
 public class StorageDlo extends StorageCoreDlo {
@@ -27,15 +28,19 @@ public class StorageDlo extends StorageCoreDlo {
 	}
 
 	@Override
-	public Integer totalRevenue() throws Exception {
+	public String totalRevenue() throws Exception {
 		log.info("totalRevenue() enter...");
 		List<StorageEbo> ebos = listAll();
 		log.debug("size == " + ebos.size());
 		int sum = 0;
+		StringBuilder sb = new StringBuilder();
 		for (StorageEbo ebo : ebos) {
 			ebo.postGet();
 			sum += ebo.getRevenue();
+			sb.append(String.format(MmmConstant.REVENUE_OUTPUT_FORMAT,
+					ebo.getCode(), ebo.getRevenue())
+					+ "\n");
 		}
-		return sum;
+		return "total revenue is " + sum + "\n" + sb.toString();
 	}
 }

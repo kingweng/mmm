@@ -6,6 +6,8 @@
         <SvcAttr name="retryIntvl" label="retryInterval"/>
         <SvcAttr name="retryLimit" label="retryLimit"/>
         <SvcAttr name="dailyImportTime" label="dailyImportTime"/>
+        <SvcAttr name="revenueSellTime" label="revenueSellTime"/>
+        <SvcAttr name="kBreakSellTime" label="kBreakSellTime"/>
         <SvcAttr name="tickInterval" label="tickIntervalSec"/>
         <SvcAttr name="tickTimeout" label="tickTimeoutSec"/>
         <SvcAttr name="tickTimeRange" label="tickTimeRange"/>
@@ -19,6 +21,8 @@
         <SvcAttr name="qualifiedDealers" label="qualifiedDealers"/>
         <SvcAttr name="minLeverage" label="minLeverage"/>
         <SvcAttr name="warrantRetryIntvl" label="warrantRetryIntvl"/>
+        <SvcAttr name="buyRetryLimit" label="retryLimit"/>
+        <SvcAttr name="sellRetryLimit" label="retryLimit"/>
     </SvcProperty>
     <SvcProperty name="DealCfg" label="DealCfg">
         <SvcAttr name="svcName" label="svcName"/>
@@ -27,6 +31,11 @@
         <SvcAttr name="kBreak" label="kBreak"/>
         <SvcAttr name="winChance" label="winChance"/>
         <SvcAttr name="revenueRate" label="revenueRate"/>
+    </SvcProperty>
+    <SvcProperty name="BalanceCfg" label="BalanceCfg">
+        <SvcAttr name="svcName" label="svcName"/>
+        <SvcAttr name="balance" label="balance"/>
+        <SvcAttr name="singleBid" label="singleBid"/>
     </SvcProperty>
     <SvcTable name="Stock" label="Stock">
         <SvcAttr name="code" label="Code"/>
@@ -137,8 +146,10 @@
         <SvcAttr name="realOid" label="actionOid"/>
         <SvcAttr name="code" label="Code"/>
         <SvcAttr name="buyDateStr" label="buyDateStr(yyyymmdd)"/>
+        <SvcAttr name="buyPrice" label="buyPrice"/>
         <SvcAttr name="recordHigh" label="recordHigh"/>
         <SvcAttr name="sellDateStr" label="sellDateStr(yyyymmdd)"/>
+        <SvcAttr name="sellPrice" label="sellPrice"/>
         <SvcAttr name="sellType" label="sellType"/>
         <SvcAttr name="diffPrice" label="diffPrice(sell price minus buy price)"/>
         <SvcAttr name="keepDays" label="keepDays between buy and sell"/>
@@ -159,6 +170,7 @@
     </SvcTable>
     <SvcTable name="QueryJob" label="QueryJob">
         <SvcAttr name="jobOid" label="jobOid"/>
+        <SvcAttr name="action" label="action"/>
         <SvcAttr name="code" label="code"/>
         <SvcAttr name="price" label="price"/>
         <SvcAttr name="amount" label="amount of money"/>
@@ -175,13 +187,15 @@
         <SvcAttr name="jobOid" label="jobOid"/>
         <SvcAttr name="name" label="Warrant name"/>
         <SvcAttr name="price" label="Warrant price"/>
-        <SvcAttr name="unit" label="unit"/>
+        <SvcAttr name="applyUnit" label="unit"/>
+        <SvcAttr name="remainUnit" label="unit"/>
         <SvcAttr name="action" label="action"/>
         <SvcAttr name="bidState" label="bidState"/>
         <SvcAttr name="amount" label="amount"/>
         <SvcAttr name="failMsg" label="failMsg"/>
         <SvcAttr name="createTime" label="Create Time"/>
         <SvcAttr name="updateTime" label="Update Time"/>
+        <SvcIndex name="State" label="State"/>
         <SvcForeignKey name="Warrant" label="Warrant"/>
         <SvcForeignKey name="Job" label="Job"/>
     </SvcTable>
@@ -192,6 +206,21 @@
         <SvcAttr name="value" label="value"/>
         <SvcIndex name="CodeDate" label="CodeDate"/>
         <SvcIndex name="Code" label="Code"/>
+    </SvcTable>
+    <SvcTable name="WarrantTick" label="WarrantTick">
+        <SvcAttr name="tickOid" label="tickOid"/>
+        <SvcAttr name="code" label="code"/>
+        <SvcAttr name="price" label="price"/>
+        <SvcAttr name="tickVolume" label="tickVolume"/>
+        <SvcAttr name="totalVolume" label="totalVolume"/>
+        <SvcAttr name="timestamp" label="timestamp"/>
+        <SvcAttr name="createTime" label="createTime"/>
+        <SvcAttr name="buyPrices" label="buyPrices"/>
+        <SvcAttr name="buyVolumes" label="buyVolumes"/>
+        <SvcAttr name="seldPrices" label="seldPrices"/>
+        <SvcAttr name="seldVolumes" label="seldVolumes"/>
+        <SvcIndex name="Code" label="Code"/>
+        <SvcIndex name="Time" label="Time"/>
     </SvcTable>
     <SvcTable name="Drive" label="Bid">
         <SvcAttr name="driveOid" label="driveOid"/>
@@ -252,15 +281,18 @@
     </Fsm>
     <Fsm name="BidState" label="BidState">
         <FsmState name="Init" label="Init"/>
-        <FsmState name="Success" label="Success"/>
-        <FsmState name="Failure" label="Failure"/>
-        <FsmState name="Cancel" label="Cancel"/>
         <FsmState name="Processing" label="Processing"/>
+        <FsmState name="Cancel" label="Cancel"/>
+        <FsmState name="Failure" label="Failure"/>
+        <FsmState name="Success" label="Success"/>
+        <FsmState name="PartialProcessing" label="PartialProcessing"/>
         <FsmState name="PartialSuccess" label="PartialSuccess"/>
+        <FsmAction name="Apply" label="Apply"/>
         <FsmAction name="Succeed" label="Succeed"/>
         <FsmAction name="PartialSucceed" label="PartialSucceed"/>
         <FsmAction name="Fail" label="Fail"/>
         <FsmAction name="Cancel" label="Cancel"/>
+        <FsmAction name="Finish" label="Finish"/>
     </Fsm>
     <Fsm name="PullReqState" label="PullReqState">
         <FsmState name="Init" label="Init"/>

@@ -7,11 +7,10 @@ package com.oforsky.mmm.svc;
 
 import org.apache.log4j.Logger;
 
-import com.oforsky.mmm.cache.DealCfgCacheStore;
 import com.oforsky.mmm.cache.SvcCfgCacheStore;
-import com.oforsky.mmm.handler.BigVolumeStrategy;
-import com.oforsky.mmm.handler.StrategyHandler;
 import com.oforsky.mmm.timer.DailyTimerTask;
+import com.oforsky.mmm.timer.KBreakTimerTask;
+import com.oforsky.mmm.timer.RevenueBreakTimerTask;
 import com.oforsky.mmm.timer.SchTimerTask;
 
 public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements MmmSvcMBean {
@@ -26,14 +25,16 @@ public class MmmSvcMBeanImpl extends MmmBaseSvcMBeanImpl implements MmmSvcMBean 
 	@Override
 	protected void postActivateSvcCb() throws Exception {
 		super.postActivateSvcCb();
-		StrategyHandler.init();
-		StrategyHandler.get().addStrategy(new BigVolumeStrategy());
 	}
 
 	@Override
 	protected void postPrimarizeSvcCb() throws Exception {
 		super.postPrimarizeSvcCb();
+		log.info("schedule all timers...");
 		new DailyTimerTask(SvcCfgCacheStore.getDailyImportTime()).schedule();
+		new RevenueBreakTimerTask(SvcCfgCacheStore.getRevenueSellTime())
+				.schedule();
+		new KBreakTimerTask(SvcCfgCacheStore.getKBreakSellTime()).schedule();
 		SchTimerTask.schedule();
 	}
 }

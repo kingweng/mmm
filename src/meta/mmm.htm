@@ -34,8 +34,9 @@ function toggleDiv(linkObj,divId) {
 		<div style="overflow-y: auto;width:100%;height: 100%;display: block;">
 			<p><a href="#link_svcProperty">SvcProperty List</a>[<span onclick="toggleDiv(this,'slide_svcProperty')">+</span>]</p>
 			<div id="slide_svcProperty" style="display:none">
+				<div style="margin:3px"><a href="#BalanceCfg" title="">BalanceCfg</a></div>
 				<div style="margin:3px"><a href="#DealCfg" title="">DealCfg</a></div>
-				<div style="margin:3px"><a href="#SvcCfg" title="System Configuration">SvcCfg</a></div>
+				<div style="margin:3px"><a href="#SvcCfg" title="">SvcCfg</a></div>
 				<div style="margin:3px"><a href="#WarrantCfg" title="">WarrantCfg</a></div>
 			</div>
 			
@@ -57,6 +58,7 @@ function toggleDiv(linkObj,divId) {
 				<div style="margin:3px"><a href="#Tick" title="Tick">Tick</a></div>
 				<div style="margin:3px"><a href="#Training" title="Training">Training</a></div>
 				<div style="margin:3px"><a href="#Warrant" title="Warrant">Warrant</a></div>
+				<div style="margin:3px"><a href="#WarrantTick" title="WarrantTick">WarrantTick</a></div>
 			</div>
 
 			<p><a href="#link_svcDataBean">SvcDataBean List</a>[<span onclick="toggleDiv(this,'slide_svcDataBean')">+</span>]</p>
@@ -129,11 +131,11 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfProperties</b></td>
-	<td width="90%" bgcolor="#E0F0DD">3&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">4&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfTables</b></td>
-	<td width="90%" bgcolor="#E0F0DD">16&nbsp;</td>
+	<td width="90%" bgcolor="#E0F0DD">17&nbsp;</td>
   </tr>
   <tr>
 	<td width="10%" bgcolor="#CCDDFF"><b>numOfEnums</b></td>
@@ -170,6 +172,15 @@ function toggleDiv(linkObj,divId) {
 	<td width="80%" bgcolor="#CCDDFF"><b>comment</b></td>
   </tr>
   <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="BalanceCfgDesc" href="#BalanceCfg">BalanceCfg </A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">3&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
+	<td width="80%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" bgcolor="#E0F0DD"><A name="DealCfgDesc" href="#DealCfg">DealCfg </A>&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
@@ -180,10 +191,10 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="10%" bgcolor="#E0F0DD"><A name="SvcCfgDesc" href="#SvcCfg">SvcCfg </A>&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">System Configuration&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">10&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">12&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
 	<td width="80%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -192,7 +203,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">6&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">8&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">V&nbsp;</td>
 	<td width="80%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -249,8 +260,8 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" bgcolor="#E0F0DD"><A href="#BidReq.bidOid">bidOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">12&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">13&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
@@ -317,7 +328,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" bgcolor="#E0F0DD"><A href="#Deal.realOid">realOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD"><A href="#Deal.code">code</A><br/><A href="#Deal.buyDateStr">buyDateStr</A>&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">9&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">11&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">3&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
@@ -405,7 +416,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" bgcolor="#E0F0DD"><A href="#QueryJob.jobOid">jobOid</A>&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">rw&nbsp;</td>
-	<td width="5%" bgcolor="#E0F0DD">9&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">10&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
 	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
@@ -578,6 +589,28 @@ function toggleDiv(linkObj,divId) {
 	</td>
 	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
+  <tr>
+	<td width="10%" bgcolor="#E0F0DD"><A name="WarrantTickDesc" href="#WarrantTick">WarrantTick </A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">WarrantTick&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD"><A href="#WarrantTick.tickOid">tickOid</A>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">rc&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">11&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">0&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">table&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="5%" bgcolor="#E0F0DD">
+	</td>
+	<td width="60%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
 </table>
 
 <a name="link_svcDataBean"/>
@@ -592,6 +625,70 @@ function toggleDiv(linkObj,divId) {
   </tr>
 </table>
 
+<p><b>SvcProperty:&nbsp; <A name="BalanceCfg">BalanceCfg</A> &nbsp<A href="#BalanceCfgDesc">Description</A></b></p>
+<p><b>SvcProperty-><A href="#BalanceCfg">BalanceCfg</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="BalanceCfg.svcName">svcName</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">mmm &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="BalanceCfg.balance">balance</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">500000 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">account balance &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="BalanceCfg.singleBid">singleBid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">10000 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">single order amount &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcProperty-><A href="#BalanceCfg">BalanceCfg</A>: Cache</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>eagerLoad</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attachState</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>deepGet</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b>false</b>&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">Ready&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
 <p><b>SvcProperty:&nbsp; <A name="DealCfg">DealCfg</A> &nbsp<A href="#DealCfgDesc">Description</A></b></p>
 <p><b>SvcProperty-><A href="#DealCfg">DealCfg</A>: Persistent Attributes</b></p>
 <table border="1" width="103%" height="55">
@@ -759,6 +856,28 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD">format is hhmm, start to pull stock csv files &nbsp;</td>
   </tr>
   <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.revenueSellTime">revenueSellTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">revenueSellTime&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">0905 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">format is hhmm, start to pull stock csv files &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.kBreakSellTime">kBreakSellTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">kBreakSellTime&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">1320 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">format is hhmm, start to pull stock csv files &nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="SvcCfg.tickInterval">tickInterval</A></b></td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">tickIntervalSec&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
@@ -905,10 +1024,32 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
-	<td width="5%" height="19" bgcolor="#E0F0DD">1 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">5 &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD">warrantRetryIntvl in second &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantCfg.buyRetryLimit">buyRetryLimit</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">retryLimit&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">10 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">maximum retry times for warrants buying &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantCfg.sellRetryLimit">sellRetryLimit</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">retryLimit&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rw &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">10 &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD">maximum retry times for warrants selling &nbsp;</td>
   </tr>
 </table>
 <p><b>SvcProperty-><A href="#WarrantCfg">WarrantCfg</A>: Cache</b></p>
@@ -1092,11 +1233,22 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
-	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="BidReq.unit">unit</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">unit&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="BidReq.applyUnit">applyUnit</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">applyUnit&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="BidReq.remainUnit">remainUnit</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">remainUnit&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -1167,6 +1319,25 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#BidReq">BidReq</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#State">State</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#BidReq.bidState">bidState</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
 </table>
 <p><b>SvcTable-><A href="#BidReq">BidReq</A>: Foreign Key List</b></p>
@@ -1474,6 +1645,17 @@ function toggleDiv(linkObj,divId) {
 	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
   </tr>
   <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.buyPrice">buyPrice</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">buyPrice&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.recordHigh">recordHigh</A></b></td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">recordHigh&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
@@ -1488,6 +1670,17 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.sellDateStr">sellDateStr</A></b></td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">sellDateStr(yyyymmdd)&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="Deal.sellPrice">sellPrice</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">sellPrice&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
@@ -1937,6 +2130,17 @@ function toggleDiv(linkObj,divId) {
 	<td width="10%" height="19" bgcolor="#E0F0DD">jobOid&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="QueryJob.action">action</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">action&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><A href="#ActionType">Enum&lt;ActionType&gt;</A></td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -2543,7 +2747,7 @@ function toggleDiv(linkObj,divId) {
 	<td width="5%" bgcolor="#E0F0DD" rowspan="1">true&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">RETURN</td>
-	<td width="10%" bgcolor="#E0F0DD">Integer&nbsp;</td>
+	<td width="10%" bgcolor="#E0F0DD">String&nbsp;</td>
 	<td width="10%" bgcolor="#E0F0DD">&nbsp;</td>
 	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
   </tr>
@@ -2584,7 +2788,7 @@ function toggleDiv(linkObj,divId) {
   </tr>
 	  <tr>
 	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="StorageLog.logOid">logOid</A></b></td>
-	<td width="10%" height="19" bgcolor="#E0F0DD">storageOid&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">logOid&nbsp;</td>
 	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
 	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
@@ -3306,6 +3510,176 @@ function toggleDiv(linkObj,divId) {
 
 
 
+<p>&nbsp;</p>
+<p><b>SvcTable:&nbsp; <A name="WarrantTick">WarrantTick</A> &nbsp<A href="#WarrantTickDesc">Description</A></b></p>
+<p><b>SvcTable-><A href="#WarrantTick">WarrantTick</A>: Persistent Attributes</b></p>
+<table border="1" width="103%" height="55">
+  <tr>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>svcAttrName</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="10%" height="24"  bgcolor="#CCDDFF"><b>type</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>access</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>required</b></td>
+	<td width="5%" height="24"  bgcolor="#CCDDFF"><b>default</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>showInGrid</b></td>
+	<td width="5%" height="12" bgcolor="#CCDDFF"><b>searchable</b></td>
+	<td width="45%" height="24"  bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+	  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.tickOid">tickOid</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">tickOid&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">RecId &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.code">code</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">code&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">String(20) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.price">price</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">price&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Double &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.tickVolume">tickVolume</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">tickVolume&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.totalVolume">totalVolume</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">totalVolume&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Integer &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.timestamp">timestamp</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">timestamp&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">Long &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.createTime">createTime</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">createTime&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">CreateTime &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">ro &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.buyPrices">buyPrices</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;String&gt;(100) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.buyVolumes">buyVolumes</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;Integer&gt;(100) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.seldPrices">seldPrices</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;String&gt;(100) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+  <tr>
+	<td width="10%" height="19" bgcolor="#E0F0DD"><b><A name="WarrantTick.seldVolumes">seldVolumes</A></b></td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="10%" height="19" bgcolor="#E0F0DD">ObjectList&lt;Integer&gt;(100) &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">rc &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="5%" height="19" bgcolor="#E0F0DD">V &nbsp;</td>
+	<td width="45%" height="19" bgcolor="#E0F0DD"> &nbsp;</td>
+  </tr>
+</table>
+<p><b>SvcTable-><A href="#WarrantTick">WarrantTick</A>: Index List</b></p>
+<table border="1" width="100%">
+  <tr>
+	<td width="20%" bgcolor="#CCDDFF"><b>svcIndexName</b></td>
+	<td width="20%" bgcolor="#CCDDFF"><b>label</b></td>
+	<td width="30%" bgcolor="#CCDDFF"><b>attrNames</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>isUnique</b></td>
+	<td width="5%" bgcolor="#CCDDFF"><b>dbSchema</b></td>
+	<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Code">Code</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#WarrantTick.code">code</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+  <tr>
+	<td width="20%" bgcolor="#E0F0DD"><b><A name="#Time">Time</A></b>&nbsp;</td>
+	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
+	<td width="30%" bgcolor="#E0F0DD"><A href="#WarrantTick.createTime">createTime</A>&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">false&nbsp;</td>
+	<td width="5%" bgcolor="#E0F0DD">apiAndIndex&nbsp;</td>
+	<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+
 
 
 <a name="link_svcEnum"/>
@@ -3324,7 +3698,7 @@ function toggleDiv(linkObj,divId) {
   </tr>
   <tr>
 	<td width="20%" bgcolor="#E0F0DD"><b><A name="ActionType">ActionType</A></b></td>
-	<td width="80%" colspan="4" bgcolor="#E0F0DD"><A href="#BidReq.action">BidReq.action</A>&nbsp;</td>
+	<td width="80%" colspan="4" bgcolor="#E0F0DD"><A href="#QueryJob.action">QueryJob.action</A>, <A href="#BidReq.action">BidReq.action</A>&nbsp;</td>
   </tr>
   <tr>
 	<td width="20%" bgcolor="#E0F0DD">&nbsp;</td>
@@ -3449,7 +3823,7 @@ function toggleDiv(linkObj,divId) {
 	<td colspan="6">
 		<table border="0" width="100%">
 		  <tr>
-			<td width="20%" bgcolor="#CCDDFF" rowspan="7"><b><A name="BidState">State</A></b></td>
+			<td width="20%" bgcolor="#CCDDFF" rowspan="8"><b><A name="BidState">State</A></b></td>
 			<td width="15%" bgcolor="#CCDDFF"><b>State name</b></td>
 			<td width="15%" bgcolor="#CCDDFF"><b>label </b></td>
 			<td width="5%" bgcolor="#CCDDFF"><b>State value</b></td>
@@ -3464,37 +3838,44 @@ function toggleDiv(linkObj,divId) {
 			<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
 		  <tr>
-			<td width="15%" bgcolor="#E0F0DD">Success&nbsp;</td>
-			<td width="15%" bgcolor="#E0F0DD">Success&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Processing&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Processing&nbsp;</td>
 			<td width="5%" bgcolor="#E0F0DD">1&nbsp;</td>
-			<td width="10%" bgcolor="#E0F0DD">final&nbsp;</td>
+			<td width="10%" bgcolor="#E0F0DD">transient&nbsp;</td>
 			<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
 		  <tr>
-			<td width="15%" bgcolor="#E0F0DD">Failure&nbsp;</td>
-			<td width="15%" bgcolor="#E0F0DD">Failure&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Cancel&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Cancel&nbsp;</td>
 			<td width="5%" bgcolor="#E0F0DD">2&nbsp;</td>
 			<td width="10%" bgcolor="#E0F0DD">final&nbsp;</td>
 			<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
 		  <tr>
-			<td width="15%" bgcolor="#E0F0DD">Cancel&nbsp;</td>
-			<td width="15%" bgcolor="#E0F0DD">Cancel&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Failure&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Failure&nbsp;</td>
 			<td width="5%" bgcolor="#E0F0DD">3&nbsp;</td>
 			<td width="10%" bgcolor="#E0F0DD">final&nbsp;</td>
 			<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
 		  <tr>
-			<td width="15%" bgcolor="#E0F0DD">Processing&nbsp;</td>
-			<td width="15%" bgcolor="#E0F0DD">Processing&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Success&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">Success&nbsp;</td>
 			<td width="5%" bgcolor="#E0F0DD">4&nbsp;</td>
+			<td width="10%" bgcolor="#E0F0DD">final&nbsp;</td>
+			<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td width="15%" bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td width="15%" bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td width="5%" bgcolor="#E0F0DD">5&nbsp;</td>
 			<td width="10%" bgcolor="#E0F0DD">transient&nbsp;</td>
 			<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
 		  <tr>
 			<td width="15%" bgcolor="#E0F0DD">PartialSuccess&nbsp;</td>
 			<td width="15%" bgcolor="#E0F0DD">PartialSuccess&nbsp;</td>
-			<td width="5%" bgcolor="#E0F0DD">5&nbsp;</td>
+			<td width="5%" bgcolor="#E0F0DD">6&nbsp;</td>
 			<td width="10%" bgcolor="#E0F0DD">final&nbsp;</td>
 			<td width="40%" bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
@@ -3506,12 +3887,17 @@ function toggleDiv(linkObj,divId) {
 	<td colspan="6">
 		<table border="0" width="100%">
 		  <tr>
-			<td width="20%" bgcolor="#CCDDFF" rowspan="5"><b><A name="BidState_Action">Action</A></b></td>
+			<td width="20%" bgcolor="#CCDDFF" rowspan="7"><b><A name="BidState_Action">Action</A></b></td>
 			<td width="20%" bgcolor="#CCDDFF"><b>Action name</b></td>
 			<td width="20%" bgcolor="#CCDDFF"><b>label </b></td>
 			<td width="40%" bgcolor="#CCDDFF"><b>comment</b></td>
 		  </tr>
 		  <tr>
+			<td bgcolor="#E0F0DD">Apply&nbsp;</td>
+			<td bgcolor="#E0F0DD">Apply&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
 			<td bgcolor="#E0F0DD">Succeed&nbsp;</td>
 			<td bgcolor="#E0F0DD">Succeed&nbsp;</td>
 			<td bgcolor="#E0F0DD">&nbsp;</td>
@@ -3529,6 +3915,11 @@ function toggleDiv(linkObj,divId) {
 		  <tr>
 			<td bgcolor="#E0F0DD">Cancel&nbsp;</td>
 			<td bgcolor="#E0F0DD">Cancel&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#E0F0DD">Finish&nbsp;</td>
+			<td bgcolor="#E0F0DD">Finish&nbsp;</td>
 			<td bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
 		</table>
@@ -3539,7 +3930,7 @@ function toggleDiv(linkObj,divId) {
 	<td colspan="6">
 		<table border="0" width="100%">
 		  <tr>
-			<td width="20%" bgcolor="#CCDDFF" rowspan="8"><b><A name="BidState_Transition">Transition</A></b></td>
+			<td width="20%" bgcolor="#CCDDFF" rowspan="11"><b><A name="BidState_Transition">Transition</A></b></td>
 			<td width="13%" bgcolor="#CCDDFF"><b>From State</b></td>
 			<td width="14%" bgcolor="#CCDDFF"><b>Action</b></td>
 			<td width="13%" bgcolor="#CCDDFF"><b>To State</b></td>
@@ -3553,25 +3944,7 @@ function toggleDiv(linkObj,divId) {
 		  </tr>
 		  <tr>
 			<td bgcolor="#E0F0DD">Init&nbsp;</td>
-			<td bgcolor="#E0F0DD">PartialSucceed&nbsp;</td>
-			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
-			<td bgcolor="#E0F0DD">&nbsp;</td>
-		  </tr>
-		  <tr>
-			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
-			<td bgcolor="#E0F0DD">Succeed&nbsp;</td>
-			<td bgcolor="#E0F0DD">Success&nbsp;</td>
-			<td bgcolor="#E0F0DD">&nbsp;</td>
-		  </tr>
-		  <tr>
-			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
-			<td bgcolor="#E0F0DD">Cancel&nbsp;</td>
-			<td bgcolor="#E0F0DD">PartialSuccess&nbsp;</td>
-			<td bgcolor="#E0F0DD">&nbsp;</td>
-		  </tr>
-		  <tr>
-			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
-			<td bgcolor="#E0F0DD">PartialSucceed&nbsp;</td>
+			<td bgcolor="#E0F0DD">Apply&nbsp;</td>
 			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
 			<td bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
@@ -3583,8 +3956,44 @@ function toggleDiv(linkObj,divId) {
 		  </tr>
 		  <tr>
 			<td bgcolor="#E0F0DD">Init&nbsp;</td>
+			<td bgcolor="#E0F0DD">PartialSucceed&nbsp;</td>
+			<td bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
 			<td bgcolor="#E0F0DD">Cancel&nbsp;</td>
 			<td bgcolor="#E0F0DD">Cancel&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
+			<td bgcolor="#E0F0DD">Succeed&nbsp;</td>
+			<td bgcolor="#E0F0DD">Success&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#E0F0DD">Processing&nbsp;</td>
+			<td bgcolor="#E0F0DD">PartialSucceed&nbsp;</td>
+			<td bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td bgcolor="#E0F0DD">Succeed&nbsp;</td>
+			<td bgcolor="#E0F0DD">Success&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td bgcolor="#E0F0DD">PartialSucceed&nbsp;</td>
+			<td bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td bgcolor="#E0F0DD">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#E0F0DD">PartialProcessing&nbsp;</td>
+			<td bgcolor="#E0F0DD">Finish&nbsp;</td>
+			<td bgcolor="#E0F0DD">PartialSuccess&nbsp;</td>
 			<td bgcolor="#E0F0DD">&nbsp;</td>
 		  </tr>
 		</table>

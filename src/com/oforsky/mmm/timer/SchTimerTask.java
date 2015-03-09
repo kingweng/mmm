@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.oforsky.mmm.cache.StorageCacheStore;
 import com.oforsky.mmm.cache.SvcCfgCacheStore;
-import com.oforsky.mmm.handler.StrategyHandler;
+import com.oforsky.mmm.data.HistoricalStock;
+import com.oforsky.mmm.ebo.StorageEbo;
+import com.oforsky.mmm.handler.ContextHandler;
+import com.oforsky.mmm.handler.strategy.TickContext;
+import com.oforsky.mmm.handler.strategy.TickStrategy;
+import com.oforsky.mmm.handler.strategy.TickStrategyImpl;
 import com.oforsky.mmm.proxy.MmmProxy;
 import com.oforsky.mmm.proxy.MmmProxyUtil;
 import com.oforsky.mmm.svc.MmmPart;
@@ -81,9 +88,20 @@ public class SchTimerTask implements ScheduleTimerTask {
 	public void timerFiredCb() throws Exception {
 		log.info("SchTimerTask() fire...");
 		MmmProxy proxy = MmmProxyUtil.getProxy();
-		StrategyHandler.get().reset(proxy.getHistoryMap(120));
+		Map<String, HistoricalStock> histories = proxy.getHistoryMap(120);
+		for (String code : histories.keySet()) {
+			setupContext(proxy, histories, code);
+		}
 		proxy.genTickReqs();
 		TickTimerTask.schedule();
 	}
 
+	private void setupContext(MmmProxy proxy,
+			Map<String, HistoricalStock> histories, String code)
+			throws Exception {
+		TickStrategy strategy = new TickStrategyImpl(histories.get(code));
+		StorageEbo storage = StorageCacheStore.getStore().get(code);
+		TickContext context = new TickContext(proxy, strategy, storage);
+		ContextHandler.get().putContext(code, context);
+	}
 }

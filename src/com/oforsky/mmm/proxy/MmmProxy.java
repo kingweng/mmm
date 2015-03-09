@@ -12,9 +12,12 @@ import javax.ejb.Remote;
 
 import com.oforsky.mmm.data.BigVolume;
 import com.oforsky.mmm.data.HistoricalStock;
+import com.oforsky.mmm.ebo.BidReqEbo;
+import com.oforsky.mmm.ebo.DealCfgEbo;
 import com.oforsky.mmm.ebo.DealEbo;
+import com.oforsky.mmm.ebo.SellTypeEnum;
+import com.oforsky.mmm.ebo.StockEbo;
 import com.oforsky.mmm.ebo.StockGroupEbo;
-import com.oforsky.mmm.ebo.StorageEbo;
 import com.oforsky.mmm.ebo.TickEbo;
 import com.oforsky.mmm.ebo.WarrantEbo;
 import com.truetel.jcore.util.AppException;
@@ -50,9 +53,6 @@ public interface MmmProxy extends MmmBaseProxy {
 
 	public void deleteDealStats() throws AppException;
 
-	public List<DealEbo> findPastDeals(String startDate, int dayCount,
-			int times, int breakK, double revenueRate) throws AppException;
-
 	public void analyzeDeals() throws AppException;
 
 	public List<BigVolume> findBigVolume(String baseDate, Integer dayCount,
@@ -72,12 +72,25 @@ public interface MmmProxy extends MmmBaseProxy {
 
 	public void queryJobFail(Integer jobOid, Exception e) throws AppException;
 
-	public void sellStorage(StorageEbo ebo) throws AppException;
-
 	public void proceedBidReq(Integer bidOid) throws AppException;
 
 	public void failBidReq(Integer bidOid, Exception e) throws AppException;
 
 	public void genFakeTick(TickEbo ebo) throws AppException;
+
+	public int getRecordHigh(String code, String dateStr) throws AppException;
+
+	public int getKeepDays(String code, String buyDateStr, String sellDateStr)
+			throws AppException;
+
+	public List<DealEbo> findPastDeals(String startDate, DealCfgEbo cfg)
+			throws AppException;
+
+	public List<StockEbo> listStockByCodeFromDate(String code, String yyyymmdd)
+			throws AppException;
+
+	public void createStorage(BidReqEbo bid) throws AppException;
+
+	public void sellStorage(BidReqEbo bid) throws AppException;
 
 }

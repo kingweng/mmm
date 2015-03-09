@@ -137,21 +137,21 @@ public class Tick {
 	}
 
 	private static Integer parseInt(String input) {
-		if (StringUtil.isEmpty(input) && "-".equals(input)) {
+		if (StringUtil.isEmpty(input) || "-".equals(input)) {
 			return 0;
 		}
 		return Integer.parseInt(input);
 	}
 
 	private static Double parseDouble(String input) {
-		if (StringUtil.isEmpty(input) && "-".equals(input)) {
+		if (StringUtil.isEmpty(input) || "-".equals(input)) {
 			return 0.0;
 		}
 		return Double.parseDouble(input);
 	}
 
 	private static Long parseLong(String input) {
-		if (StringUtil.isEmpty(input) && "-".equals(input)) {
+		if (StringUtil.isEmpty(input) || "-".equals(input)) {
 			return 0l;
 		}
 		return Long.parseLong(input);

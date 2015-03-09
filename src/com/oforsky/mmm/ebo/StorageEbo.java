@@ -36,7 +36,7 @@ public class StorageEbo extends StorageCoreEbo {
 		setName(bid.getName());
 		setPrice(bid.getPrice());
 		setWarrantOid(bid.getWarrantOid());
-		setUnit(bid.getUnit());
+		setUnit(bid.getApplyUnit());
 		setAmount(bid.getAmount());
 	}
 

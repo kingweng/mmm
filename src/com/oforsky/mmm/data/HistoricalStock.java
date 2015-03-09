@@ -136,7 +136,7 @@ public class HistoricalStock implements Serializable {
 
 	public boolean isBelowK(String date, int days) throws Exception {
 		double k = computeK(date, days);
-		return stocks.get(date).getLowestPrice() < k;
+		return stocks.get(date).getPrice() < k;
 	}
 
 	public int recordHigh(String date) throws AppException {
