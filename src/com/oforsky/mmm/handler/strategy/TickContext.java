@@ -15,7 +15,7 @@ public class TickContext implements TickState {
 
 	private static final Logger log = Logger.getLogger(TickContext.class);
 
-	private boolean isAlive = true;
+	private volatile boolean isAlive = true;
 
 	private TickState state;
 

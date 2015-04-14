@@ -93,4 +93,8 @@ public interface MmmProxy extends MmmBaseProxy {
 
 	public void sellStorage(BidReqEbo bid) throws AppException;
 
+	public double getTheoryPrice(WarrantEbo warrant, double targetPrice)
+			throws AppException;
+
+
 }

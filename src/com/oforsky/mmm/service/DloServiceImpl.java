@@ -1,8 +1,14 @@
 package com.oforsky.mmm.service;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.oforsky.mmm.cache.StorageCacheStore;
+import com.oforsky.mmm.cache.SvcCfgCacheStore;
+import com.oforsky.mmm.cache.WarrantCfgCacheStore;
 import com.oforsky.mmm.dlo.BalanceCfgDlo;
 import com.oforsky.mmm.dlo.BiasDlo;
 import com.oforsky.mmm.dlo.BidReqDlo;
@@ -20,6 +26,7 @@ import com.oforsky.mmm.ebo.BidReqEbo;
 import com.oforsky.mmm.ebo.DailyCsvReqEbo;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.DealStatsEbo;
+import com.oforsky.mmm.ebo.JobStateFsm;
 import com.oforsky.mmm.ebo.QueryJobEbo;
 import com.oforsky.mmm.ebo.StockEbo;
 import com.oforsky.mmm.ebo.StorageEbo;
@@ -28,11 +35,15 @@ import com.oforsky.mmm.ebo.TickEbo;
 import com.oforsky.mmm.ebo.WarrantEbo;
 import com.oforsky.mmm.ebo.WarrantTickEbo;
 import com.oforsky.mmm.proxy.MmmProxyUtil;
+import com.oforsky.mmm.util.MmmUtil;
 
 /**
  * Created by kingweng on 2014/10/25.
  */
 public class DloServiceImpl implements DloService {
+
+	private static final Logger log = Logger.getLogger(DloServiceImpl.class);
+
 	@Override
 	public DailyCsvReqEbo getDailyCsvReq(Integer reqOid) throws Exception {
 		return new DailyCsvReqDlo().get(reqOid);
@@ -114,6 +125,7 @@ public class DloServiceImpl implements DloService {
 	@Override
 	public WarrantEbo createWarrant(WarrantEbo ebo) throws Exception {
 		new WarrantDlo().create(ebo);
+		log.info("warrantOid=" + ebo.getWarrantOid());
 		return ebo;
 	}
 
@@ -135,6 +147,45 @@ public class DloServiceImpl implements DloService {
 	@Override
 	public int updateBalance(int value) throws Exception {
 		return new BalanceCfgDlo().updateBalance(value);
+	}
+
+	@Override
+	public Calendar getLastBidTime() throws Exception {
+		return MmmUtil.hhmmToCalendar(SvcCfgCacheStore.getLastBidTime());
+	}
+
+	@Override
+	public double getMaxDiffRate() throws Exception {
+		return WarrantCfgCacheStore.getMaxDiffRate();
+	}
+
+	@Override
+	public QueryJobEbo getQueryJob(Integer jobOid) throws Exception {
+		return new QueryJobDlo().get(jobOid);
+	}
+
+	@Override
+	public void createBidReq(QueryJobEbo job) throws Exception {
+		//TODO
+	}
+
+	@Override
+	public WarrantEbo getWarrantByTarget(String code) throws Exception {
+		StorageEbo storage =  StorageCacheStore.getStore().get(code);
+		return storage.getWarrantEboForced();
+	}
+
+	@Override
+	public List<QueryJobEbo> listQueryJob(JobStateFsm... states)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void batchUpdateQueryJob(List<QueryJobEbo> ebos) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

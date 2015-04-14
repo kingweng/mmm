@@ -1,5 +1,6 @@
 package com.oforsky.mmm.service;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import com.oforsky.mmm.ebo.BidReqEbo;
 import com.oforsky.mmm.ebo.DailyCsvReqEbo;
 import com.oforsky.mmm.ebo.DealEbo;
 import com.oforsky.mmm.ebo.DealStatsEbo;
+import com.oforsky.mmm.ebo.JobStateFsm;
 import com.oforsky.mmm.ebo.QueryJobEbo;
 import com.oforsky.mmm.ebo.StockEbo;
 import com.oforsky.mmm.ebo.StorageEbo;
@@ -61,5 +63,19 @@ public interface DloService {
 	int getAndLockBalance() throws Exception;
 
 	int updateBalance(int value) throws Exception;
+
+	Calendar getLastBidTime() throws Exception;
+
+	double getMaxDiffRate() throws Exception;
+
+	QueryJobEbo getQueryJob(Integer jobOid) throws Exception;
+
+	void createBidReq(QueryJobEbo job) throws Exception;
+
+	WarrantEbo getWarrantByTarget(String code) throws Exception;
+
+	List<QueryJobEbo> listQueryJob(JobStateFsm... states) throws Exception;
+
+	void batchUpdateQueryJob(List<QueryJobEbo> ebos) throws Exception;
 
 }

@@ -14,10 +14,6 @@ public enum ActionTypeEnum {
 				public void handleInit(BidReqEbo bid) throws Exception {
 					throw new AppException(5000, "cannot be here!");
 				}
-				@Override
-				public void handle(QueryJobEbo job) throws Exception {
-					throw new AppException(5000, "cannot be here!");
-				}
 
 			}
 			, Buy(1) {
@@ -26,22 +22,11 @@ public enum ActionTypeEnum {
 					MmmProxyUtil.getProxy().createStorage(bid);
 				}
 
-				@Override
-				public void handle(QueryJobEbo job) throws Exception {
-					//job
-				}
-
 			}
 			, Sell(2) {
 				@Override
 				public void handleInit(BidReqEbo bid) throws Exception {
 					MmmProxyUtil.getProxy().sellStorage(bid);
-				}
-
-				@Override
-				public void handle(QueryJobEbo job) throws Exception {
-					// TODO Auto-generated method stub
-					
 				}
 
 			}
@@ -94,5 +79,4 @@ public enum ActionTypeEnum {
 
 	public abstract void handleInit(BidReqEbo bid) throws Exception;
 	
-	public abstract void handle(QueryJobEbo job) throws Exception;
 }

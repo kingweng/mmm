@@ -22,12 +22,5 @@ public class StorageHandler {
 		this.dloSvc = dloSvc;
 	}
 
-	public void sellStorage(StorageEbo ebo) throws Exception {
-		WarrantEbo warrant = ebo.getWarrantEboForced();
-		TickEbo tick = TickEbo.valueOf(retriever.getWarrantTick(
-				MmmUtil.getTodayStr(), ebo.getCode(), warrant.getCode()));
-		BidReqEbo req = BidReqEbo.sell(ebo, tick);
-		dloSvc.createBidReq(req);
-	}
 
 }

@@ -20,6 +20,16 @@ public class HttpServiceImpl implements HttpService {
 
 	private static final Logger log = Logger.getLogger(HttpServiceImpl.class);
 
+	private Integer tickTimeout;
+
+	public HttpServiceImpl(Integer tickTimeout) {
+		this.tickTimeout = tickTimeout;
+	}
+
+	public HttpServiceImpl() {
+		this(SvcCfgCacheStore.getTickTimeout());
+	}
+
 	@Override
 	public void download(String url, File file, String encoding)
 			throws Exception {
@@ -48,8 +58,8 @@ public class HttpServiceImpl implements HttpService {
 	}
 
 	private void setTimeout(URLConnection urlConn) {
-		urlConn.setConnectTimeout(SvcCfgCacheStore.getTickTimeout() * 1000);
-		urlConn.setReadTimeout(SvcCfgCacheStore.getTickTimeout() * 1000);
+		urlConn.setConnectTimeout(tickTimeout * 1000);
+		urlConn.setReadTimeout(tickTimeout * 1000);
 	}
 
 	@Override

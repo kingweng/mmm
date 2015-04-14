@@ -21,9 +21,9 @@
 			<xsd:element name="BuyingStock" type="tdml:BuyingStockType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Deal" type="tdml:DealType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="QueryJob" type="tdml:QueryJobType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="WarrantTick" type="tdml:WarrantTickType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="BidReq" type="tdml:BidReqType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Bias" type="tdml:BiasType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="WarrantTick" type="tdml:WarrantTickType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Drive" type="tdml:DriveType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="License" type="tdml:LicenseType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="Training" type="tdml:TrainingType" minOccurs="0" maxOccurs="unbounded"/>
@@ -69,6 +69,7 @@
 		<xsd:attribute name="idealDiffPrices" type="xsd:double" use="required"/>
 		<xsd:attribute name="remainingDays" type="xsd:int" use="required"/>
 		<xsd:attribute name="leverage" type="xsd:double" use="required"/>
+		<xsd:attribute name="biv" type="xsd:double" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="StorageType">
@@ -127,22 +128,6 @@
 		<xsd:attribute name="amount" type="xsd:int" use="required"/>
 	</xsd:complexType>
 
-	<xsd:complexType name="BidReqType">
-		<xsd:attribute name="name" type="xsd:string" use="required"/>
-		<xsd:attribute name="price" type="xsd:double" use="required"/>
-		<xsd:attribute name="applyUnit" type="xsd:int" use="required"/>
-		<xsd:attribute name="action" type="tdml:ActionTypeEnu" use="required"/>
-		<xsd:attribute name="amount" type="xsd:int" use="required"/>
-		<xsd:attribute name="warrantAppId" type="xsd:string" use="optional"/>
-		<xsd:attribute name="jobAppId" type="xsd:string" use="optional"/>
-	</xsd:complexType>
-
-	<xsd:complexType name="BiasType">
-		<xsd:attribute name="code" type="xsd:string" use="required"/>
-		<xsd:attribute name="dateStr" type="xsd:string" use="required"/>
-		<xsd:attribute name="value" type="xsd:double" use="required"/>
-	</xsd:complexType>
-
 	<xsd:complexType name="WarrantTickType">
 		<xsd:attribute name="code" type="xsd:string" use="required"/>
 		<xsd:attribute name="price" type="xsd:double" use="required"/>
@@ -153,6 +138,23 @@
 		<xsd:attribute name="buyVolumes" type="tdml:IntegerList" use="optional"/>
 		<xsd:attribute name="seldPrices" type="tdml:StringList" use="optional"/>
 		<xsd:attribute name="seldVolumes" type="tdml:IntegerList" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="BidReqType">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="price" type="xsd:double" use="required"/>
+		<xsd:attribute name="applyUnit" type="xsd:int" use="required"/>
+		<xsd:attribute name="action" type="tdml:ActionTypeEnu" use="required"/>
+		<xsd:attribute name="amount" type="xsd:int" use="required"/>
+		<xsd:attribute name="warrantAppId" type="xsd:string" use="optional"/>
+		<xsd:attribute name="tickAppId" type="xsd:string" use="optional"/>
+		<xsd:attribute name="jobAppId" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="BiasType">
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="dateStr" type="xsd:string" use="required"/>
+		<xsd:attribute name="value" type="xsd:double" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="DriveType">

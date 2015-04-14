@@ -49,6 +49,16 @@ public class WarrantHandler {
 		warrants = retrieveWarrants();
 	}
 
+	public WarrantEbo retrieveWarrant(String warrantCode) throws Exception {
+		sessionId = httpSvc.getSessionId(WARRANT_BASE_URL);
+		String content = httpSvc.downloadBySession(WARRANT_DETAIL_URL
+				+ warrantCode + "&ndays_sv=60", sessionId, "big5");
+		List<OriWarrant> oriWarrants = new Gson().fromJson(content,
+				new TypeToken<List<OriWarrant>>() {
+				}.getType());
+		return WarrantEbo.valueOf(oriWarrants.get(0));
+	}
+
 	private List<WarrantEbo> retrieveWarrants() throws Exception {
 		String content = httpSvc.downloadBySession(WARRANT_DETAIL_URL
 				+ asCodes(warrantCodes) + "&ndays_sv=60", sessionId, "big5");

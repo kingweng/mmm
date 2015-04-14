@@ -75,8 +75,8 @@ public class BidReqEbo extends BidReqCoreEbo {
 		BidReqZone.get().putReq(new BidReq(getBidOid()));
 	}
 
-	public static BidReqEbo sell(StorageEbo storage, TickEbo tick)
-			throws Exception {
+	public static BidReqEbo sell(StorageEbo storage, TickEbo tick,
+			Integer warrantTickOid) throws Exception {
 		BidReqEbo ebo = new BidReqEbo();
 		ebo.setAction(ActionTypeEnum.Sell);
 		ebo.setWarrantOid(storage.getWarrantEboForced().getWarrantOid());
@@ -84,6 +84,7 @@ public class BidReqEbo extends BidReqCoreEbo {
 		ebo.setName(storage.getWarrantEboForced().getName());
 		ebo.setPrice(tick.getBuyPrice(storage.getUnit()));
 		ebo.setAmount((int) (ebo.getPrice() * ebo.getApplyUnit() * BID_UNIT));
+		ebo.setWarrantTickOid(warrantTickOid);
 		return ebo;
 	}
 

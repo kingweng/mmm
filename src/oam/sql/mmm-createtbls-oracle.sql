@@ -8,6 +8,7 @@ create table mmm_SvcCfg (
 	dailyImportTime varchar2(20),
 	revenueSellTime varchar2(20),
 	kBreakSellTime varchar2(20),
+	lastBidTime varchar2(20),
 	tickInterval number(10),
 	tickTimeout number(10),
 	tickTimeRange varchar2(20),
@@ -23,6 +24,7 @@ create table mmm_WarrantCfg (
 	warrantDiffPrice float(126),
 	qualifiedDealers varchar2(256),
 	minLeverage number(10),
+	maxDiffRate float(126),
 	warrantRetryIntvl number(10),
 	buyRetryLimit number(10),
 	sellRetryLimit number(10),
@@ -106,6 +108,7 @@ create table mmm_Warrant (
 	idealDiffPrices float(126),
 	remainingDays number(10),
 	leverage float(126),
+	biv float(126),
 	createTime date,
         constraint mmm_Warrant_PK
 		primary key (warrantOid) using index tablespace tasind_svc
@@ -262,6 +265,7 @@ create table mmm_BidReq (
 	bidState number(3),
 	amount number(10),
 	failMsg varchar2(512),
+	warrantTickOid number(10),
 	createTime date,
 	updateTime date,
         constraint mmm_BidReq_PK
@@ -366,6 +370,9 @@ create index
 	
 create index
 	mmm_BidReq_Warrant on mmm_BidReq (warrantOid) tablespace tasind_svc;
+	
+create index
+	mmm_BidReq_Tick on mmm_BidReq (warrantTickOid) tablespace tasind_svc;
 	
         
 alter table mmm_BidReq add constraint

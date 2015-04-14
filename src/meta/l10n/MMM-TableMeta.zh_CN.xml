@@ -8,6 +8,7 @@
         <SvcAttr name="dailyImportTime" label="dailyImportTime"/>
         <SvcAttr name="revenueSellTime" label="revenueSellTime"/>
         <SvcAttr name="kBreakSellTime" label="kBreakSellTime"/>
+        <SvcAttr name="lastBidTime" label="lastBidTime"/>
         <SvcAttr name="tickInterval" label="tickIntervalSec"/>
         <SvcAttr name="tickTimeout" label="tickTimeoutSec"/>
         <SvcAttr name="tickTimeRange" label="tickTimeRange"/>
@@ -20,6 +21,7 @@
         <SvcAttr name="warrantDiffPrice" label="warrantDiffPrice"/>
         <SvcAttr name="qualifiedDealers" label="qualifiedDealers"/>
         <SvcAttr name="minLeverage" label="minLeverage"/>
+        <SvcAttr name="maxDiffRate" label="diffTheoryPri"/>
         <SvcAttr name="warrantRetryIntvl" label="warrantRetryIntvl"/>
         <SvcAttr name="buyRetryLimit" label="retryLimit"/>
         <SvcAttr name="sellRetryLimit" label="retryLimit"/>
@@ -82,9 +84,13 @@
         <SvcAttr name="idealDiffPrices" label="diffPrices"/>
         <SvcAttr name="remainingDays" label="remainingDays"/>
         <SvcAttr name="leverage" label="leverage times"/>
+        <SvcAttr name="biv" label="biv"/>
         <SvcAttr name="createTime" label="Create Time"/>
         <SvcIndex name="Code" label="Code"/>
         <SvcIndex name="Target" label="Target"/>
+        <SvcApi name="getTheoryPrice" label="getTheoryPrice">
+            <Argument name="price" label="price"/>
+        </SvcApi>
     </SvcTable>
     <SvcTable name="Storage" label="Purchase">
         <SvcAttr name="code" label="targetCode"/>
@@ -193,10 +199,12 @@
         <SvcAttr name="bidState" label="bidState"/>
         <SvcAttr name="amount" label="amount"/>
         <SvcAttr name="failMsg" label="failMsg"/>
+        <SvcAttr name="warrantTickOid" label="warrantTickOid"/>
         <SvcAttr name="createTime" label="Create Time"/>
         <SvcAttr name="updateTime" label="Update Time"/>
         <SvcIndex name="State" label="State"/>
         <SvcForeignKey name="Warrant" label="Warrant"/>
+        <SvcForeignKey name="Tick" label="Tick"/>
         <SvcForeignKey name="Job" label="Job"/>
     </SvcTable>
     <SvcTable name="Bias" label="Bias">

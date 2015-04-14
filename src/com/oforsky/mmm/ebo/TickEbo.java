@@ -71,15 +71,4 @@ public class TickEbo extends TickCoreEbo {
 		throw new AppException(5011, unit, getCode());
 	}
 
-	public boolean isQualifyToSell() throws Exception {
-		int count = 0;
-		for (int i = 0; i < getBuyVolumes().size(); i++) {
-			int volume = getBuyVolumes().get(i);
-			if (volume >= 100) {
-				count++;
-			}
-		}
-		return count >= 1 ? true : false;
-	}
-
 }

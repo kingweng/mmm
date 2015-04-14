@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 
@@ -29,6 +30,12 @@ public class QueryJobEbo extends QueryJobCoreEbo {
 	private static final long serialVersionUID = 1L;
 	private static final String TASVERSION = "TAS-OFF-R5V1P10 2014-08-01 15:49:52";
 	private static final Logger log = Logger.getLogger(QueryJobEbo.class);
+
+	@Transient
+	private WarrantEbo warrant;
+
+	@Transient
+	private TickEbo tick;
 
 	public QueryJobEbo() {
 	}
@@ -64,5 +71,13 @@ public class QueryJobEbo extends QueryJobCoreEbo {
 
 	public void retrieve() throws Exception {
 		setJobState(JobStateFsm.Action.Retrieve);
+	}
+
+	public void setWarrant(WarrantEbo warrant) {
+		this.warrant = warrant;
+	}
+
+	public void setTick(TickEbo tick) {
+		this.tick = tick;
 	}
 }

@@ -45,8 +45,11 @@ import com.oforsky.mmm.handler.ContextHandler;
 import com.oforsky.mmm.handler.DailyCsvReqHandler;
 import com.oforsky.mmm.handler.QueryJobHandler;
 import com.oforsky.mmm.handler.ReportHandler;
+import com.oforsky.mmm.handler.TheoryPriceReceiver;
 import com.oforsky.mmm.handler.TickHandler;
 import com.oforsky.mmm.handler.WarrantHandler;
+import com.oforsky.mmm.timer.KBreakTimerTask;
+import com.oforsky.mmm.timer.RevenueBreakTimerTask;
 import com.oforsky.mmm.timer.SchTimerTask;
 import com.oforsky.mmm.util.YahooStockParser;
 import com.truetel.jcore.proxy.ProxyInterceptor;
@@ -405,6 +408,19 @@ public class MmmProxyBean extends MmmBaseProxyBean implements MmmProxy {
 			log.error("sellStorage failed!", e);
 			handleException(e);
 		}
+	}
+
+	@Override
+	public double getTheoryPrice(WarrantEbo warrant, double targetPrice)
+			throws AppException {
+		try {
+			return new TheoryPriceReceiver().computeTheoryPrice(
+					warrant.getCode(), targetPrice);
+		} catch (Exception e) {
+			log.error("sellStorage failed!", e);
+			handleException(e);
+		}
+		return -1;
 	}
 
 }

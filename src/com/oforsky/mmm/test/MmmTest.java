@@ -263,5 +263,5 @@ public class MmmTest extends MmmBaseTest {
 		ebo.setTotalVolume(totalVolume);
 		proxy.genFakeTick(ebo);
 	}
-	
+
 }

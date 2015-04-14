@@ -62,10 +62,16 @@ public class ContextHandler implements TickListener {
 		HistoricalStock history = new HistoricalStock(code,
 				new StockDlo().listByCodeSize(code, 120));
 		TickStrategy strategy = new TickStrategyImpl(history);
+		enableAllBreak(strategy);
 		StorageEbo storage = StorageCacheStore.getStore().get(code);
 		TickContext context = new TickContext(MmmProxyUtil.getProxy(),
 				strategy, storage);
 		putContext(code, context);
 		handleTick(tick);
+	}
+
+	private void enableAllBreak(TickStrategy strategy) {
+		strategy.enableKBreak();
+		strategy.enableRevenueBreak();
 	}
 }
